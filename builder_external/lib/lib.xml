@@ -7,7 +7,7 @@
                    
      jens                                                                
      ====================================================================== -->
-<project name="OpenSCADA Builder" default="default" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="OpenSCADA Builder Library" default="default" xmlns:ivy="antlib:org.apache.ivy.ant">
     <description>
             Library File
     </description>
