@@ -40,7 +40,6 @@
           target: clean              
          ================================= -->
     <target name="clean" depends="" description="Clean up">
-        <delete dir="${deploy.repo.root}"/>
     </target>
 
 	<!-- ================================= 

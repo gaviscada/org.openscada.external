@@ -175,9 +175,7 @@
   <!-- ===================================================================== -->
   <target name="postBuild">
     <antcall target="gatherLogs" />
-  	
-  	<mkdir dir="${deploy.repo.root}"/>
-  	<copy file="${builder}/build/${buildLabel}/org.openscada.external-${buildId}-group.group.group.zip" tofile="${deploy.repo.root}/org.openscada.external-${buildId}-p2repo.zip"/>
+	<openscada.deploy.repository name="org.openscada.external"/>
   </target>
 
   <!-- ===================================================================== -->
