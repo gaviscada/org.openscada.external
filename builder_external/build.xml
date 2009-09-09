@@ -18,6 +18,8 @@
 	<property file="common/config/local.properties"/>
 	<property file="common/config/build.properties"/>
 	
+	<import file="common/lib/lib.xml"/>
+	
 	<property name="build.root" location="${basedir}"/>
 	
     <!-- ================================= 

@@ -1,10 +1,12 @@
 <project name="Build specific targets and properties" default="noDefault" xmlns:ivy="antlib:org.apache.ivy.ant">
 
-	<property name="build.root" location="../.."/>
+	<property name="build.root" location=".."/>
 	<import file="${build.root}/lib/lib.xml"/>
 	
-	<property file="${builder}/../../config/local.properties"/>
-	<property file="${builder}/../../config/build.properties"/>
+	<property file="${builder}/../config/local.properties"/>
+	<property file="${builder}/../config/build.properties"/>
+	<property file="${builder}/../common/config/local.properties"/>
+	<property file="${builder}/../common/config/build.properties"/>
 	
 	<!-- ===================================================================== -->
 		<!-- Run a given ${target} on all elements being built -->
