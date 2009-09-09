@@ -105,8 +105,8 @@
   		</fileset>
 	</copy>
   	
-  	<openscada.builder.copyFeature id="org.openscada.external" root="${external.root}" buildroot="${builder}/build"/>
-  	<openscada.builder.copyFeature id="org.openscada.external.slf4j" root="${external.root}" buildroot="${builder}/build"/>
+  	<openscada.builder.copyFeature id="org.openscada.external" root="${source.root}" buildroot="${builder}/build"/>
+  	<openscada.builder.copyFeature id="org.openscada.external.slf4j" root="${source.root}" buildroot="${builder}/build"/>
   </target>
 
   <!-- ===================================================================== -->
