@@ -26,13 +26,13 @@
     <!-- ================================= 
           target: default              
          ================================= -->
-    <target name="default" depends="clean,external" description="The main OpenSCADA Builder file">
+    <target name="default" depends="clean,build" description="The main OpenSCADA Builder file">
     </target>
 	
 	<!-- ================================= 
-          target: external              
+          target: build              
          ================================= -->
-    <target name="external" depends="" description="OpenSCADA External">
+    <target name="build" depends="" description="OpenSCADA External">
     	<openscada.bundleBuild builder="builder"/>
     </target>
 
@@ -46,6 +46,10 @@
           target: publish              
          ================================= -->
     <target name="publish" depends="" description="Publish artifacts">
+    	<delete dir="${publish.download.root}/aurora/${buildType}/${buildId}"/>
+    	<mkdir dir="${publish.download.root}/aurora/${buildType}/${buildId}"/>
+    	
+    	<copy file="${deploy.repo.root}/org.openscada.external-${buildId}-p2repo.zip" todir="${publish.download.root}/aurora/${buildType}/${buildId}"/>
     </target>
 	
 </project>
