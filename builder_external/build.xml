@@ -18,9 +18,9 @@
 	<property file="common/config/local.properties"/>
 	<property file="common/config/build.properties"/>
 	
-	<import file="common/lib/lib.xml"/>
-	
 	<property name="build.root" location="${basedir}"/>
+		
+	<import file="${build.root}/common/lib/lib.xml"/>
 	
     <!-- ================================= 
           target: default              
