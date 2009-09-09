@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     Sep 9, 2009 4:03:30 PM                                                        
+
+     OpenSCADA Builder    
+     Library File
+                   
+     jens                                                                
+     ====================================================================== -->
+<project name="OpenSCADA Builder" default="default" xmlns:ivy="antlib:org.apache.ivy.ant">
+    <description>
+            Library File
+    </description>
+
+	<!-- ================================= 
+          target: default              
+         ================================= -->
+    <target name="default" depends="" description="No Default">
+        <fail message="This file is only a task loader"/>
+    </target>
+	
+	<path id="ivy.lib.path">
+		<fileset dir="${build.root}/lib/ivy" includes="*.jar"/>
+    </path>
+	
+	<taskdef resource="org/apache/ivy/ant/antlib.xml"
+	    	uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+	
+	<!-- macrodefs -->
+	
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: openscada.builder.copyFeature          
+         = = = = = = = = = = = = = = = = = -->
+    <macrodef name="openscada.builder.copyFeature">
+        <attribute name="id" />
+    	<attribute name="root"/>
+    	<attribute name="buildRoot"/>
+        <sequential>
+          	<copy todir="@{buildRoot}/features/@{id}">
+          		<fileset dir="@{root}/@{id}.feature" />
+        	</copy>
+        </sequential>
+    </macrodef>
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: openscada.builder.copyPlugin          
+         = = = = = = = = = = = = = = = = = -->
+    <macrodef name="openscada.builder.copyPlugin">
+        <attribute name="id" />
+    	<attribute name="root"/>
+    	<attribute name="buildRoot"/>
+        <sequential>
+          	<copy todir="@{buildRoot}/plugins/@{id}">
+          		<fileset dir="@{root}/@{id}" />
+        	</copy>
+        </sequential>
+    </macrodef>
+	
+</project>
+

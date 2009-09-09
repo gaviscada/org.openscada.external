@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     Sep 9, 2009 2:53:07 PM                                                        
+
+     OpenSCADA Builder
+     The main OpenSCADA Builder file
+
+     Jens Reimann
+     ====================================================================== -->
+<project name="OpenSCADA Builder" default="default" basedir=".">
+    <description>
+            The main OpenSCADA Builder file
+    </description>
+
+	<property environment="env" />
+	<property file="config/local.properties"/>
+	<property file="config/build.properties"/>
+	<property file="common/config/local.properties"/>
+	<property file="common/config/build.properties"/>
+	
+	<property name="build.root" location="${basedir}"/>
+	
+    <!-- ================================= 
+          target: default              
+         ================================= -->
+    <target name="default" depends="clean,external,aurora" description="The main OpenSCADA Builder file">
+    </target>
+	
+	<!-- ================================= 
+          target: external              
+         ================================= -->
+    <target name="external" depends="" description="OpenSCADA External">
+    	<openscada.bundleBuild builder="projects/external"/>
+    </target>
+
+	<!-- ================================= 
+          target: aurora              
+         ================================= -->
+    <target name="aurora" depends="" description="OpenSCADA Aurora">
+    	<openscada.bundleBuild builder="projects/aurora"/>
+    </target>
+	
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+    <target name="clean" depends="" description="Clean up">
+        <delete dir="${deploy.repo.root}"/>
+    </target>
+
+	<!-- ================================= 
+          target: publish              
+         ================================= -->
+    <target name="publish" depends="" description="Publish artifacts">
+        <delete dir="${publish.root}/${buildType}"/>
+    	<mkdir dir="${publish.root}/${buildType}"/>
+
+    	<!-- copy archived P2 repositories to download -->
+    	<mkdir dir="${publish.download.root}/${buildType}/p2"/>
+    	<copy>
+    	</copy>
+    </target>
+
+	
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: openscada.bundleBuild          
+         = = = = = = = = = = = = = = = = = -->
+    <macrodef name="openscada.bundleBuild">
+        <attribute name="builder" />
+        <sequential>
+        	<delete dir="@{builder}/build" failonerror="false"/>
+        	<mkdir dir="@{builder}/build" />
+        	<java jar="${startup}" failonerror="true" maxmemory="1024m" fork="true" dir="${eclipse.home.dir}/plugins/org.eclipse.pde.build${eclipse.builder.version}/scripts">
+	    		<jvmarg value="-XX:MaxPermSize=256m"/>
+	    		
+				<arg value="-application" />
+			    <arg value="org.eclipse.ant.core.antRunner" />
+        		
+        		<!--
+        		<arg value="-verbose"/>
+        		-->
+        		
+				<arg value="-Dbuilder=${basedir}/@{builder}"/>
+        		<arg value="-Dbuild.root=${build.root}"/>
+	    		<arg value="-DbaseLocation=${eclipse.home.dir}"/>
+				<arg value="-DbuildDirectory=${basedir}/@{builder}/build"/>
+        		
+        		<arg value="-DbuildType=${buildType}"/>
+        		<arg value="-DbuildId=${buildId}"/>
+			</java>
+        </sequential>
+    </macrodef>
+
+</project>
