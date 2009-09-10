@@ -107,6 +107,9 @@
   	
   	<openscada.builder.copyFeature id="org.openscada.external" />
   	<openscada.builder.copyPlugin id="org.openscada.external.log4j" />
+  	<openscada.builder.copyPlugin id="org.openscada.external.javax.xml.namespace" />
+  	<openscada.builder.copyPlugin id="org.openscada.external.jsr173" />
+  	<openscada.builder.copyPlugin id="org.openscada.external.xmlbeans" />
   	<openscada.builder.copyFeature id="org.openscada.external.slf4j" />
   </target>
 
