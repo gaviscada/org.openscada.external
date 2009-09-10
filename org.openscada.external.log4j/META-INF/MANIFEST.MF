@@ -24,4 +24,4 @@ Export-Package: org.apache.log4j;version="1.2.15",
  org.apache.log4j.varia;version="1.2.15",
  org.apache.log4j.xml;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: org.w3c.dom
+Import-Package: org.w3c.dom;resolution:=optional
