@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: LOG4J Wrapper Plug-In
-Bundle-SymbolicName: org.openscada.external.org.apache.log4j;singleton:=true
-Bundle-Version: 1.2.15.r1
+Bundle-SymbolicName: org.openscada.external.log4j
+Bundle-Version: 1.2.15.r2
 Bundle-ClassPath: log4j-1.2.15.jar,
  .
 Eclipse-BuddyPolicy: registered
