@@ -27,5 +27,36 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+         
+   <plugin
+   		id="org.apache.mina.core"
+   		version="0.0.0"
+   		unpack="false"
+   		/>
+   		
+	<plugin
+   		id="org.apache.mina.filter.compression"
+   		version="0.0.0"
+   		unpack="false"
+   		/>
+   		
+	<plugin
+   		id="org.apache.mina.transport.socket.apr"
+   		version="0.0.0"
+   		unpack="false"
+   		/>
+   		
+	<plugin
+   		id="org.apache.tomcat-apr"
+   		version="0.0.0"
+   		unpack="false"
+   		/>
+   		
+   	<plugin
+   		id="com.springsource.com.jcraft.jzlib"
+   		version="0.0.0"
+   		unpack="false"
+   		/>
+   		
 
 </feature>
