@@ -22,13 +22,6 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.openscada.external.log4j"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.apache.mina.core"
          download-size="0"
          install-size="0"
@@ -64,21 +57,42 @@
          unpack="false"/>
 
    <plugin
-         id="org.openscada.external.javax.xml.namespace"
+         id="org.springframework.osgi.log4j.osgi"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.openscada.external.jsr173"
+         id="com.springsource.org.apache.xmlbeans"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.openscada.external.xmlbeans"
+         id="com.springsource.javax.transaction"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.springsource.javax.xml.crypto"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.springsource.javax.xml.stream"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.springsource.org.jvnet.staxex"
          download-size="0"
          install-size="0"
          version="0.0.0"
