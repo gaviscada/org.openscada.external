@@ -27,36 +27,61 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
-   		id="org.apache.mina.core"
-   		version="0.0.0"
-   		unpack="false"
-   		/>
-   		
-	<plugin
-   		id="org.apache.mina.filter.compression"
-   		version="0.0.0"
-   		unpack="false"
-   		/>
-   		
-	<plugin
-   		id="org.apache.mina.transport.socket.apr"
-   		version="0.0.0"
-   		unpack="false"
-   		/>
-   		
-	<plugin
-   		id="org.apache.tomcat-apr"
-   		version="0.0.0"
-   		unpack="false"
-   		/>
-   		
-   	<plugin
-   		id="com.springsource.com.jcraft.jzlib"
-   		version="0.0.0"
-   		unpack="false"
-   		/>
-   		
+         id="org.apache.mina.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.mina.filter.compression"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.mina.transport.socket.apr"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.tomcat-apr"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.springsource.com.jcraft.jzlib"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openscada.external.javax.xml.namespace"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openscada.external.jsr173"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openscada.external.xmlbeans"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
