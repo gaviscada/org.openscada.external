@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JCIFS
+Bundle-SymbolicName: org.openscada.external.jcifs
+Bundle-Version: 1.2.9.r1
+Bundle-Vendor: inavare GmbH
+Export-Package: jcifs,
+ jcifs.http,
+ jcifs.https,
+ jcifs.netbios,
+ jcifs.ntlmssp,
+ jcifs.smb,
+ jcifs.util,
+ jcifs.util.transport
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
