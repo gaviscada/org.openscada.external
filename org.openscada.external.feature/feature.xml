@@ -65,13 +65,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.springframework.osgi.log4j.osgi"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.springsource.org.apache.xmlbeans"
          download-size="0"
          install-size="0"
@@ -158,6 +151,13 @@
 
    <plugin
          id="com.springsource.org.apache.commons.collections"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.springsource.org.apache.log4j"
          download-size="0"
          install-size="0"
          version="0.0.0"
