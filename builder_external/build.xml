@@ -21,6 +21,8 @@
 	<property file="common/config/local.properties"/>
 	<property file="common/config/build.properties"/>
 		
+	<property name="buildId" value="${external.version}"/>
+	
 	<import file="${build.root}/common/lib/lib.xml"/>
 	
     <!-- ================================= 
