@@ -2,7 +2,7 @@
 <feature
       id="org.openscada.external.slf4j"
       label="SLF4J"
-      version="1.5.8"
+      version="1.5.8.qualifier"
       provider-name="inavare GmbH">
 
    <description url="http://www.example.com/description">

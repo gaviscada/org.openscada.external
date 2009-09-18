@@ -2,7 +2,7 @@
 <feature
       id="org.openscada.external"
       label="OpenSCADA Externals Feature"
-      version="0.14.0"
+      version="0.14.0.qualifier"
       provider-name="inavare GmbH">
 
    <description url="http://www.example.com/description">
