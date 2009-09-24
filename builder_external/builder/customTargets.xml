@@ -114,7 +114,7 @@
   	<openscada.builder.copyPlugin id="org.openscada.external.jinterop" />
   	
   	<openscada.builder.copyFeature id="org.openscada.external.jOpenDocument" />
-  	<openscada.builder.copyPlugin id="org.openscada.external.jOpenDocument" project="org.openscada.external.jOpenDocument2" />
+  	<openscada.builder.copyPlugin id="org.openscada.external.jOpenDocument" />
   </target>
 
   <!-- ===================================================================== -->
