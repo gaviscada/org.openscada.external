@@ -29,6 +29,14 @@
          id="org.openscada.external.jinterop"
          version="0.0.0"/>
 
+   <includes
+         id="org.openscada.external.jOpenDocument"
+         version="0.0.0"/>
+
+   <requires>
+      <import plugin="org.eclipse.osgi"/>
+   </requires>
+
    <plugin
          id="org.apache.mina.core"
          download-size="0"
@@ -165,20 +173,6 @@
 
    <plugin
          id="com.springsource.jxl"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.springsource.org.jdom"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.openscada.external.jOpenDocument"
          download-size="0"
          install-size="0"
          version="0.0.0"
