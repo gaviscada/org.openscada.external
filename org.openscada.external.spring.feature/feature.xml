@@ -2,7 +2,7 @@
 <feature
       id="org.openscada.external.spring"
       label="OpenSCADA Spring Feature"
-      version="2.5.6.SEC1"
+      version="2.5.6.SEC01"
       provider-name="inavare GmbH">
 
    <description url="http://www.example.com/description">
