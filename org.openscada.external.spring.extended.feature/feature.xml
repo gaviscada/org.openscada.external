@@ -16,6 +16,10 @@
       [Enter License Description here.]
    </license>
 
+   <includes
+         id="org.openscada.external.spring"
+         version="0.0.0"/>
+
    <plugin
          id="org.springframework.aop"
          download-size="0"
