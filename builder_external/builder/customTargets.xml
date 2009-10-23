@@ -108,6 +108,7 @@
   	<openscada.builder.copyFeature id="org.openscada.external" />
   	<openscada.builder.copyFeature id="org.openscada.external.slf4j" />
   	<openscada.builder.copyFeature id="org.openscada.external.spring" />
+  	<openscada.builder.copyFeature id="org.openscada.external.hibernate" />
   	
   	<openscada.builder.copyFeature id="org.openscada.external.jinterop" />
   	<openscada.builder.copyPlugin id="org.openscada.external.jcifs" />
