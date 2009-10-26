@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.openscada.external.apache.ldap.filter"
-      label="Filter"
+      label="OpenSCADA LDAP Style Filter Parsing (from Apache DS)"
       version="0.9.5.5">
 
    <description url="http://www.example.com/description">
