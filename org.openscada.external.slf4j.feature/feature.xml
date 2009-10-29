@@ -53,4 +53,12 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          version="1.5.8"
          unpack="false"/>
 
+   <plugin
+         id="slf4j.jcl"
+         download-size="0"
+         install-size="0"
+         version="1.5.8"
+         fragment="true"
+         unpack="false"/>
+
 </feature>
