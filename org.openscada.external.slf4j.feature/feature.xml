@@ -36,7 +36,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          id="slf4j.api"
          download-size="0"
          install-size="0"
-         version="1.5.8"/>
+         version="1.5.8"
+         unpack="false"/>
 
    <plugin
          id="slf4j.log4j12"
