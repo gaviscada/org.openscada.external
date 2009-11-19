@@ -45,6 +45,10 @@
          id="org.openscada.external.apache.ldap.filter"
          version="0.0.0"/>
 
+   <includes
+         id="org.openscada.external.spring.osgi"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.osgi"/>
    </requires>
@@ -276,6 +280,20 @@
 
    <plugin
          id="com.springsource.mx4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.springsource.org.aopalliance"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.springsource.org.aspectj.tools"
          download-size="0"
          install-size="0"
          version="0.0.0"
