@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.openscada.aurora_0.15.0.qualifier.jar" id="org.openscada.aurora" version="0.15.0.qualifier">
+      <category name="org.openscada.external"/>
+   </feature>
+   <feature url="features/org.openscada.aurora.sdk_0.15.0.qualifier.jar" id="org.openscada.aurora.sdk" version="0.15.0.qualifier">
+      <category name="org.openscada.external"/>
+   </feature>
+   <category-def name="org.openscada.external" label="External Libraries"/>
+</site>
