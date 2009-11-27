@@ -119,6 +119,8 @@
   	
   	<openscada.builder.copyFeature id="org.openscada.external.jOpenDocument" />
   	<openscada.builder.copyPlugin id="org.openscada.external.jOpenDocument" />
+  	
+  	<openscada.builder.copyPlugin id="com.google.collections"/>
   </target>
 
   <!-- ===================================================================== -->
