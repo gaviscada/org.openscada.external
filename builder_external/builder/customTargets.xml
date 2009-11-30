@@ -120,7 +120,7 @@
   	<openscada.builder.copyFeature id="org.openscada.external.jOpenDocument" />
   	<openscada.builder.copyPlugin id="org.openscada.external.jOpenDocument" />
   	
-  	<openscada.builder.copyPlugin id="com.google.collections"/>
+  	<openscada.builder.copyPlugin id="org.openscada.external.com.google.collections"/>
   </target>
 
   <!-- ===================================================================== -->
