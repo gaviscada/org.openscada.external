@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Google Collections
-Bundle-SymbolicName: com.google.collections
+Bundle-SymbolicName: org.openscada.external.com.google.collections
 Bundle-Version: 1.0.0.rc4
 Bundle-Vendor: inavare GmbH
 Export-Package: com.google.common.annotations;version="1.0.0.rc4",
