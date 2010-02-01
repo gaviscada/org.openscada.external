@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.openscada.external.com.google.gson"
+      id="org.openscada.external.com.google.gson.feature"
       label="Googles GSON library"
       version="1.4">
 
