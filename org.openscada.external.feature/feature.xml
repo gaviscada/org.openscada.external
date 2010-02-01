@@ -50,7 +50,7 @@
          version="0.0.0"/>
 
    <includes
-         id="org.openscada.external.com.google.gson"
+         id="org.openscada.external.com.google.gson.feature"
          version="0.0.0"/>
 
    <requires>
