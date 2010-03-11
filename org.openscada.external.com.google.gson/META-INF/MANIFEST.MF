@@ -9,7 +9,7 @@ Bundle-Description: Google Gson library
 Bundle-ManifestVersion: 2
 Bundle-Name: Gson
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-SymbolicName: com.google.gson
+Bundle-SymbolicName: org.openscada.external.com.google.gson
 Bundle-Vendor: Google Gson Project
 Bundle-Version: 1.4
 Export-Package: com.google.gson;version=1.4, com.google.gson.annotatio
