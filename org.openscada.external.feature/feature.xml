@@ -49,10 +49,6 @@
          id="org.openscada.external.spring.osgi"
          version="0.0.0"/>
 
-   <includes
-         id="org.openscada.external.com.google.gson.feature"
-         version="0.0.0"/>
-
    <requires>
       <import plugin="org.eclipse.osgi"/>
       <import plugin="javax.servlet"/>
@@ -334,7 +330,7 @@
          unpack="false"/>
 
    <plugin
-         id="com.google.gson"
+         id="org.openscada.external.com.google.gson"
          download-size="0"
          install-size="0"
          version="0.0.0"
