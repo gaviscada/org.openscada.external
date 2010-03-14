@@ -15,8 +15,6 @@
 
 package org.jopendocument.util;
 
-import org.jopendocument.util.cc.ITransformer;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -36,17 +34,20 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.TransformerUtils;
+import org.jopendocument.util.cc.ITransformer;
 
 /**
  * Une classe regroupant des méthodes utilitaires pour les collections.
  * 
  * @author ILM Informatique 30 sept. 2004
  */
-public class CollectionUtils extends org.apache.commons.collections.CollectionUtils {
+public class CollectionUtils extends org.apache.commons.collections.CollectionUtils
+{
 
     // TODO rm the non generic one
-    static public final <E> String join(final Collection<E> c, final String sep, final ITransformer<? super E, ?> tf) {
-        return join(c, sep, (Transformer) tf);
+    static public final <E> String join ( final Collection<E> c, final String sep, final ITransformer<? super E, ?> tf )
+    {
+        return join ( c, sep, (Transformer)tf );
     }
 
     /**
@@ -59,30 +60,40 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @return la chaine composée de chacun des éléments séparés par <code>sep</code>.
      * @deprecated use {@link  #join(Collection, String, ITransformer)}
      */
-    static public final String join(final Collection c, final String sep, final Transformer tf) {
-        if (c.size() == 0)
+    static public final String join ( final Collection c, final String sep, final Transformer tf )
+    {
+        if ( c.size () == 0 )
+        {
             return "";
+        }
 
-        final StringBuffer res = new StringBuffer(c.size() * 4);
-        if (c instanceof RandomAccess && c instanceof List) {
-            final List list = (List) c;
-            final int stop = c.size() - 1;
-            for (int i = 0; i < stop; i++) {
-                res.append(tf.transform(list.get(i)));
-                res.append(sep);
+        final StringBuffer res = new StringBuffer ( c.size () * 4 );
+        if ( c instanceof RandomAccess && c instanceof List )
+        {
+            final List list = (List)c;
+            final int stop = c.size () - 1;
+            for ( int i = 0; i < stop; i++ )
+            {
+                res.append ( tf.transform ( list.get ( i ) ) );
+                res.append ( sep );
 
             }
-            res.append(tf.transform(list.get(stop)));
-        } else {
-            final Iterator iter = c.iterator();
-            while (iter.hasNext()) {
-                final Object elem = iter.next();
-                res.append(tf.transform(elem));
-                if (iter.hasNext())
-                    res.append(sep);
+            res.append ( tf.transform ( list.get ( stop ) ) );
+        }
+        else
+        {
+            final Iterator iter = c.iterator ();
+            while ( iter.hasNext () )
+            {
+                final Object elem = iter.next ();
+                res.append ( tf.transform ( elem ) );
+                if ( iter.hasNext () )
+                {
+                    res.append ( sep );
+                }
             }
         }
-        return res.toString();
+        return res.toString ();
     }
 
     /**
@@ -94,20 +105,23 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @return la chaine composée de chacun des éléments séparés par <code>sep</code>.
      * @see #join(Collection, String, ITransformer)
      */
-    static public <T> String join(Collection<T> c, String sep) {
-        return join(c, sep, ITransformer.<T> nopTransformer());
+    static public <T> String join ( final Collection<T> c, final String sep )
+    {
+        return join ( c, sep, ITransformer.<T> nopTransformer () );
     }
 
     // *** split
 
-    private static final Pattern COMMA = Pattern.compile("\\p{Space}*,\\p{Space}*");
+    private static final Pattern COMMA = Pattern.compile ( "\\p{Space}*,\\p{Space}*" );
 
-    static public List<String> split(String s) {
-        return split(s, COMMA);
+    static public List<String> split ( final String s )
+    {
+        return split ( s, COMMA );
     }
 
-    static public List<String> split(String s, String sep) {
-        return split(s, Pattern.compile(sep));
+    static public List<String> split ( final String s, final String sep )
+    {
+        return split ( s, Pattern.compile ( sep ) );
     }
 
     /**
@@ -117,8 +131,9 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param pattern the pattern where to cut the string.
      * @return the splitted string, empty list if <code>s</code> is "".
      */
-    static public List<String> split(String s, Pattern pattern) {
-        return s.length() == 0 ? Collections.<String> emptyList() : Arrays.asList(pattern.split(s));
+    static public List<String> split ( final String s, final Pattern pattern )
+    {
+        return s.length () == 0 ? Collections.<String> emptyList () : Arrays.asList ( pattern.split ( s ) );
     }
 
     /**
@@ -137,15 +152,24 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param i the virtual index, eg -1.
      * @return the real index, eg 3.
      */
-    static public int getValidIndex(final List<?> l, final int i) {
-        if (i > l.size()) {
-            return l.size();
-        } else if (i >= 0) {
+    static public int getValidIndex ( final List<?> l, final int i )
+    {
+        if ( i > l.size () )
+        {
+            return l.size ();
+        }
+        else if ( i >= 0 )
+        {
             return i;
-        } else if (l.size() + i <= 0)
+        }
+        else if ( l.size () + i <= 0 )
+        {
             return 0;
+        }
         else
-            return l.size() + i;
+        {
+            return l.size () + i;
+        }
     }
 
     /**
@@ -155,8 +179,9 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param from the first index to be removed (inclusive).
      * @param to the last index to be removed (exclusive).
      */
-    static public void delete(List<?> l, int from, int to) {
-        l.subList(getValidIndex(l, from), getValidIndex(l, to)).clear();
+    static public void delete ( final List<?> l, final int from, final int to )
+    {
+        l.subList ( getValidIndex ( l, from ), getValidIndex ( l, to ) ).clear ();
     }
 
     /**
@@ -165,8 +190,9 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param l the list to delete from.
      * @param from the first index to be removed (inclusive).
      */
-    static public void delete(List<?> l, int from) {
-        delete(l, from, l.size());
+    static public void delete ( final List<?> l, final int from )
+    {
+        delete ( l, from, l.size () );
     }
 
     /**
@@ -189,39 +215,50 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      *        <code>null</code> si les éléments sont des Comparable.
      * @return une hiérarchie de SortedMap et en dernier un SortedSet.
      */
-    static public final SortedMap organize(Collection col, List<? extends Transformer> propExtractors, List<? extends Comparator> propComp, Comparator itemOrdering) {
-        if (propExtractors.size() == 0)
-            throw new IllegalArgumentException("Empty property extractors");
+    static public final SortedMap organize ( final Collection col, final List<? extends Transformer> propExtractors, List<? extends Comparator> propComp, final Comparator itemOrdering )
+    {
+        if ( propExtractors.size () == 0 )
+        {
+            throw new IllegalArgumentException ( "Empty property extractors" );
+        }
 
-        if (propComp == null)
-            propComp = Collections.nCopies(propExtractors.size(), null);
-        else if (propExtractors.size() != propComp.size())
-            throw new IllegalArgumentException("Size mismatch between " + propExtractors + " and " + propComp);
+        if ( propComp == null )
+        {
+            propComp = Collections.nCopies ( propExtractors.size (), null );
+        }
+        else if ( propExtractors.size () != propComp.size () )
+        {
+            throw new IllegalArgumentException ( "Size mismatch between " + propExtractors + " and " + propComp );
+        }
 
-        final SortedMap res = new TreeMap(propComp.get(0));
+        final SortedMap res = new TreeMap ( propComp.get ( 0 ) );
 
-        Iterator iter = col.iterator();
-        while (iter.hasNext()) {
-            final Object item = iter.next();
+        final Iterator iter = col.iterator ();
+        while ( iter.hasNext () )
+        {
+            final Object item = iter.next ();
             Map m = res;
 
-            for (int i = 0; i < propExtractors.size() - 1; i++) {
-                final Transformer extractor = propExtractors.get(i);
-                final Object property = extractor.transform(item);
-                Map newM = (Map) m.get(property);
-                if (newM == null) {
-                    newM = new TreeMap(propComp.get(i + 1));
-                    m.put(property, newM);
+            for ( int i = 0; i < propExtractors.size () - 1; i++ )
+            {
+                final Transformer extractor = propExtractors.get ( i );
+                final Object property = extractor.transform ( item );
+                Map newM = (Map)m.get ( property );
+                if ( newM == null )
+                {
+                    newM = new TreeMap ( propComp.get ( i + 1 ) );
+                    m.put ( property, newM );
                 }
                 m = newM;
             }
-            final Object property = propExtractors.get(propExtractors.size() - 1).transform(item);
-            SortedSet s = (SortedSet) m.get(property);
-            if (s == null) {
-                s = new TreeSet(itemOrdering);
-                m.put(property, s);
+            final Object property = propExtractors.get ( propExtractors.size () - 1 ).transform ( item );
+            SortedSet s = (SortedSet)m.get ( property );
+            if ( s == null )
+            {
+                s = new TreeSet ( itemOrdering );
+                m.put ( property, s );
             }
-            s.add(item);
+            s.add ( item );
         }
 
         return res;
@@ -246,25 +283,34 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param itemTransf la transformation à faire sur les feuilles.
      * @return la liste correspondante.
      */
-    static public final List flatten(Map hierarchy, Transformer itemTransf) {
-        final List res = new ArrayList();
+    static public final List flatten ( final Map hierarchy, final Transformer itemTransf )
+    {
+        final List res = new ArrayList ();
 
-        final Iterator iter = hierarchy.keySet().iterator();
-        while (iter.hasNext()) {
-            final Object obj = iter.next();
-            res.add(obj);
-            final Object value = hierarchy.get(obj);
-            if (value instanceof Map)
-                res.addAll(flatten((Map) value, itemTransf));
-            else if (value instanceof Collection) {
-                final Collection items = (Collection) value;
-                final Iterator itemIter = items.iterator();
-                while (itemIter.hasNext()) {
-                    final Object item = itemIter.next();
-                    res.add(itemTransf.transform(item));
+        final Iterator iter = hierarchy.keySet ().iterator ();
+        while ( iter.hasNext () )
+        {
+            final Object obj = iter.next ();
+            res.add ( obj );
+            final Object value = hierarchy.get ( obj );
+            if ( value instanceof Map )
+            {
+                res.addAll ( flatten ( (Map)value, itemTransf ) );
+            }
+            else if ( value instanceof Collection )
+            {
+                final Collection items = (Collection)value;
+                final Iterator itemIter = items.iterator ();
+                while ( itemIter.hasNext () )
+                {
+                    final Object item = itemIter.next ();
+                    res.add ( itemTransf.transform ( item ) );
                 }
-            } else
-                throw new IllegalArgumentException("Illegal value: " + value);
+            }
+            else
+            {
+                throw new IllegalArgumentException ( "Illegal value: " + value );
+            }
         }
         return res;
     }
@@ -275,8 +321,9 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param hierarchy la hiérarchie à aplatir.
      * @return la liste correspondante.
      */
-    static public final List flatten(Map hierarchy) {
-        return flatten(hierarchy, TransformerUtils.nopTransformer());
+    static public final List flatten ( final Map hierarchy )
+    {
+        return flatten ( hierarchy, TransformerUtils.nopTransformer () );
     }
 
     /**
@@ -287,12 +334,14 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param <K> type of key
      * @param <V> type of value
      */
-    static public <K, V> List<?>[] mapToLists(Map<K, V> map) {
-        final List<K> keys = new ArrayList<K>(map.size());
-        final List<V> vals = new ArrayList<V>(map.size());
-        for (final Map.Entry<K, V> e : map.entrySet()) {
-            keys.add(e.getKey());
-            vals.add(e.getValue());
+    static public <K, V> List<?>[] mapToLists ( final Map<K, V> map )
+    {
+        final List<K> keys = new ArrayList<K> ( map.size () );
+        final List<V> vals = new ArrayList<V> ( map.size () );
+        for ( final Map.Entry<K, V> e : map.entrySet () )
+        {
+            keys.add ( e.getKey () );
+            vals.add ( e.getValue () );
         }
 
         return new List[] { keys, vals };
@@ -309,35 +358,46 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param <E> type of item
      * @throws IllegalStateException if one list is not a sublist of the other.
      */
-    static public <E> List<Integer> getIndexesChanged(List<E> oldList, List<E> newList) {
+    static public <E> List<Integer> getIndexesChanged ( final List<E> oldList, final List<E> newList )
+    {
         final List<E> longer;
         final List<E> shorter;
-        if (newList.size() > oldList.size()) {
-            longer = new ArrayList<E>(newList);
-            shorter = new ArrayList<E>(oldList);
-        } else {
-            longer = new ArrayList<E>(oldList);
-            shorter = new ArrayList<E>(newList);
+        if ( newList.size () > oldList.size () )
+        {
+            longer = new ArrayList<E> ( newList );
+            shorter = new ArrayList<E> ( oldList );
+        }
+        else
+        {
+            longer = new ArrayList<E> ( oldList );
+            shorter = new ArrayList<E> ( newList );
         }
 
-        final List<Integer> res = new ArrayList<Integer>();
+        final List<Integer> res = new ArrayList<Integer> ();
         int offset = 0;
-        while (shorter.size() > 0) {
-            if (longer.size() < shorter.size())
-                throw new IllegalStateException(shorter + " is not a sublist of " + longer);
+        while ( shorter.size () > 0 )
+        {
+            if ( longer.size () < shorter.size () )
+            {
+                throw new IllegalStateException ( shorter + " is not a sublist of " + longer );
+            }
             // compare nulls
-            if (CompareUtils.equals(shorter.get(0), longer.get(0))) {
-                shorter.remove(0);
-                longer.remove(0);
-            } else {
-                longer.remove(0);
-                res.add(offset);
+            if ( CompareUtils.equals ( shorter.get ( 0 ), longer.get ( 0 ) ) )
+            {
+                shorter.remove ( 0 );
+                longer.remove ( 0 );
+            }
+            else
+            {
+                longer.remove ( 0 );
+                res.add ( offset );
             }
             offset++;
         }
 
-        for (int i = 0; i < longer.size(); i++) {
-            res.add(i + offset);
+        for ( int i = 0; i < longer.size (); i++ )
+        {
+            res.add ( i + offset );
         }
 
         return res;
@@ -350,17 +410,22 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param ints a list of Integer strictly increasing.
      * @return a list of int[2].
      */
-    static public List<int[]> aggregate(Collection<? extends Number> ints) {
-        final List<int[]> res = new ArrayList<int[]>();
+    static public List<int[]> aggregate ( final Collection<? extends Number> ints )
+    {
+        final List<int[]> res = new ArrayList<int[]> ();
         int[] currentInterval = null;
-        for (final Number n : ints) {
-            final int index = n.intValue();
-            if (currentInterval == null || index != currentInterval[1] + 1) {
+        for ( final Number n : ints )
+        {
+            final int index = n.intValue ();
+            if ( currentInterval == null || index != currentInterval[1] + 1 )
+            {
                 currentInterval = new int[2];
                 currentInterval[0] = index;
                 currentInterval[1] = currentInterval[0];
-                res.add(currentInterval);
-            } else {
+                res.add ( currentInterval );
+            }
+            else
+            {
                 currentInterval[1] = index;
             }
         }
@@ -376,12 +441,16 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @return <code>null</code> if col1 contains all of col2, else return the extra items that
      *         col2 have.
      */
-    static public <T> Set<T> contains(final Set<T> col1, final Set<T> col2) {
-        if (col1.containsAll(col2))
+    static public <T> Set<T> contains ( final Set<T> col1, final Set<T> col2 )
+    {
+        if ( col1.containsAll ( col2 ) )
+        {
             return null;
-        else {
-            final Set<T> names = new HashSet<T>(col2);
-            names.removeAll(col1);
+        }
+        else
+        {
+            final Set<T> names = new HashSet<T> ( col2 );
+            names.removeAll ( col1 );
             return names;
         }
     }
@@ -396,10 +465,12 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @return all items of <code>array</code> into a list, eg ["a", "b"].
      * @throws ClassCastException if some item of <code>array</code> is not a <code>T</code>.
      */
-    static public <U, T extends U> List<T> castToList(U[] array, Class<T> clazz) throws ClassCastException {
-        final List<T> res = new ArrayList<T>(array.length);
-        for (final U item : array) {
-            res.add(clazz.cast(item));
+    static public <U, T extends U> List<T> castToList ( final U[] array, final Class<T> clazz ) throws ClassCastException
+    {
+        final List<T> res = new ArrayList<T> ( array.length );
+        for ( final U item : array )
+        {
+            res.add ( clazz.cast ( item ) );
         }
         return res;
     }
@@ -412,12 +483,14 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param b the second list, eg [a, null, z, c].
      * @return the number of common items, eg 1.
      */
-    public static <T> int equalsFromEnd(final List<T> a, final List<T> b) {
-        return equals(a, b, true, null);
+    public static <T> int equalsFromEnd ( final List<T> a, final List<T> b )
+    {
+        return equals ( a, b, true, null );
     }
 
-    public static <T> int equalsFromStart(final List<T> a, final List<T> b) {
-        return equals(a, b, false, null);
+    public static <T> int equalsFromStart ( final List<T> a, final List<T> b )
+    {
+        return equals ( a, b, false, null );
     }
 
     /**
@@ -432,22 +505,27 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      *        be <code>null</code>.
      * @return the number of common items, eg 1.
      */
-    public final static <A, B> int equals(final List<A> a, final List<B> b, boolean fromEnd, ITransformer<A, B> transf) {
-        final int sizeA = a.size();
-        final int sizeB = b.size();
-        final int lastI = Math.min(sizeA, sizeB);
-        for (int i = 0; i < lastI; i++) {
-            final A itemA = a.get(fromEnd ? sizeA - 1 - i : i);
-            final B itemB = b.get(fromEnd ? sizeB - 1 - i : i);
-            if (!CompareUtils.equals(transf == null ? itemA : transf.transformChecked(itemA), itemB))
+    public final static <A, B> int equals ( final List<A> a, final List<B> b, final boolean fromEnd, final ITransformer<A, B> transf )
+    {
+        final int sizeA = a.size ();
+        final int sizeB = b.size ();
+        final int lastI = Math.min ( sizeA, sizeB );
+        for ( int i = 0; i < lastI; i++ )
+        {
+            final A itemA = a.get ( fromEnd ? sizeA - 1 - i : i );
+            final B itemB = b.get ( fromEnd ? sizeB - 1 - i : i );
+            if ( !CompareUtils.equals ( transf == null ? itemA : transf.transformChecked ( itemA ), itemB ) )
+            {
                 return i;
+            }
         }
         return lastI;
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> Collection<T> inter(final Collection<T> a, final Collection<T> b) {
-        return org.apache.commons.collections.CollectionUtils.intersection(a, b);
+    @SuppressWarnings ( "unchecked" )
+    public static <T> Collection<T> inter ( final Collection<T> a, final Collection<T> b )
+    {
+        return org.apache.commons.collections.CollectionUtils.intersection ( a, b );
     }
 
     /**
@@ -458,77 +536,108 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param b the second set, can be <code>null</code>.
      * @return the intersection.
      */
-    public static <T> Set<T> inter(final Set<T> a, final Set<T> b) {
-        if (a == b)
+    public static <T> Set<T> inter ( final Set<T> a, final Set<T> b )
+    {
+        if ( a == b )
+        {
             return a;
-        else if (a == null)
+        }
+        else if ( a == null )
+        {
             return b;
-        else if (b == null)
+        }
+        else if ( b == null )
+        {
             return a;
-        else if (a.size() > b.size()) {
-            return inter(b, a);
+        }
+        else if ( a.size () > b.size () )
+        {
+            return (Set<T>)inter ( b, a );
         }
 
-        final Set<T> res = new HashSet<T>();
-        for (final T item : a) {
-            if (b.contains(item))
-                res.add(item);
+        final Set<T> res = new HashSet<T> ();
+        for ( final T item : a )
+        {
+            if ( b.contains ( item ) )
+            {
+                res.add ( item );
+            }
         }
         return res;
     }
 
-    public static <T> Set<T> inter(final Set<T>... sets) {
-        return inter(Arrays.asList(sets));
+    public static <T> Set<T> inter ( final Set<T>... sets )
+    {
+        return inter ( Arrays.asList ( sets ) );
     }
 
-    public static <T> Set<T> inter(final List<Set<T>> sets) {
-        final List<Set<T>> mutable = new ArrayList<Set<T>>(sets.size());
-        for (final Set<T> s : sets) {
+    public static <T> Set<T> inter ( final List<Set<T>> sets )
+    {
+        final List<Set<T>> mutable = new ArrayList<Set<T>> ( sets.size () );
+        for ( final Set<T> s : sets )
+        {
             // ignore nulls
-            if (s != null)
-                mutable.add(s);
+            if ( s != null )
+            {
+                mutable.add ( s );
+            }
         }
 
-        if (mutable.isEmpty())
+        if ( mutable.isEmpty () )
+        {
             return null;
-        else if (mutable.size() == 1)
-            return mutable.get(0);
-
-        final int indexMin = indexOfMinSize(mutable);
-        if (indexMin != 0) {
-            mutable.add(0, mutable.remove(indexMin));
-            return inter(mutable);
+        }
+        else if ( mutable.size () == 1 )
+        {
+            return mutable.get ( 0 );
         }
 
-        if (mutable.get(0).isEmpty())
-            return Collections.emptySet();
+        final int indexMin = indexOfMinSize ( mutable );
+        if ( indexMin != 0 )
+        {
+            mutable.add ( 0, mutable.remove ( indexMin ) );
+            return inter ( mutable );
+        }
+
+        if ( mutable.get ( 0 ).isEmpty () )
+        {
+            return Collections.emptySet ();
+        }
 
         // replace the first 2 by their intersection
         // (inter will swap as appropriate if java doesn't evalute args in source order)
-        mutable.add(0, inter(mutable.remove(0), mutable.remove(0)));
-        return inter(mutable);
+        mutable.add ( 0, inter ( mutable.remove ( 0 ), mutable.remove ( 0 ) ) );
+        return inter ( mutable );
     }
 
-    private static final <T> int indexOfMinSize(final List<Set<T>> sets) {
-        if (sets.isEmpty())
-            throw new IllegalArgumentException("empty sets");
+    private static final <T> int indexOfMinSize ( final List<Set<T>> sets )
+    {
+        if ( sets.isEmpty () )
+        {
+            throw new IllegalArgumentException ( "empty sets" );
+        }
 
         int res = 0;
-        for (int i = 1; i < sets.size(); i++) {
-            if (sets.get(i).size() < sets.get(res).size())
+        for ( int i = 1; i < sets.size (); i++ )
+        {
+            if ( sets.get ( i ).size () < sets.get ( res ).size () )
+            {
                 res = i;
+            }
         }
         return res;
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> Collection<T> subtract(final Collection<T> a, final Collection<? extends T> b) {
-        return org.apache.commons.collections.CollectionUtils.subtract(a, b);
+    @SuppressWarnings ( "unchecked" )
+    public static <T> Collection<T> subtract ( final Collection<T> a, final Collection<? extends T> b )
+    {
+        return org.apache.commons.collections.CollectionUtils.subtract ( a, b );
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> Collection<T> substract(final Collection<T> a, final Collection<? extends T> b) {
-        return org.apache.commons.collections.CollectionUtils.subtract(a, b);
+    @SuppressWarnings ( "unchecked" )
+    public static <T> Collection<T> substract ( final Collection<T> a, final Collection<? extends T> b )
+    {
+        return org.apache.commons.collections.CollectionUtils.subtract ( a, b );
     }
 
     /**
@@ -538,16 +647,19 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param l the list.
      * @return the first item of <code>l</code> or <code>null</code>.
      */
-    public static <T> T getSole(List<T> l) {
-        return l.size() == 1 ? l.get(0) : null;
+    public static <T> T getSole ( final List<T> l )
+    {
+        return l.size () == 1 ? l.get ( 0 ) : null;
     }
 
-    public static <T> T getSole(Collection<T> l) {
-        return l.size() == 1 ? l.iterator().next() : null;
+    public static <T> T getSole ( final Collection<T> l )
+    {
+        return l.size () == 1 ? l.iterator ().next () : null;
     }
 
-    public static <T> T getFirst(Collection<T> l) {
-        return l.size() > 0 ? l.iterator().next() : null;
+    public static <T> T getFirst ( final Collection<T> l )
+    {
+        return l.size () > 0 ? l.iterator ().next () : null;
     }
 
     /**
@@ -557,8 +669,9 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param l the list.
      * @return the first item of <code>l</code> or <code>null</code>.
      */
-    public static <T> T getFirst(List<T> l) {
-        return getNoExn(l, 0);
+    public static <T> T getFirst ( final List<T> l )
+    {
+        return getNoExn ( l, 0 );
     }
 
     /**
@@ -568,8 +681,9 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param l the list.
      * @return the last item of <code>l</code> or <code>null</code>.
      */
-    public static <T> T getLast(List<T> l) {
-        return getNoExn(l, l.size() - 1);
+    public static <T> T getLast ( final List<T> l )
+    {
+        return getNoExn ( l, l.size () - 1 );
     }
 
     /**
@@ -581,7 +695,8 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
      * @param index the wanted index.
      * @return the corresponding item of <code>l</code> or <code>null</code>.
      */
-    public static <T> T getNoExn(List<T> l, int index) {
-        return index >= 0 && index < l.size() ? l.get(index) : null;
+    public static <T> T getNoExn ( final List<T> l, final int index )
+    {
+        return index >= 0 && index < l.size () ? l.get ( index ) : null;
     }
 }
