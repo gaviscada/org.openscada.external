@@ -295,13 +295,6 @@
          unpack="false"/>
 
    <plugin
-         id="com.springsource.org.aspectj.tools"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.openscada.external.com.google.collections"
          download-size="0"
          install-size="0"
