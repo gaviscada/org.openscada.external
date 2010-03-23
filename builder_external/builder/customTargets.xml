@@ -122,6 +122,7 @@
   	
   	<openscada.builder.copyPlugin id="org.openscada.external.com.google.collections"/>
   	<openscada.builder.copyPlugin id="org.openscada.external.com.google.gson"/>
+  	<openscada.builder.copyPlugin id="org.eclipse.albireo"/>
   </target>
 
   <!-- ===================================================================== -->
