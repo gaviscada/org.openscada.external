@@ -386,7 +386,7 @@ public abstract class SwingControl extends Composite
                         {
 
                             // Propagate focus to Swing, if necesssary
-                            SwingControl.this.focusHandler.activateEmbeddedFrame ();
+                            //                            SwingControl.this.focusHandler.activateEmbeddedFrame ();
 
                             // Now that the preferred size is known, enable
                             // the layout on the layoutable ancestor.
