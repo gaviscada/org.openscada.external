@@ -83,7 +83,7 @@ public abstract class SwingControl extends Composite
 
     final/*private*/Display display;
 
-    private final Composite layoutDeferredAncestor;
+    private Composite layoutDeferredAncestor;
 
     // The width of the border to keep around the embedded AWT frame.
     private final int borderWidth;
@@ -1335,13 +1335,47 @@ public abstract class SwingControl extends Composite
 
     private void handleDispose ()
     {
+        if ( HIDE_SWING_POPUPS_ON_SWT_SHELL_BOUNDS_CHANGE )
+        {
+            getShell ().removeControlListener ( this.shellControlListener );
+        }
         if ( this.focusHandler != null )
         {
             this.focusHandler.dispose ();
+            this.focusHandler = null;
+        }
+        if ( this.swingComponent != null )
+        {
+            this.rootPaneContainer.getRootPane ().getContentPane ().remove ( this.swingComponent );
+            this.swingComponent = null;
+        }
+        if ( this.rootPaneContainer.getRootPane () != null )
+        {
+            this.rootPaneContainer.getRootPane ().removeAll ();
+            this.rootPaneContainer.getRootPane ().validate ();
+        }
+        if ( this.frame != null )
+        {
+            this.frame.remove ( this.rootPaneContainer.getRootPane () );
+            this.frame.removeAll ();
+            this.frame.validate ();
+            this.frame.dispose ();
+            this.frame = null;
+        }
+        if ( this.focusHandler != null )
+        {
+            this.focusHandler.dispose ();
+            this.focusHandler = null;
         }
         if ( this.borderlessChild != this )
         {
             this.borderlessChild.dispose ();
+            this.borderlessChild = null;
+        }
+        if ( this.layoutDeferredAncestor != null )
+        {
+            this.layoutDeferredAncestor.dispose ();
+            this.layoutDeferredAncestor = null;
         }
         this.display.removeListener ( SWT.Settings, this.settingsListener );
     }
