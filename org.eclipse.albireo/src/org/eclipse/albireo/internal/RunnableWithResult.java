@@ -31,14 +31,14 @@ public abstract class RunnableWithResult implements Runnable
      */
     public Object getResult ()
     {
-        return result;
+        return this.result;
     }
 
     /**
      * Assigns a result. This method should be called once during
      * {@link #run}.
      */
-    protected void setResult ( Object result )
+    protected void setResult ( final Object result )
     {
         this.result = result;
     }

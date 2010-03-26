@@ -53,13 +53,15 @@ public class FocusDebugging
     /**
       * Adds listeners for debugging the three first kinds of focus events.
       */
-    public static void addFocusDebugListeners ( org.eclipse.swt.widgets.Composite control, Container topLevelComponent )
+    public static void addFocusDebugListeners ( final org.eclipse.swt.widgets.Composite control, final Container topLevelComponent )
     {
         control.addFocusListener ( _SWTFocusListener );
         control.addListener ( SWT.Activate, _SWTActivationListener );
         control.addListener ( SWT.Deactivate, _SWTActivationListener );
         if ( topLevelComponent instanceof Window )
+        {
             ( (Window)topLevelComponent ).addWindowFocusListener ( _AWTWindowFocusListener );
+        }
         addFocusListenerToTree ( topLevelComponent );
     }
 
@@ -68,12 +70,12 @@ public class FocusDebugging
      */
     private static class SWTFocusListener implements org.eclipse.swt.events.FocusListener
     {
-        public void focusGained ( org.eclipse.swt.events.FocusEvent event )
+        public void focusGained ( final org.eclipse.swt.events.FocusEvent event )
         {
             System.err.println ( "@" + System.currentTimeMillis () + " SWT focus gained " + event.getSource ().hashCode () );
         }
 
-        public void focusLost ( org.eclipse.swt.events.FocusEvent event )
+        public void focusLost ( final org.eclipse.swt.events.FocusEvent event )
         {
             System.err.println ( "@" + System.currentTimeMillis () + " SWT focus lost " + event.getSource ().hashCode () );
         }
@@ -87,7 +89,7 @@ public class FocusDebugging
      */
     private static class SWTActivationListener implements org.eclipse.swt.widgets.Listener
     {
-        public void handleEvent ( Event event )
+        public void handleEvent ( final Event event )
         {
             String name = null;
             switch ( event.type )
@@ -111,21 +113,21 @@ public class FocusDebugging
      */
     private static class AWTWindowFocusListener implements WindowFocusListener
     {
-        private void showKFMStatus ( Window window )
+        private void showKFMStatus ( final Window window )
         {
-            KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager ();
+            final KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager ();
             System.err.println ( "               permanentFocusOwner: " + kfm.getPermanentFocusOwner () );
             System.err.println ( "               focusOwner:          " + kfm.getFocusOwner () );
             System.err.println ( "               window's focusOwner: " + window.getFocusOwner () );
         }
 
-        public void windowGainedFocus ( WindowEvent event )
+        public void windowGainedFocus ( final WindowEvent event )
         {
             System.err.println ( "@" + System.currentTimeMillis () + " AWT focus gained by window " + event.getWindow () );
             showKFMStatus ( event.getWindow () );
         }
 
-        public void windowLostFocus ( WindowEvent event )
+        public void windowLostFocus ( final WindowEvent event )
         {
             System.err.println ( "@" + System.currentTimeMillis () + " AWT focus lost by window " + event.getWindow () );
             showKFMStatus ( event.getWindow () );
@@ -139,12 +141,12 @@ public class FocusDebugging
      */
     private static class AWTFocusListener implements FocusListener
     {
-        public void focusGained ( FocusEvent event )
+        public void focusGained ( final FocusEvent event )
         {
             System.err.println ( "@" + System.currentTimeMillis () + " AWT focus gained " + event.getComponent () );
         }
 
-        public void focusLost ( FocusEvent event )
+        public void focusLost ( final FocusEvent event )
         {
             System.err.println ( "@" + System.currentTimeMillis () + " AWT focus lost " + event.getComponent () );
         }
@@ -158,12 +160,12 @@ public class FocusDebugging
      */
     private static class AWTContainerListener implements ContainerListener
     {
-        public void componentAdded ( ContainerEvent event )
+        public void componentAdded ( final ContainerEvent event )
         {
             addFocusListenerToTree ( event.getChild () );
         }
 
-        public void componentRemoved ( ContainerEvent event )
+        public void componentRemoved ( final ContainerEvent event )
         {
             removeFocusListenerFromTree ( event.getChild () );
         }
@@ -171,32 +173,36 @@ public class FocusDebugging
 
     private static AWTContainerListener _AWTContainerListener = new AWTContainerListener ();
 
-    static void addFocusListenerToTree ( Component comp )
+    static void addFocusListenerToTree ( final Component comp )
     {
         comp.addFocusListener ( _AWTFocusListener );
         if ( comp instanceof Container )
         {
-            Container cont = (Container)comp;
+            final Container cont = (Container)comp;
             // Remember to add the listener to child components that are added later.
             cont.addContainerListener ( _AWTContainerListener );
             // Recurse across all child components that are already in the tree now.
-            int n = cont.getComponentCount ();
+            final int n = cont.getComponentCount ();
             for ( int i = 0; i < n; i++ )
+            {
                 addFocusListenerToTree ( cont.getComponent ( i ) );
+            }
         }
     }
 
-    static void removeFocusListenerFromTree ( Component comp )
+    static void removeFocusListenerFromTree ( final Component comp )
     {
         // The exact opposite of addFocusListenerToTree.
         comp.removeFocusListener ( _AWTFocusListener );
         if ( comp instanceof Container )
         {
-            Container cont = (Container)comp;
+            final Container cont = (Container)comp;
             cont.removeContainerListener ( _AWTContainerListener );
-            int n = cont.getComponentCount ();
+            final int n = cont.getComponentCount ();
             for ( int i = 0; i < n; i++ )
+            {
                 removeFocusListenerFromTree ( cont.getComponent ( i ) );
+            }
         }
     }
 
@@ -212,11 +218,11 @@ public class FocusDebugging
         enableFinest ( "java.awt.focus.DefaultKeyboardFocusManager" );
     }
 
-    private static void enableFinest ( String name )
+    private static void enableFinest ( final String name )
     {
-        Logger logger = Logger.getLogger ( name );
+        final Logger logger = Logger.getLogger ( name );
         logger.setLevel ( Level.FINEST );
-        ConsoleHandler handler = new ConsoleHandler ();
+        final ConsoleHandler handler = new ConsoleHandler ();
         handler.setLevel ( Level.FINEST );
         logger.addHandler ( handler );
     }

@@ -33,9 +33,9 @@ public class SwtKeystroke
      * @param keyCode the SWT key code
      * @param stateMask the SWT state mask
      */
-    public SwtKeystroke ( int eventType, int keyCode, int stateMask )
+    public SwtKeystroke ( final int eventType, final int keyCode, final int stateMask )
     {
-        if ( ( eventType != SWT.KeyDown ) && ( eventType != SWT.KeyUp ) )
+        if ( eventType != SWT.KeyDown && eventType != SWT.KeyUp )
         {
             SWT.error ( SWT.ERROR_INVALID_ARGUMENT );
         }
@@ -50,11 +50,11 @@ public class SwtKeystroke
      * @param eventType the SWT event type
      * @param e the SWT KeyEvent
      */
-    public SwtKeystroke ( int eventType, KeyEvent e )
+    public SwtKeystroke ( final int eventType, final KeyEvent e )
     {
         this.eventType = eventType;
-        keyCode = e.keyCode;
-        stateMask = e.stateMask;
+        this.keyCode = e.keyCode;
+        this.stateMask = e.stateMask;
     }
 
     /**
@@ -62,11 +62,11 @@ public class SwtKeystroke
      * 
      * @param e the SWT Event
      */
-    public SwtKeystroke ( Event e )
+    public SwtKeystroke ( final Event e )
     {
-        eventType = e.type;
-        keyCode = e.keyCode;
-        stateMask = e.stateMask;
+        this.eventType = e.type;
+        this.keyCode = e.keyCode;
+        this.stateMask = e.stateMask;
     }
 
     /**
@@ -76,7 +76,7 @@ public class SwtKeystroke
      */
     public int getEventType ()
     {
-        return eventType;
+        return this.eventType;
     }
 
     /**
@@ -88,7 +88,7 @@ public class SwtKeystroke
      */
     public int getKeyCode ()
     {
-        return keyCode;
+        return this.keyCode;
     }
 
     /**
@@ -100,49 +100,64 @@ public class SwtKeystroke
      */
     public int getStateMask ()
     {
-        return stateMask;
+        return this.stateMask;
     }
 
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
      */
+    @Override
     public int hashCode ()
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + eventType;
-        result = prime * result + keyCode;
-        result = prime * result + stateMask;
+        result = prime * result + this.eventType;
+        result = prime * result + this.keyCode;
+        result = prime * result + this.stateMask;
         return result;
     }
 
     /* (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    public boolean equals ( Object obj )
+    @Override
+    public boolean equals ( final Object obj )
     {
         if ( this == obj )
+        {
             return true;
+        }
         if ( obj == null )
+        {
             return false;
+        }
         if ( getClass () != obj.getClass () )
+        {
             return false;
-        SwtKeystroke other = (SwtKeystroke)obj;
-        if ( eventType != other.eventType )
+        }
+        final SwtKeystroke other = (SwtKeystroke)obj;
+        if ( this.eventType != other.eventType )
+        {
             return false;
-        if ( keyCode != other.keyCode )
+        }
+        if ( this.keyCode != other.keyCode )
+        {
             return false;
-        if ( stateMask != other.stateMask )
+        }
+        if ( this.stateMask != other.stateMask )
+        {
             return false;
+        }
         return true;
     }
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString ()
     {
-        return "key: type=" + eventType + ", code=" + keyCode + ", stateMask=" + stateMask;
+        return "key: type=" + this.eventType + ", code=" + this.keyCode + ", stateMask=" + this.stateMask;
     }
 
 }

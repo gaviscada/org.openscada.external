@@ -41,37 +41,38 @@ public class SwtInputBlocker
 
     private final AwtDialogListener dialogListener;
 
-    private Shell parentShell;
+    private final Shell parentShell;
 
     private Stack /* of Shell */shellsWithActivateListener;
 
-    private Listener activateListener = new Listener () {
-        public void handleEvent ( Event event )
+    private final Listener activateListener = new Listener () {
+        public void handleEvent ( final Event event )
         {
             // Schedule the AWT focus request so that activation is completed first. Otherwise the focus
             // request can happen before the AWT window is deactivated.
-            ThreadingHandler.getInstance ().asyncExec ( shell.getDisplay (), new Runnable () {
+            ThreadingHandler.getInstance ().asyncExec ( SwtInputBlocker.this.shell.getDisplay (), new Runnable () {
                 public void run ()
                 {
                     // On some platforms (e.g. Linux/GTK), the 0x0 shell still appears as a dot 
                     // on the screen, so make it invisible by moving it below other windows. This
                     // is unnecessary under Windows and causes a flash, so only make the call when necessary.
                     // note: would like to do this too: parentShell.moveBelow(null);, but see bug 170774
-                    shell.moveBelow ( null );
-                    dialogListener.requestFocus ();
+                    SwtInputBlocker.this.shell.moveBelow ( null );
+                    SwtInputBlocker.this.dialogListener.requestFocus ();
                 }
             } );
         }
     };
 
-    private FocusListener focusListener = new FocusAdapter () {
-        public void focusGained ( FocusEvent e )
+    private final FocusListener focusListener = new FocusAdapter () {
+        @Override
+        public void focusGained ( final FocusEvent e )
         {
-            dialogListener.requestFocus ();
+            SwtInputBlocker.this.dialogListener.requestFocus ();
         }
     };
 
-    private SwtInputBlocker ( Shell parent, AwtDialogListener dialogListener )
+    private SwtInputBlocker ( final Shell parent, final AwtDialogListener dialogListener )
     {
         this.parentShell = parent;
         this.dialogListener = dialogListener;
@@ -86,8 +87,8 @@ public class SwtInputBlocker
         // Construct with the current display, rather than parent. This reduces problems where
         // the AWT dialog gets covered or does not have focus when opened. 
         // Use ON_TOP to prevent a Windows task bar button
-        shell = new Shell ( Display.getCurrent (), SWT.APPLICATION_MODAL | SWT.NO_TRIM | SWT.ON_TOP );
-        shell.setSize ( 0, 0 );
+        this.shell = new Shell ( Display.getCurrent (), SWT.APPLICATION_MODAL | SWT.NO_TRIM | SWT.ON_TOP );
+        this.shell.setSize ( 0, 0 );
 
         // Add listener(s) to force focus back to the AWT dialog if SWT gets control
         if ( Platform.isGtk () )
@@ -95,26 +96,26 @@ public class SwtInputBlocker
             // Under GTK, focus events are not available to detect this condition, 
             // so use the activate event. 
             // TODO: is it necessary to do this for all parents?
-            shellsWithActivateListener = new Stack ();
-            Shell shell = parentShell;
+            this.shellsWithActivateListener = new Stack ();
+            Shell shell = this.parentShell;
             while ( shell != null )
             {
-                shell.addListener ( SWT.Activate, activateListener );
-                shellsWithActivateListener.push ( shell );
-                Composite composite = shell.getParent ();
-                shell = ( composite != null ) ? composite.getShell () : null;
+                shell.addListener ( SWT.Activate, this.activateListener );
+                this.shellsWithActivateListener.push ( shell );
+                final Composite composite = shell.getParent ();
+                shell = composite != null ? composite.getShell () : null;
             }
         }
         else
         {
             // Otherwise, restore focus to awt if the shell gets focus  
             // TODO: test on MacOS and Motif
-            shell.addFocusListener ( focusListener );
+            this.shell.addFocusListener ( this.focusListener );
         }
-        shell.open ();
+        this.shell.open ();
 
-        Display display = shell.getDisplay ();
-        while ( !shell.isDisposed () )
+        final Display display = this.shell.getDisplay ();
+        while ( !this.shell.isDisposed () )
         {
             if ( !display.readAndDispatch () )
             {
@@ -125,24 +126,28 @@ public class SwtInputBlocker
         // If windows from other applications have been opened while SWT was being blocked, 
         // the original parent shell can get lost under those windows after the blocking
         // is stopped. Force the parent shell back to the front here.
-        if ( !parentShell.isDisposed () )
-            parentShell.forceActive ();
+        if ( !this.parentShell.isDisposed () )
+        {
+            this.parentShell.forceActive ();
+        }
     }
 
     private void close ()
     {
-        assert shell != null;
+        assert this.shell != null;
 
         if ( Platform.isGtk () )
         {
-            while ( !shellsWithActivateListener.isEmpty () )
+            while ( !this.shellsWithActivateListener.isEmpty () )
             {
-                Shell shell = (Shell)shellsWithActivateListener.pop ();
+                final Shell shell = (Shell)this.shellsWithActivateListener.pop ();
                 if ( !shell.isDisposed () )
-                    shell.removeListener ( SWT.Activate, activateListener );
+                {
+                    shell.removeListener ( SWT.Activate, this.activateListener );
+                }
             }
         }
-        shell.dispose ();
+        this.shell.dispose ();
     }
 
     public static void unblock ()
@@ -155,7 +160,7 @@ public class SwtInputBlocker
         {
             return;
         }
-        if ( ( blockCount == 1 ) && ( instance != null ) )
+        if ( blockCount == 1 && instance != null )
         {
             instance.close ();
             instance = null;
@@ -163,7 +168,7 @@ public class SwtInputBlocker
         blockCount--;
     }
 
-    public static void block ( AwtDialogListener dialogListener )
+    public static void block ( final AwtDialogListener dialogListener )
     {
         assert blockCount >= 0;
 
@@ -177,7 +182,7 @@ public class SwtInputBlocker
             assert instance == null; // should be no existing blocker
 
             // get a shell to parent the blocking dialog
-            Shell shell = getShell ( display );
+            final Shell shell = getShell ( display );
 
             // If there is a shell to block, block input now. If there are no shells, 
             // then there is no input to block. In the case of no shells, we are not
@@ -197,12 +202,12 @@ public class SwtInputBlocker
     }
 
     // Find a shell to use, giving preference to the active shell.
-    static private Shell getShell ( Display display )
+    static private Shell getShell ( final Display display )
     {
         Shell shell = display.getActiveShell ();
         if ( shell == null )
         {
-            Shell[] allShells = display.getShells ();
+            final Shell[] allShells = display.getShells ();
             if ( allShells.length > 0 )
             {
                 shell = allShells[0];

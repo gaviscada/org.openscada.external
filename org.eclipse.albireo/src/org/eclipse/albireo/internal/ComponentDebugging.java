@@ -28,27 +28,27 @@ public class ComponentDebugging
     public static void addComponentSizeDebugListeners ( final Component comp )
     {
         comp.addComponentListener ( new ComponentListener () {
-            private void log ( ComponentEvent event )
+            private void log ( final ComponentEvent event )
             {
                 System.err.println ( "Size: " + comp.getWidth () + " x " + comp.getHeight () + " after " + event );
             }
 
-            public void componentHidden ( ComponentEvent event )
+            public void componentHidden ( final ComponentEvent event )
             {
                 log ( event );
             }
 
-            public void componentMoved ( ComponentEvent event )
+            public void componentMoved ( final ComponentEvent event )
             {
                 log ( event );
             }
 
-            public void componentResized ( ComponentEvent event )
+            public void componentResized ( final ComponentEvent event )
             {
                 log ( event );
             }
 
-            public void componentShown ( ComponentEvent event )
+            public void componentShown ( final ComponentEvent event )
             {
                 log ( event );
             }

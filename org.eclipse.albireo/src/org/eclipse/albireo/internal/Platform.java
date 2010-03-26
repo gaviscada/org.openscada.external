@@ -63,8 +63,9 @@ public class Platform
             return 0;
         }
         int major = 0, minor = 0, micro = 0;
-        int length = version.length (), index = 0, start = 0;
-        while ( ( index < length ) && Character.isDigit ( version.charAt ( index ) ) )
+        final int length = version.length ();
+        int index = 0, start = 0;
+        while ( index < length && Character.isDigit ( version.charAt ( index ) ) )
         {
             index++;
         }
@@ -75,11 +76,11 @@ public class Platform
                 major = Integer.parseInt ( version.substring ( start, index ) );
             }
         }
-        catch ( NumberFormatException e )
+        catch ( final NumberFormatException e )
         {
         }
         start = ++index;
-        while ( ( index < length ) && Character.isDigit ( version.charAt ( index ) ) )
+        while ( index < length && Character.isDigit ( version.charAt ( index ) ) )
         {
             index++;
         }
@@ -90,11 +91,11 @@ public class Platform
                 minor = Integer.parseInt ( version.substring ( start, index ) );
             }
         }
-        catch ( NumberFormatException e )
+        catch ( final NumberFormatException e )
         {
         }
         start = ++index;
-        while ( ( index < length ) && Character.isDigit ( version.charAt ( index ) ) )
+        while ( index < length && Character.isDigit ( version.charAt ( index ) ) )
         {
             index++;
         }
@@ -105,7 +106,7 @@ public class Platform
                 micro = Integer.parseInt ( version.substring ( start, index ) );
             }
         }
-        catch ( NumberFormatException e )
+        catch ( final NumberFormatException e )
         {
         }
         return javaVersion ( major, minor, micro );

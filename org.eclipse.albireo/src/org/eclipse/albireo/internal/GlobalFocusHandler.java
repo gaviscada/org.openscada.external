@@ -33,95 +33,95 @@ public class GlobalFocusHandler
 
     private static final boolean verboseFocusEvents = FocusHandler.verboseFocusEvents;
 
-    public GlobalFocusHandler ( Display display )
+    public GlobalFocusHandler ( final Display display )
     {
         this.display = display;
-        swtEventFilter = new SwtEventFilter ();
-        display.addFilter ( SWT.Activate, swtEventFilter );
-        display.addFilter ( SWT.Deactivate, swtEventFilter );
-        display.addFilter ( SWT.Traverse, swtEventFilter );
+        this.swtEventFilter = new SwtEventFilter ();
+        display.addFilter ( SWT.Activate, this.swtEventFilter );
+        display.addFilter ( SWT.Deactivate, this.swtEventFilter );
+        display.addFilter ( SWT.Traverse, this.swtEventFilter );
     }
 
     public int getCurrentSwtTraversal ()
     {
         assert Display.getCurrent () != null; // On SWT event thread
-        return swtEventFilter.currentSwtTraversal;
+        return this.swtEventFilter.currentSwtTraversal;
     }
 
     public Widget getActiveWidget ()
     {
         assert Display.getCurrent () != null; // On SWT event thread
-        return swtEventFilter.activeWidget;
+        return this.swtEventFilter.activeWidget;
     }
 
     public Shell getActiveShell ()
     {
         assert Display.getCurrent () != null; // On SWT event thread
-        return swtEventFilter.activeShell;
+        return this.swtEventFilter.activeShell;
     }
 
     public SwingControl getActiveEmbedded ()
     {
         assert Display.getCurrent () != null; // On SWT event thread
-        return swtEventFilter.activeEmbedded;
+        return this.swtEventFilter.activeEmbedded;
     }
 
     public Widget getLastActiveWidget ()
     {
         assert Display.getCurrent () != null; // On SWT event thread
-        return swtEventFilter.lastActiveWidget;
+        return this.swtEventFilter.lastActiveWidget;
     }
 
     public SwingControl getLastActiveEmbedded ()
     {
         assert Display.getCurrent () != null; // On SWT event thread
-        return swtEventFilter.lastActiveEmbedded;
+        return this.swtEventFilter.lastActiveEmbedded;
     }
 
     public boolean getLastActiveFocusCleared ()
     {
         assert Display.getCurrent () != null; // On SWT event thread
-        return swtEventFilter.lastActiveFocusCleared;
+        return this.swtEventFilter.lastActiveFocusCleared;
     }
 
-    public void setLastActiveFocusCleared ( boolean lastActiveFocusCleared )
+    public void setLastActiveFocusCleared ( final boolean lastActiveFocusCleared )
     {
         assert Display.getCurrent () != null; // On SWT event thread
-        swtEventFilter.lastActiveFocusCleared = lastActiveFocusCleared;
+        this.swtEventFilter.lastActiveFocusCleared = lastActiveFocusCleared;
     }
 
-    public void addEventFilter ( Listener filter )
+    public void addEventFilter ( final Listener filter )
     {
-        listeners.add ( filter );
+        this.listeners.add ( filter );
     }
 
-    public void removeEventFilter ( Listener filter )
+    public void removeEventFilter ( final Listener filter )
     {
-        listeners.remove ( filter );
+        this.listeners.remove ( filter );
     }
 
-    protected void fireEvent ( Event event )
+    protected void fireEvent ( final Event event )
     {
-        for ( Iterator iterator = listeners.iterator (); iterator.hasNext (); )
+        for ( final Iterator iterator = this.listeners.iterator (); iterator.hasNext (); )
         {
-            Listener listener = (Listener)iterator.next ();
+            final Listener listener = (Listener)iterator.next ();
             listener.handleEvent ( event );
         }
     }
 
     public void dispose ()
     {
-        display.removeFilter ( SWT.Activate, swtEventFilter );
-        display.removeFilter ( SWT.Deactivate, swtEventFilter );
-        display.removeFilter ( SWT.Traverse, swtEventFilter );
+        this.display.removeFilter ( SWT.Activate, this.swtEventFilter );
+        this.display.removeFilter ( SWT.Deactivate, this.swtEventFilter );
+        this.display.removeFilter ( SWT.Traverse, this.swtEventFilter );
     }
 
-    protected boolean isBorderlessSwingControl ( Widget widget )
+    protected boolean isBorderlessSwingControl ( final Widget widget )
     {
-        return ( widget instanceof SwingControl ) && ( ( widget.getStyle () & SWT.EMBEDDED ) != 0 );
+        return widget instanceof SwingControl && ( widget.getStyle () & SWT.EMBEDDED ) != 0;
     }
 
-    protected void clearFocusOwner ( SwingControl swingControl )
+    protected void clearFocusOwner ( final SwingControl swingControl )
     {
         assert Display.getCurrent () != null; // On SWT event thread
 
@@ -145,7 +145,7 @@ public class GlobalFocusHandler
                     // the drawback of a brief visual movement of the cursor (or other 
                     // focus indicator), so it is good to avoid it whenever possible, as 
                     // we do here. 
-                    KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager ();
+                    final KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager ();
                     if ( owner == kfm.getFocusOwner () )
                     {
                         if ( verboseFocusEvents )
@@ -169,7 +169,7 @@ public class GlobalFocusHandler
         }
     }
 
-    protected void restoreFocusOwner ( SwingControl swingControl )
+    protected void restoreFocusOwner ( final SwingControl swingControl )
     {
         assert Display.getCurrent () != null; // On SWT event thread
 
@@ -192,7 +192,7 @@ public class GlobalFocusHandler
         }
     }
 
-    private void trace ( String msg )
+    private void trace ( final String msg )
     {
         System.err.println ( header () + ' ' + msg );
     }
@@ -221,75 +221,75 @@ public class GlobalFocusHandler
 
         public SwtEventFilter ()
         {
-            activeWidget = display.getFocusControl ();
-            activeShell = display.getActiveShell ();
-            if ( isBorderlessSwingControl ( activeWidget ) )
+            this.activeWidget = GlobalFocusHandler.this.display.getFocusControl ();
+            this.activeShell = GlobalFocusHandler.this.display.getActiveShell ();
+            if ( isBorderlessSwingControl ( this.activeWidget ) )
             {
-                activeEmbedded = (SwingControl)activeWidget;
+                this.activeEmbedded = (SwingControl)this.activeWidget;
             }
         }
 
-        public void handleEvent ( Event event )
+        public void handleEvent ( final Event event )
         {
-            Widget widget = event.widget;
+            final Widget widget = event.widget;
             switch ( event.type )
             {
             case SWT.Activate:
-                activeWidget = widget;
+                this.activeWidget = widget;
 
                 // Track the currently active shell. This is more reliable than
                 // depending on Display.getActiveShell() which sometimes returns an 
                 // inactive shell. 
                 if ( widget instanceof Shell )
                 {
-                    activeShell = (Shell)widget;
+                    this.activeShell = (Shell)widget;
                 }
 
                 // If we have moved from a SwingControl to another control in the same
                 // shell, clear its current focus owner so that a permanent focus
                 // lost event is generated. 
-                if ( ( lastActiveEmbedded != null ) && ( !lastActiveEmbedded.isDisposed () ) && ( lastActiveEmbedded != widget ) && !lastActiveFocusCleared && ( widget instanceof Control ) && // (need a getShell() method)
-                ( lastActiveEmbedded.getShell () == ( (Control)widget ).getShell () ) )
+                if ( this.lastActiveEmbedded != null && !this.lastActiveEmbedded.isDisposed () && this.lastActiveEmbedded != widget && !this.lastActiveFocusCleared && widget instanceof Control && // (need a getShell() method)
+                this.lastActiveEmbedded.getShell () == ( (Control)widget ).getShell () )
                 {
-                    clearFocusOwner ( lastActiveEmbedded );
-                    lastActiveFocusCleared = true;
+                    clearFocusOwner ( this.lastActiveEmbedded );
+                    this.lastActiveFocusCleared = true;
                 }
 
                 // If we have moved to a SwingControl, restore the current focus owner
                 // that was cleared above during a previous Activate event.
                 if ( isBorderlessSwingControl ( widget ) )
                 {
-                    activeEmbedded = (SwingControl)widget;
-                    restoreFocusOwner ( activeEmbedded );
+                    this.activeEmbedded = (SwingControl)widget;
+                    restoreFocusOwner ( this.activeEmbedded );
                 }
                 break;
 
             case SWT.Deactivate:
-                if ( activeWidget != null )
+                if ( this.activeWidget != null )
                 {
-                    lastActiveWidget = activeWidget;
-                    activeWidget = null;
+                    this.lastActiveWidget = this.activeWidget;
+                    this.activeWidget = null;
                 }
 
                 if ( event.widget instanceof Shell )
                 {
-                    activeShell = null;
+                    this.activeShell = null;
                 }
 
                 if ( isBorderlessSwingControl ( widget ) )
                 {
-                    if ( activeEmbedded != null )
+                    if ( this.activeEmbedded != null )
                     {
-                        lastActiveEmbedded = activeEmbedded;
-                        lastActiveFocusCleared = false;
-                        activeEmbedded = null;
+                        this.lastActiveEmbedded = this.activeEmbedded;
+                        this.lastActiveFocusCleared = false;
+                        this.activeEmbedded = null;
                     }
                 }
 
                 break;
 
             case SWT.Traverse:
-                currentSwtTraversal = event.detail;
+                this.currentSwtTraversal = event.detail;
 
                 break;
             }
@@ -302,7 +302,7 @@ public class GlobalFocusHandler
             // to indicate no current traversal. 
             if ( event.type == SWT.Activate )
             {
-                currentSwtTraversal = SWT.TRAVERSE_NONE;
+                this.currentSwtTraversal = SWT.TRAVERSE_NONE;
             }
         }
     }

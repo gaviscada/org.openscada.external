@@ -84,7 +84,7 @@ public class LookAndFeelHandler
         // https://bugs.eclipse.org/bugs/show_bug.cgi?id=126931
         if ( Platform.JAVA_VERSION >= Platform.javaVersion ( 1, 6, 0 ) )
         {
-            lafChoice = LAFChoiceNativeSystemNoGtk;
+            this.lafChoice = LAFChoiceNativeSystemNoGtk;
         }
         else
         {
@@ -92,7 +92,7 @@ public class LookAndFeelHandler
             // Unix systems with a GNOME desktop and with themes supported by
             // the Swing Gtk look&feel this Gtk look&feel is used; it resembles
             // the system look&feel more closely than Metal or Nimbus.
-            lafChoice = LAFChoiceNativeSystemPreferGtk;
+            this.lafChoice = LAFChoiceNativeSystemPreferGtk;
         }
     }
 
@@ -102,7 +102,7 @@ public class LookAndFeelHandler
      */
     public String getLAFChoice ()
     {
-        return lafChoice;
+        return this.lafChoice;
     }
 
     /**
@@ -120,9 +120,9 @@ public class LookAndFeelHandler
      *               {@link #LAFChoiceNativeSystemPreferGtk},
      *               {@link #LAFChoiceNativeSystemNoGtk}.
      */
-    public void setLAFChoice ( String choice )
+    public void setLAFChoice ( final String choice )
     {
-        lafChoice = choice;
+        this.lafChoice = choice;
     }
 
     // -------------------------- Options ----------------------------------------------
@@ -140,7 +140,7 @@ public class LookAndFeelHandler
      */
     public boolean isSwtDefaultFontPropagated ()
     {
-        return isDefaultSwtFontPropagated;
+        return this.isDefaultSwtFontPropagated;
     }
 
     /**
@@ -160,9 +160,9 @@ public class LookAndFeelHandler
      * @param val boolean flag. If <code>true</code>, default fonts will be
      *            propagated to Swing.
      */
-    public void setSwtDefaultFontPropagated ( boolean val )
+    public void setSwtDefaultFontPropagated ( final boolean val )
     {
-        isDefaultSwtFontPropagated = val;
+        this.isDefaultSwtFontPropagated = val;
     }
 
     /**
@@ -174,7 +174,7 @@ public class LookAndFeelHandler
      */
     public boolean isTooltipAlwaysShown ()
     {
-        return isTooltipAlwaysShown;
+        return this.isTooltipAlwaysShown;
     }
 
     /**
@@ -191,7 +191,7 @@ public class LookAndFeelHandler
      * 
      * @param isTooltipAlwaysShown the new isTooltipAlwaysShown value to set
      */
-    public void setTooltipAlwaysShown ( boolean isTooltipAlwaysShown )
+    public void setTooltipAlwaysShown ( final boolean isTooltipAlwaysShown )
     {
         this.isTooltipAlwaysShown = isTooltipAlwaysShown;
     }
@@ -209,7 +209,7 @@ public class LookAndFeelHandler
     {
         assert EventQueue.isDispatchThread (); // On AWT event thread
 
-        if ( isTooltipAlwaysShown )
+        if ( this.isTooltipAlwaysShown )
         {
             // Try to turn on tooltips for inactive AWT windows. This is not the default
             // behavior on some platforms. Also, note that it will only work in 
@@ -221,7 +221,9 @@ public class LookAndFeelHandler
         // system property, and the application has also specified the
         // look&feel, obey the user. The user is always right.
         if ( System.getProperty ( "swing.defaultlaf" ) != null )
+        {
             return;
+        }
 
         String laf = getLAFChoice ();
         if ( LAFChoiceSwingDefault.equals ( laf ) )
@@ -252,16 +254,16 @@ public class LookAndFeelHandler
                     doSetLookAndFeel ( GTK_LOOK_AND_FEEL_NAME );
                     return;
                 }
-                catch ( ClassNotFoundException e )
+                catch ( final ClassNotFoundException e )
                 {
                 }
-                catch ( InstantiationException e )
+                catch ( final InstantiationException e )
                 {
                 }
-                catch ( IllegalAccessException e )
+                catch ( final IllegalAccessException e )
                 {
                 }
-                catch ( UnsupportedLookAndFeelException e )
+                catch ( final UnsupportedLookAndFeelException e )
                 {
                 }
                 // Second try: Use cross platform look and feel
@@ -272,13 +274,15 @@ public class LookAndFeelHandler
         {
             laf = UIManager.getSystemLookAndFeelClassName ();
             if ( GTK_LOOK_AND_FEEL_NAME.equals ( laf ) )
+            {
                 laf = UIManager.getCrossPlatformLookAndFeelClassName ();
+            }
         }
 
         doSetLookAndFeel ( laf );
     }
 
-    private static void doSetLookAndFeel ( String laf ) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
+    private static void doSetLookAndFeel ( final String laf ) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
     {
         // Although UIManager.setLookAndFeel is specified to throw an
         // UnsupportedLookAndFeelException when the look&feel is not supported,
@@ -294,25 +298,27 @@ public class LookAndFeelHandler
         // "/opt/gnome/share/themes/Qt/gtk-2.0/gtkrc:5: Engine "qtengine" is unsupported, ignoring"
         //
         // This can also happens even when running the GNOME desktop, when certain themes are selected.  
-        PrintStream origSystemErr = System.err;
+        final PrintStream origSystemErr = System.err;
         try
         {
             System.setErr ( new PrintStream ( origSystemErr ) {
-                public void print ( String s )
+                @Override
+                public void print ( final String s )
                 {
                     throw new UnsupportedLookAndFeelRuntimeException ( s );
                 }
 
-                public void println ( String s )
+                @Override
+                public void println ( final String s )
                 {
                     throw new UnsupportedLookAndFeelRuntimeException ( s );
                 }
             } );
             UIManager.setLookAndFeel ( laf );
         }
-        catch ( UnsupportedLookAndFeelRuntimeException e )
+        catch ( final UnsupportedLookAndFeelRuntimeException e )
         {
-            UnsupportedLookAndFeelException newExc = new UnsupportedLookAndFeelException ( e.getMessage () );
+            final UnsupportedLookAndFeelException newExc = new UnsupportedLookAndFeelException ( e.getMessage () );
             newExc.initCause ( e );
             throw newExc;
         }
@@ -327,7 +333,7 @@ public class LookAndFeelHandler
      */
     static class UnsupportedLookAndFeelRuntimeException extends RuntimeException
     {
-        UnsupportedLookAndFeelRuntimeException ( String message )
+        UnsupportedLookAndFeelRuntimeException ( final String message )
         {
             super ( message );
         }
@@ -349,14 +355,14 @@ public class LookAndFeelHandler
      * @see #isSwtDefaultFontPropagated()
      * @see #updateLookAndFeelFonts(java.awt.Font)
      */
-    public java.awt.Font propagateSwtFont ( Font swtFont, FontData[] swtFontData )
+    public java.awt.Font propagateSwtFont ( final Font swtFont, final FontData[] swtFontData )
     {
         assert EventQueue.isDispatchThread (); // On AWT event thread
 
-        java.awt.Font awtFont = ResourceConverter.getInstance ().convertFont ( swtFont, swtFontData );
-        if ( isSwtDefaultFontPropagated () && !swtFont.getDevice ().isDisposed () && ( lastPropagatedSwtFont != swtFont ) )
+        final java.awt.Font awtFont = ResourceConverter.getInstance ().convertFont ( swtFont, swtFontData );
+        if ( isSwtDefaultFontPropagated () && !swtFont.getDevice ().isDisposed () && this.lastPropagatedSwtFont != swtFont )
         {
-            lastPropagatedSwtFont = swtFont;
+            this.lastPropagatedSwtFont = swtFont;
 
             // Update the look and feel defaults to use new font.
             // Swing should take care of this on its own, but it does not seem
@@ -371,14 +377,14 @@ public class LookAndFeelHandler
      * as primary font for everything.
      * @param awtFont A font.
      */
-    protected void updateLookAndFeelFonts ( java.awt.Font awtFont )
+    protected void updateLookAndFeelFonts ( final java.awt.Font awtFont )
     {
         assert awtFont != null;
         assert EventQueue.isDispatchThread (); // On AWT event thread
 
         // The FontUIResource class marks the font as replaceable by the look and feel
         // implementation if font settings are later changed.
-        FontUIResource fontResource = new FontUIResource ( awtFont );
+        final FontUIResource fontResource = new FontUIResource ( awtFont );
 
         // Assign the new font to the relevant L&F font properties. These are
         // the properties that are initially assigned to the system font
@@ -420,13 +426,13 @@ public class LookAndFeelHandler
      *                         or inherited) is already the same as the given
      *                         foreground color.
      */
-    public void propagateSwtForeground ( Component component, Color foreground, boolean preserveDefaults )
+    public void propagateSwtForeground ( final Component component, final Color foreground, final boolean preserveDefaults )
     {
         assert EventQueue.isDispatchThread ();
         assert component != null;
 
-        ResourceConverter converter = ResourceConverter.getInstance ();
-        java.awt.Color fg = converter.convertColor ( foreground );
+        final ResourceConverter converter = ResourceConverter.getInstance ();
+        final java.awt.Color fg = converter.convertColor ( foreground );
 
         if ( !fg.equals ( component.getForeground () ) || !preserveDefaults )
         {
@@ -443,13 +449,13 @@ public class LookAndFeelHandler
      *                         or inherited) is already the same as the given
      *                         background color.
      */
-    public void propagateSwtBackground ( Component component, Color background, boolean preserveDefaults )
+    public void propagateSwtBackground ( final Component component, final Color background, final boolean preserveDefaults )
     {
         assert EventQueue.isDispatchThread ();
         assert component != null;
 
-        ResourceConverter converter = ResourceConverter.getInstance ();
-        java.awt.Color bg = converter.convertColor ( background );
+        final ResourceConverter converter = ResourceConverter.getInstance ();
+        final java.awt.Color bg = converter.convertColor ( background );
 
         if ( !bg.equals ( component.getBackground () ) || !preserveDefaults )
         {
@@ -474,7 +480,7 @@ public class LookAndFeelHandler
      * Replaces the singleton of this class.
      * @param instance An instance of this class or of a customized subclass.
      */
-    public static void setInstance ( LookAndFeelHandler instance )
+    public static void setInstance ( final LookAndFeelHandler instance )
     {
         theHandler = instance;
     }

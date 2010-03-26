@@ -43,7 +43,7 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
 
     private static boolean verboseModalityHandling = false;
 
-    protected static boolean USING_ALWAYS_ON_TOP = Platform.isGtk () && ( Platform.JAVA_VERSION >= Platform.javaVersion ( 1, 5, 0 ) );
+    protected static boolean USING_ALWAYS_ON_TOP = Platform.isGtk () && Platform.JAVA_VERSION >= Platform.javaVersion ( 1, 5, 0 );
 
     private static boolean alwaysOnTopMethodsInitialized = false;
 
@@ -64,7 +64,7 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
      * need not be called separately in that case.  
      * @param shell 
      */
-    public AwtDialogListener ( Display display )
+    public AwtDialogListener ( final Display display )
     {
         assert display != null;
 
@@ -90,14 +90,14 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
                 setAlwaysOnTopMethod = Window.class.getMethod ( "setAlwaysOnTop", new Class[] { boolean.class } );
                 isAlwaysOnTopMethod = Window.class.getMethod ( "isAlwaysOnTop", new Class[] {} );
             }
-            catch ( NoSuchMethodException e )
+            catch ( final NoSuchMethodException e )
             {
                 handleAlwaysOnTopException ( e );
             }
         }
     }
 
-    protected void setAlwaysOnTop ( Window window, boolean onTop )
+    protected void setAlwaysOnTop ( final Window window, final boolean onTop )
     {
         assert setAlwaysOnTopMethod != null;
         try
@@ -108,17 +108,17 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
             }
             setAlwaysOnTopMethod.invoke ( window, new Object[] { new Boolean ( onTop ) } );
         }
-        catch ( IllegalAccessException e )
+        catch ( final IllegalAccessException e )
         {
             handleAlwaysOnTopException ( e );
         }
-        catch ( InvocationTargetException e )
+        catch ( final InvocationTargetException e )
         {
             handleAlwaysOnTopException ( e );
         }
     }
 
-    protected boolean isAlwaysOnTop ( Window window )
+    protected boolean isAlwaysOnTop ( final Window window )
     {
         assert isAlwaysOnTopMethod != null;
         try
@@ -127,22 +127,22 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
             {
                 System.err.println ( "Calling isAlwaysOnTop() for " + window );
             }
-            Object result = isAlwaysOnTopMethod.invoke ( window, new Object[] {} );
+            final Object result = isAlwaysOnTopMethod.invoke ( window, new Object[] {} );
             return ( (Boolean)result ).booleanValue ();
         }
-        catch ( IllegalAccessException e )
+        catch ( final IllegalAccessException e )
         {
             handleAlwaysOnTopException ( e );
             return false;
         }
-        catch ( InvocationTargetException e )
+        catch ( final InvocationTargetException e )
         {
             handleAlwaysOnTopException ( e );
             return false;
         }
     }
 
-    protected void handleAlwaysOnTopException ( Exception e )
+    protected void handleAlwaysOnTopException ( final Exception e )
     {
         if ( verboseModalityHandling )
         {
@@ -150,11 +150,11 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
         }
     }
 
-    private void handleRemovedDialog ( Dialog awtDialog, boolean removeListener )
+    private void handleRemovedDialog ( final Dialog awtDialog, final boolean removeListener )
     {
         assert awtDialog != null;
-        assert modalDialogs != null;
-        assert display != null;
+        assert this.modalDialogs != null;
+        assert this.display != null;
         assert EventQueue.isDispatchThread (); // On AWT event thread
 
         if ( verboseModalityHandling )
@@ -173,9 +173,9 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
         // have been changed from modal to non-modal after it was opened. In this case
         // the currently visible dialog would still act modal and we'd need to unblock
         // SWT here when it goes away.
-        if ( modalDialogs.remove ( awtDialog ) )
+        if ( this.modalDialogs.remove ( awtDialog ) )
         {
-            ThreadingHandler.getInstance ().asyncExec ( display, new Runnable () {
+            ThreadingHandler.getInstance ().asyncExec ( this.display, new Runnable () {
                 public void run ()
                 {
                     SwtInputBlocker.unblock ();
@@ -187,7 +187,7 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
     private void handleAddedDialog ( final Dialog awtDialog )
     {
         assert awtDialog != null;
-        assert modalDialogs != null;
+        assert this.modalDialogs != null;
         assert EventQueue.isDispatchThread (); // On AWT event thread
 
         if ( verboseModalityHandling )
@@ -201,11 +201,11 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
         // 3) the dialog is not (yet?) visible
         // It's not clear why/when case 3 would happen, but it has been reported and the consequences
         // are severe if the check is not in place. 
-        if ( modalDialogs.contains ( awtDialog ) || !awtDialog.isModal () || !awtDialog.isVisible () )
+        if ( this.modalDialogs.contains ( awtDialog ) || !awtDialog.isModal () || !awtDialog.isVisible () )
         {
             return;
         }
-        modalDialogs.add ( awtDialog );
+        this.modalDialogs.add ( awtDialog );
         awtDialog.addComponentListener ( this );
 
         // In some cases (e.g. GTK), we need to use the Window.setAlwaysOnTop
@@ -223,7 +223,7 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
             awtDialog.addWindowFocusListener ( this );
         }
 
-        ThreadingHandler.getInstance ().asyncExec ( display, new Runnable () {
+        ThreadingHandler.getInstance ().asyncExec ( this.display, new Runnable () {
             public void run ()
             {
                 SwtInputBlocker.block ( AwtDialogListener.this );
@@ -239,12 +239,12 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
         EventQueue.invokeLater ( new Runnable () {
             public void run ()
             {
-                assert modalDialogs != null;
+                assert AwtDialogListener.this.modalDialogs != null;
 
-                int size = modalDialogs.size ();
+                final int size = AwtDialogListener.this.modalDialogs.size ();
                 if ( size > 0 )
                 {
-                    final Dialog awtDialog = (Dialog)modalDialogs.get ( size - 1 );
+                    final Dialog awtDialog = (Dialog)AwtDialogListener.this.modalDialogs.get ( size - 1 );
                     Component focusOwner = awtDialog.getMostRecentFocusOwner ();
                     if ( verboseModalityHandling )
                     {
@@ -265,7 +265,7 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
                         focusOwner.requestFocus ();
                         awtDialog.toFront ();
                     }
-                    catch ( NullPointerException e )
+                    catch ( final NullPointerException e )
                     {
                         // Some dialogs (e.g. Windows page setup and print dialogs on JDK 1.5+) throw an NPE on
                         // requestFocus(). There's no way to check ahead of time, so just swallow the NPE here. 
@@ -275,25 +275,25 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
         } );
     }
 
-    private void handleOpenedWindow ( WindowEvent event )
+    private void handleOpenedWindow ( final WindowEvent event )
     {
         assert event != null;
         assert EventQueue.isDispatchThread (); // On AWT event thread
 
-        Window window = event.getWindow ();
+        final Window window = event.getWindow ();
         if ( window instanceof Dialog )
         {
             handleAddedDialog ( (Dialog)window );
         }
     }
 
-    private void handleClosedWindow ( WindowEvent event )
+    private void handleClosedWindow ( final WindowEvent event )
     {
         assert event != null;
         assert EventQueue.isDispatchThread (); // On AWT event thread
 
         // Dispose-based close
-        Window window = event.getWindow ();
+        final Window window = event.getWindow ();
         if ( window instanceof Dialog )
         {
             // Remove dialog and component listener
@@ -301,13 +301,13 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
         }
     }
 
-    private void handleClosingWindow ( WindowEvent event )
+    private void handleClosingWindow ( final WindowEvent event )
     {
         assert event != null;
         assert EventQueue.isDispatchThread (); // On AWT event thread
 
         // System-based close 
-        Window window = event.getWindow ();
+        final Window window = event.getWindow ();
         if ( window instanceof Dialog )
         {
             final Dialog dialog = (Dialog)window;
@@ -333,7 +333,7 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
     // ================== Implementation of AWTEventListener ==================
     // This listener is permanently attached to the AWT Toolkit.
 
-    public void eventDispatched ( AWTEvent event )
+    public void eventDispatched ( final AWTEvent event )
     {
         assert event != null;
         assert EventQueue.isDispatchThread (); // On AWT event thread
@@ -361,7 +361,7 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
     // This listener is attached to modal Dialog instances while they are
     // shown.
 
-    public void componentHidden ( ComponentEvent e )
+    public void componentHidden ( final ComponentEvent e )
     {
         assert e != null;
         assert EventQueue.isDispatchThread (); // On AWT event thread
@@ -370,7 +370,7 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
         {
             System.err.println ( "Component hidden" );
         }
-        Object obj = e.getSource ();
+        final Object obj = e.getSource ();
         if ( obj instanceof Dialog )
         {
             // Remove dialog but keep listener in place so that we know if/when it is set visible
@@ -378,7 +378,7 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
         }
     }
 
-    public void componentShown ( ComponentEvent e )
+    public void componentShown ( final ComponentEvent e )
     {
         assert e != null;
         assert EventQueue.isDispatchThread (); // On AWT event thread
@@ -387,19 +387,19 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
         {
             System.err.println ( "Component shown" );
         }
-        Object obj = e.getSource ();
+        final Object obj = e.getSource ();
         if ( obj instanceof Dialog )
         {
             handleAddedDialog ( (Dialog)obj );
         }
     }
 
-    public void componentResized ( ComponentEvent e )
+    public void componentResized ( final ComponentEvent e )
     {
         // Ignore event
     }
 
-    public void componentMoved ( ComponentEvent e )
+    public void componentMoved ( final ComponentEvent e )
     {
         // Ignore event
     }
@@ -408,13 +408,13 @@ public class AwtDialogListener implements AWTEventListener, ComponentListener, W
     // This listener is attached to modal Dialog instances that are not already
     // set to AlwaysOnTop, while they are shown, if USING_ALWAYS_ON_TOP is true.
 
-    public void windowGainedFocus ( WindowEvent e )
+    public void windowGainedFocus ( final WindowEvent e )
     {
         assert USING_ALWAYS_ON_TOP;
         setAlwaysOnTop ( e.getWindow (), true );
     }
 
-    public void windowLostFocus ( WindowEvent e )
+    public void windowLostFocus ( final WindowEvent e )
     {
         assert USING_ALWAYS_ON_TOP;
         setAlwaysOnTop ( e.getWindow (), false );

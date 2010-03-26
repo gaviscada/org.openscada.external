@@ -61,8 +61,8 @@ public class SwtPopupHandler
     private boolean pendingSwtPopup = false;
 
     // Listen to AWT mouse events and show SWT popups as necessary
-    private java.awt.event.AWTEventListener popupEventListener = new java.awt.event.AWTEventListener () {
-        public void eventDispatched ( java.awt.AWTEvent event )
+    private final java.awt.event.AWTEventListener popupEventListener = new java.awt.event.AWTEventListener () {
+        public void eventDispatched ( final java.awt.AWTEvent event )
         {
             if ( event instanceof MouseEvent )
             {
@@ -78,7 +78,7 @@ public class SwtPopupHandler
                         // properly opened if the user clicks, then drags, then releases the mouse. 
 
                         // System.err.println("delaying any SWT popup display");
-                        pendingSwtPopup = true;
+                        SwtPopupHandler.this.pendingSwtPopup = true;
                         isTrigger = false;
                     }
                     if ( isTrigger )
@@ -89,14 +89,14 @@ public class SwtPopupHandler
 
                 case java.awt.event.MouseEvent.MOUSE_RELEASED:
                     // TODO: can both conditions below ever be true on the same event? 
-                    if ( pendingSwtPopup )
+                    if ( SwtPopupHandler.this.pendingSwtPopup )
                     {
                         // Now handle any previously delayed popups
                         // if (pendingSwtPopup) {
                         //    System.err.println("handling any delayed SWT popup display");
                         // }
                         handlePopupTrigger ( me );
-                        pendingSwtPopup = false;
+                        SwtPopupHandler.this.pendingSwtPopup = false;
                     }
                     if ( me.isPopupTrigger () )
                     {
@@ -118,30 +118,30 @@ public class SwtPopupHandler
     };
 
     // The set of toolkits to which the popupEventListener has already been added.
-    private WeakHashMap /* java.awt.Toolkit -> Boolean */popupSupportedToolkits = new WeakHashMap ();
+    private final WeakHashMap /* java.awt.Toolkit -> Boolean */popupSupportedToolkits = new WeakHashMap ();
 
-    public void monitorAwtComponent ( Component component )
+    public void monitorAwtComponent ( final Component component )
     {
         assert EventQueue.isDispatchThread ();
 
         // Ensure the toolkit has the popupEventListener attached.
-        java.awt.Toolkit toolkit = component.getToolkit ();
-        synchronized ( popupSupportedToolkits )
+        final java.awt.Toolkit toolkit = component.getToolkit ();
+        synchronized ( this.popupSupportedToolkits )
         {
-            if ( popupSupportedToolkits.get ( toolkit ) == null )
+            if ( this.popupSupportedToolkits.get ( toolkit ) == null )
             {
-                toolkit.addAWTEventListener ( popupEventListener, java.awt.AWTEvent.MOUSE_EVENT_MASK );
-                popupSupportedToolkits.put ( toolkit, Boolean.TRUE );
+                toolkit.addAWTEventListener ( this.popupEventListener, java.awt.AWTEvent.MOUSE_EVENT_MASK );
+                this.popupSupportedToolkits.put ( toolkit, Boolean.TRUE );
             }
         }
     }
 
-    protected SwingControl getSwtParent ( Component c )
+    protected SwingControl getSwtParent ( final Component c )
     {
         // Return the SwingControl, if any, associated with the component
         if ( c instanceof JComponent )
         {
-            JComponent jc = (JComponent)c;
+            final JComponent jc = (JComponent)c;
             return (SwingControl)jc.getClientProperty ( SwingControl.SWT_PARENT_PROPERTY_KEY );
         }
         else
@@ -150,16 +150,16 @@ public class SwtPopupHandler
         }
     }
 
-    protected void handlePopupTrigger ( MouseEvent event )
+    protected void handlePopupTrigger ( final MouseEvent event )
     {
         assert EventQueue.isDispatchThread ();
 
-        java.awt.Component component = (java.awt.Component)event.getSource ();
+        final java.awt.Component component = (java.awt.Component)event.getSource ();
         int x = event.getX ();
         int y = event.getY ();
         // Climb up until the we find the SwingControl mapped to one of our parents
         java.awt.Component parent = component;
-        while ( parent != null && ( getSwtParent ( parent ) == null ) )
+        while ( parent != null && getSwtParent ( parent ) == null )
         {
             x += parent.getX ();
             y += parent.getY ();
@@ -167,10 +167,10 @@ public class SwtPopupHandler
         }
         if ( parent != null )
         {
-            SwingControl swtParent = getSwtParent ( parent );
-            int xAbsolute = x;
-            int yAbsolute = y;
-            java.awt.Component subcomp = (Component)event.getSource ();
+            final SwingControl swtParent = getSwtParent ( parent );
+            final int xAbsolute = x;
+            final int yAbsolute = y;
+            final java.awt.Component subcomp = (Component)event.getSource ();
             showPopupMenu ( swtParent, subcomp, x, y, xAbsolute, yAbsolute );
         }
     }
@@ -185,14 +185,18 @@ public class SwtPopupHandler
         {
             display = swtParent.getDisplay ();
         }
-        catch ( SWTException e )
+        catch ( final SWTException e )
         {
             if ( e.code == SWT.ERROR_WIDGET_DISPOSED )
+            {
                 return;
+            }
             else
+            {
                 throw e;
+            }
         }
-        Runnable task = new Runnable () {
+        final Runnable task = new Runnable () {
             public void run ()
             {
                 try
@@ -202,7 +206,7 @@ public class SwtPopupHandler
                         showPopupMenuSWTThread ( swtParent, component, x, y, xAbsolute, yAbsolute );
                     }
                 }
-                catch ( Throwable e )
+                catch ( final Throwable e )
                 {
                     e.printStackTrace ();
                 }
@@ -212,22 +216,26 @@ public class SwtPopupHandler
         {
             ThreadingHandler.getInstance ().asyncExec ( display, task );
         }
-        catch ( SWTException e )
+        catch ( final SWTException e )
         {
             if ( e.code == SWT.ERROR_DEVICE_DISPOSED )
+            {
                 return;
+            }
             else
+            {
                 throw e;
+            }
         }
     }
 
     // Trigger the display of the popup menu from the SWT thread.
-    protected void showPopupMenuSWTThread ( SwingControl swtParent, java.awt.Component component, int x, int y, int xAbsolute, int yAbsolute )
+    protected void showPopupMenuSWTThread ( final SwingControl swtParent, final java.awt.Component component, final int x, final int y, final int xAbsolute, final int yAbsolute )
     {
         assert Display.getCurrent () != null;
 
         final Menu menu = swtParent.getMenu ( component, x, y, xAbsolute, yAbsolute );
-        Display display = swtParent.getDisplay ();
+        final Display display = swtParent.getDisplay ();
         if ( menu != null )
         {
             final Shell popupParent = AwtEnvironment.getInstance ( display ).getSwtPopupParent ( swtParent );
@@ -238,14 +246,14 @@ public class SwtPopupHandler
                 // a MouseEnter event before displaying the menu. If we don't wait
                 // for this event, the menu is not displayed. 
                 popupParent.addListener ( SWT.MouseEnter, new Listener () {
-                    public void handleEvent ( Event e )
+                    public void handleEvent ( final Event e )
                     {
                         if ( CREATE_POPUP_PARENT_SHELL )
                         {
                             // Install a listener to hide the (created) popup parent once the menu is 
                             // dismissed. (Don't count on 0x0 sized shells to be invisible without this)
                             menu.addListener ( SWT.Hide, new Listener () {
-                                public void handleEvent ( Event e )
+                                public void handleEvent ( final Event e )
                                 {
                                     if ( !popupParent.isDisposed () )
                                     {
@@ -301,7 +309,7 @@ public class SwtPopupHandler
      * Replaces the singleton of this class.
      * @param instance An instance of this class or of a customized subclass.
      */
-    public static void setInstance ( SwtPopupHandler instance )
+    public static void setInstance ( final SwtPopupHandler instance )
     {
         theHandler = instance;
     }

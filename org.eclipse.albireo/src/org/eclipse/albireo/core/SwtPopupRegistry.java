@@ -40,14 +40,14 @@ public class SwtPopupRegistry
         boolean recursive;
 
         // Constructor.
-        MenuInfo ( Menu menu, boolean recursive )
+        MenuInfo ( final Menu menu, final boolean recursive )
         {
             this.menu = menu;
             this.recursive = recursive;
         }
     }
 
-    private WeakHashMap /* java.awt.Component -> MenuInfo */menuTable = new WeakHashMap ();
+    private final WeakHashMap /* java.awt.Component -> MenuInfo */menuTable = new WeakHashMap ();
 
     /**
      * Returns the registered menu for a given component.
@@ -56,15 +56,19 @@ public class SwtPopupRegistry
      *                  specification of a popup menu.
      * @return A popup menu, or <code>null</code>.
      */
-    public Menu getMenu ( java.awt.Component component, boolean recursive )
+    public Menu getMenu ( final java.awt.Component component, final boolean recursive )
     {
-        synchronized ( menuTable )
+        synchronized ( this.menuTable )
         {
-            MenuInfo mi = (MenuInfo)menuTable.get ( component );
+            final MenuInfo mi = (MenuInfo)this.menuTable.get ( component );
             if ( mi != null && mi.recursive == recursive )
+            {
                 return mi.menu;
+            }
             else
+            {
                 return null;
+            }
         }
     }
 
@@ -82,11 +86,11 @@ public class SwtPopupRegistry
      * @param menu A popup menu, or <code>null</code> to clear the previously
      *             specified popup menu.
      */
-    public void setMenu ( java.awt.Component component, boolean recursive, final Menu menu )
+    public void setMenu ( final java.awt.Component component, final boolean recursive, final Menu menu )
     {
-        synchronized ( menuTable )
+        synchronized ( this.menuTable )
         {
-            MenuInfo mi = (MenuInfo)menuTable.get ( component );
+            MenuInfo mi = (MenuInfo)this.menuTable.get ( component );
             if ( menu != null )
             {
                 if ( mi != null )
@@ -97,13 +101,15 @@ public class SwtPopupRegistry
                 else
                 {
                     mi = new MenuInfo ( menu, recursive );
-                    menuTable.put ( component, mi );
+                    this.menuTable.put ( component, mi );
                 }
             }
             else
             {
                 if ( mi != null )
-                    menuTable.remove ( component );
+                {
+                    this.menuTable.remove ( component );
+                }
             }
         }
 
@@ -126,25 +132,31 @@ public class SwtPopupRegistry
      * @param yAbsolute The y coordinate, relative to this control's top left
      *                  corner, of the mouse cursor when the event occurred.
      */
-    protected Menu findMenu ( java.awt.Component component, int x, int y, int xAbsolute, int yAbsolute )
+    protected Menu findMenu ( final java.awt.Component component, final int x, final int y, final int xAbsolute, final int yAbsolute )
     {
         assert Display.getCurrent () != null;
 
-        synchronized ( menuTable )
+        synchronized ( this.menuTable )
         {
-            MenuInfo mi = (MenuInfo)menuTable.get ( component );
+            MenuInfo mi = (MenuInfo)this.menuTable.get ( component );
             if ( mi != null )
+            {
                 // On the component itself, ignore whether recursive or not.
                 return mi.menu;
+            }
             for ( java.awt.Component parent = component.getParent (); parent != null; parent = parent.getParent () )
             {
-                mi = (MenuInfo)menuTable.get ( parent );
+                mi = (MenuInfo)this.menuTable.get ( parent );
                 if ( mi != null )
                 {
                     if ( mi.recursive )
+                    {
                         return mi.menu;
+                    }
                     else
+                    {
                         return null;
+                    }
                 }
             }
         }
@@ -169,7 +181,7 @@ public class SwtPopupRegistry
      * Replaces the singleton of this class.
      * @param instance An instance of this class or of a customized subclass.
      */
-    public static void setInstance ( SwtPopupRegistry instance )
+    public static void setInstance ( final SwtPopupRegistry instance )
     {
         theRegistry = instance;
     }

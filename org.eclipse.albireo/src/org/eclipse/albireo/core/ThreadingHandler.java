@@ -36,7 +36,7 @@ public class ThreadingHandler
      */
     public boolean isReportingAsyncExecExceptions ()
     {
-        return reportingAsyncExecExceptions;
+        return this.reportingAsyncExecExceptions;
     }
 
     /**
@@ -52,9 +52,9 @@ public class ThreadingHandler
      * </ol>
      * The default is <code>true</code>.
      */
-    public void setReportingAsyncExecExceptions ( boolean doReporting )
+    public void setReportingAsyncExecExceptions ( final boolean doReporting )
     {
-        reportingAsyncExecExceptions = doReporting;
+        this.reportingAsyncExecExceptions = doReporting;
     }
 
     // ========================================================================
@@ -72,7 +72,7 @@ public class ThreadingHandler
      *    <li>ERROR_DEVICE_DISPOSED - if the display has been disposed</li>
      * </ul>
      */
-    public void asyncExec ( Display display, final Runnable task )
+    public void asyncExec ( final Display display, final Runnable task )
     {
         final Runnable final_task;
         if ( isReportingAsyncExecExceptions () )
@@ -84,12 +84,12 @@ public class ThreadingHandler
                     {
                         task.run ();
                     }
-                    catch ( RuntimeException e )
+                    catch ( final RuntimeException e )
                     {
                         e.printStackTrace ();
                         throw e;
                     }
-                    catch ( Error e )
+                    catch ( final Error e )
                     {
                         e.printStackTrace ();
                         throw e;
@@ -105,20 +105,22 @@ public class ThreadingHandler
         {
             display.asyncExec ( final_task );
         }
-        catch ( NullPointerException e )
+        catch ( final NullPointerException e )
         {
             // Workaround for wrong order of actions inside Display.dispose().
             // https://bugs.eclipse.org/bugs/show_bug.cgi?id=216346
             // http://dev.eclipse.org/newslists/news.eclipse.platform.swt/msg30856.html
-            StackTraceElement[] stack = e.getStackTrace ();
+            final StackTraceElement[] stack = e.getStackTrace ();
             if ( stack.length > 0 && "org.eclipse.swt.widgets.Display".equals ( stack[0].getClassName () ) && "asyncExec".equals ( stack[0].getMethodName () ) )
             {
-                SWTException swte = new SWTException ( SWT.ERROR_DEVICE_DISPOSED );
+                final SWTException swte = new SWTException ( SWT.ERROR_DEVICE_DISPOSED );
                 swte.throwable = e;
                 throw swte;
             }
             else
+            {
                 throw e;
+            }
         }
     }
 
@@ -139,7 +141,7 @@ public class ThreadingHandler
      * Replaces the singleton of this class.
      * @param instance An instance of this class or of a customized subclass.
      */
-    public static void setInstance ( ThreadingHandler instance )
+    public static void setInstance ( final ThreadingHandler instance )
     {
         theHandler = instance;
     }

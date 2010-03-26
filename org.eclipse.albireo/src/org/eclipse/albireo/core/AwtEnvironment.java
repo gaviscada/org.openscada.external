@@ -129,7 +129,7 @@ public final class AwtEnvironment
         if ( !display.isDisposed () )
         {
             display.addListener ( SWT.Dispose, new Listener () {
-                public void handleEvent ( Event event )
+                public void handleEvent ( final Event event )
                 {
 
                     removeInstance ( display );
@@ -142,7 +142,7 @@ public final class AwtEnvironment
     {
         synchronized ( environmentMap )
         {
-            AwtEnvironment instance = (AwtEnvironment)environmentMap.remove ( display );
+            final AwtEnvironment instance = (AwtEnvironment)environmentMap.remove ( display );
             if ( instance != null )
             {
                 instance.dispose ();
@@ -202,37 +202,39 @@ public final class AwtEnvironment
                     setLookAndFeel ();
                     LookAndFeelHandler.getInstance ().propagateSwtFont ( swtFont, swtFontData );
                     if ( FocusHandler.verboseKFHEvents )
+                    {
                         FocusDebugging.enableKeyboardFocusManagerLogging ();
+                    }
                 }
             } );
         }
-        catch ( InterruptedException e )
+        catch ( final InterruptedException e )
         {
             SWT.error ( SWT.ERROR_FAILED_EXEC, e );
         }
-        catch ( InvocationTargetException e )
+        catch ( final InvocationTargetException e )
         {
             SWT.error ( SWT.ERROR_FAILED_EXEC, e.getTargetException () );
         }
 
         // Listen for AWT modal dialogs to make them modal application-wide
-        dialogListener = new AwtDialogListener ( display );
+        this.dialogListener = new AwtDialogListener ( display );
 
         // Dismiss AWT popups when SWT menus are shown
         initSwingPopupsDismissal ();
 
-        globalFocusHandler = new GlobalFocusHandler ( display );
+        this.globalFocusHandler = new GlobalFocusHandler ( display );
     }
 
     void dispose ()
     {
-        dialogListener.dispose ();
-        if ( popupParent != null )
+        this.dialogListener.dispose ();
+        if ( this.popupParent != null )
         {
-            popupParent.setVisible ( false );
-            popupParent.dispose ();
+            this.popupParent.setVisible ( false );
+            this.popupParent.dispose ();
         }
-        globalFocusHandler.dispose ();
+        this.globalFocusHandler.dispose ();
     }
 
     // ======================= Look&Feel initialization =======================
@@ -251,19 +253,19 @@ public final class AwtEnvironment
             {
                 LookAndFeelHandler.getInstance ().setLookAndFeel ();
             }
-            catch ( ClassNotFoundException e )
+            catch ( final ClassNotFoundException e )
             {
                 SWT.error ( SWT.ERROR_NOT_IMPLEMENTED, e );
             }
-            catch ( InstantiationException e )
+            catch ( final InstantiationException e )
             {
                 SWT.error ( SWT.ERROR_NOT_IMPLEMENTED, e );
             }
-            catch ( IllegalAccessException e )
+            catch ( final IllegalAccessException e )
             {
                 SWT.error ( SWT.ERROR_NOT_IMPLEMENTED, e );
             }
-            catch ( UnsupportedLookAndFeelException e )
+            catch ( final UnsupportedLookAndFeelException e )
             {
                 SWT.error ( SWT.ERROR_NOT_IMPLEMENTED, e );
             }
@@ -278,17 +280,17 @@ public final class AwtEnvironment
      * Dismiss AWT popups when SWT menus are shown (not needed in JDK1.6)
      */
 
-    private static final boolean HIDE_SWING_POPUPS_ON_SWT_MENU_OPEN = ( Platform.isGtk () && Platform.JAVA_VERSION < Platform.javaVersion ( 1, 6, 0 ) ) || // GTK: pre-Java1.6
-    ( Platform.isWin32 () ); // Win32: all JDKs
+    private static final boolean HIDE_SWING_POPUPS_ON_SWT_MENU_OPEN = Platform.isGtk () && Platform.JAVA_VERSION < Platform.javaVersion ( 1, 6, 0 ) || // GTK: pre-Java1.6
+    Platform.isWin32 (); // Win32: all JDKs
 
     private void initSwingPopupsDismissal ()
     {
         if ( HIDE_SWING_POPUPS_ON_SWT_MENU_OPEN )
         {
-            display.asyncExec ( new Runnable () {
+            this.display.asyncExec ( new Runnable () {
                 public void run ()
                 {
-                    display.addFilter ( SWT.Show, menuListener );
+                    AwtEnvironment.this.display.addFilter ( SWT.Show, AwtEnvironment.this.menuListener );
                 }
             } );
         }
@@ -297,7 +299,7 @@ public final class AwtEnvironment
     // This listener helps ensure that Swing popup menus are properly dismissed when
     // a menu item off the SWT main menu bar (or tool bar) is shown.
     private final Listener menuListener = new Listener () {
-        public void handleEvent ( Event event )
+        public void handleEvent ( final Event event )
         {
             EventQueue.invokeLater ( new Runnable () {
                 public void run ()
@@ -312,10 +314,10 @@ public final class AwtEnvironment
     protected boolean hidePopups ()
     {
         boolean result = false;
-        List popups = new ArrayList ();
+        final List popups = new ArrayList ();
         assert EventQueue.isDispatchThread (); // On AWT event thread
 
-        Window window = KeyboardFocusManager.getCurrentKeyboardFocusManager ().getFocusedWindow ();
+        final Window window = KeyboardFocusManager.getCurrentKeyboardFocusManager ().getFocusedWindow ();
         if ( window == null )
         {
             return false;
@@ -330,9 +332,9 @@ public final class AwtEnvironment
         findOwnedPopups ( window, popups );
 
         // System.err.println("Hiding popups, count=" + popups.size());
-        for ( Iterator iter = popups.iterator (); iter.hasNext (); )
+        for ( final Iterator iter = popups.iterator (); iter.hasNext (); )
         {
-            Component popup = (Component)iter.next ();
+            final Component popup = (Component)iter.next ();
             if ( popup.isVisible () )
             {
                 result = true;
@@ -342,12 +344,12 @@ public final class AwtEnvironment
         return result;
     }
 
-    protected void findOwnedPopups ( Window window, List popups )
+    protected void findOwnedPopups ( final Window window, final List popups )
     {
         assert window != null;
         assert EventQueue.isDispatchThread (); // On AWT event thread
 
-        Window[] ownedWindows = window.getOwnedWindows ();
+        final Window[] ownedWindows = window.getOwnedWindows ();
         for ( int i = 0; i < ownedWindows.length; i++ )
         {
             findContainedPopups ( ownedWindows[i], popups );
@@ -355,16 +357,16 @@ public final class AwtEnvironment
         }
     }
 
-    protected void findContainedPopups ( Container container, List popups )
+    protected void findContainedPopups ( final Container container, final List popups )
     {
         assert container != null;
         assert popups != null;
         assert EventQueue.isDispatchThread (); // On AWT event thread
 
-        Component[] components = container.getComponents ();
+        final Component[] components = container.getComponents ();
         for ( int i = 0; i < components.length; i++ )
         {
-            Component c = components[i];
+            final Component c = components[i];
             // JPopupMenu is a container, so check for it first
             if ( c instanceof JPopupMenu )
             {
@@ -412,7 +414,7 @@ public final class AwtEnvironment
      */
     public void invokeAndBlockSwt ( final Runnable runnable )
     {
-        assert display != null;
+        assert this.display != null;
 
         /*
          * This code snippet is based on the following thread on
@@ -423,7 +425,7 @@ public final class AwtEnvironment
         {
             SWT.error ( SWT.ERROR_NULL_ARGUMENT );
         }
-        if ( !display.equals ( Display.getCurrent () ) )
+        if ( !this.display.equals ( Display.getCurrent () ) )
         {
             SWT.error ( SWT.ERROR_THREAD_INVALID_ACCESS );
         }
@@ -439,7 +441,7 @@ public final class AwtEnvironment
                 }
                 finally
                 {
-                    ThreadingHandler.getInstance ().asyncExec ( display, new Runnable () {
+                    ThreadingHandler.getInstance ().asyncExec ( AwtEnvironment.this.display, new Runnable () {
                         public void run ()
                         {
                             // Unblock SWT
@@ -451,7 +453,7 @@ public final class AwtEnvironment
         } );
 
         // Prevent user input on SWT components
-        SwtInputBlocker.block ( dialogListener );
+        SwtInputBlocker.block ( this.dialogListener );
     }
 
     /**
@@ -476,11 +478,11 @@ public final class AwtEnvironment
      */
     public Frame createDialogParentFrame ()
     {
-        if ( !display.equals ( Display.getCurrent () ) )
+        if ( !this.display.equals ( Display.getCurrent () ) )
         {
             SWT.error ( SWT.ERROR_THREAD_INVALID_ACCESS );
         }
-        Shell parent = display.getActiveShell ();
+        final Shell parent = this.display.getActiveShell ();
         if ( parent == null )
         {
             throw new IllegalStateException ( "No Active Shell" ); //$NON-NLS-1$
@@ -520,13 +522,13 @@ public final class AwtEnvironment
      * @exception IllegalStateException
      *                if the current display has no shells
      */
-    public Frame createDialogParentFrame ( Shell parent )
+    public Frame createDialogParentFrame ( final Shell parent )
     {
         if ( parent == null )
         {
             SWT.error ( SWT.ERROR_NULL_ARGUMENT );
         }
-        if ( !display.equals ( Display.getCurrent () ) )
+        if ( !this.display.equals ( Display.getCurrent () ) )
         {
             SWT.error ( SWT.ERROR_THREAD_INVALID_ACCESS );
         }
@@ -535,8 +537,8 @@ public final class AwtEnvironment
         // other dialogs, so it has been removed. 
         final Shell shell = new Shell ( parent, SWT.NO_TRIM | SWT.APPLICATION_MODAL );
 
-        Composite composite = new Composite ( shell, SWT.EMBEDDED );
-        Frame frame = SWT_AWT.new_Frame ( composite );
+        final Composite composite = new Composite ( shell, SWT.EMBEDDED );
+        final Frame frame = SWT_AWT.new_Frame ( composite );
 
         // Position and size the shell and embedded composite. This ensures that 
         // any child dialogs will be shown in the proper position, relative to the 
@@ -562,11 +564,12 @@ public final class AwtEnvironment
 
         // Clean up the shell that was created above on dispose of the frame 
         frame.addWindowListener ( new WindowAdapter () {
-            public void windowClosed ( WindowEvent e )
+            @Override
+            public void windowClosed ( final WindowEvent e )
             {
-                if ( !display.isDisposed () )
+                if ( !AwtEnvironment.this.display.isDisposed () )
                 {
-                    ThreadingHandler.getInstance ().asyncExec ( display, new Runnable () {
+                    ThreadingHandler.getInstance ().asyncExec ( AwtEnvironment.this.display, new Runnable () {
                         public void run ()
                         {
                             shell.dispose ();
@@ -595,17 +598,17 @@ public final class AwtEnvironment
      * a menu attached. 
      * @return
      */
-    public Shell getSwtPopupParent ( SwingControl control )
+    public Shell getSwtPopupParent ( final SwingControl control )
     {
         if ( Platform.isGtk () )
         {
-            if ( true && ( popupParent == null ) )
+            if ( true && this.popupParent == null )
             {
                 // System.err.println("*** Creating separate popup parent shell");
-                popupParent = new Shell ( display, SWT.NO_TRIM | SWT.NO_FOCUS | SWT.ON_TOP );
-                popupParent.setSize ( 0, 0 );
+                this.popupParent = new Shell ( this.display, SWT.NO_TRIM | SWT.NO_FOCUS | SWT.ON_TOP );
+                this.popupParent.setSize ( 0, 0 );
             }
-            return popupParent;
+            return this.popupParent;
         }
         else
         {
@@ -617,7 +620,7 @@ public final class AwtEnvironment
 
     protected GlobalFocusHandler getGlobalFocusHandler ()
     {
-        return globalFocusHandler;
+        return this.globalFocusHandler;
     }
 
 }

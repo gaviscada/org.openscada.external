@@ -22,26 +22,27 @@ public class CleanResizeListener extends ControlAdapter
 {
     private Rectangle oldRect = null;
 
-    public void controlResized ( ControlEvent e )
+    @Override
+    public void controlResized ( final ControlEvent e )
     {
         assert e != null;
         assert Display.getCurrent () != null; // On SWT event thread
 
         // Prevent garbage from Swing lags during resize. Fill exposed areas 
         // with background color. 
-        Composite composite = (Composite)e.widget;
-        Rectangle newRect = composite.getClientArea ();
-        if ( oldRect != null )
+        final Composite composite = (Composite)e.widget;
+        final Rectangle newRect = composite.getClientArea ();
+        if ( this.oldRect != null )
         {
-            int heightDelta = newRect.height - oldRect.height;
-            int widthDelta = newRect.width - oldRect.width;
-            if ( ( heightDelta > 0 ) || ( widthDelta > 0 ) )
+            final int heightDelta = newRect.height - this.oldRect.height;
+            final int widthDelta = newRect.width - this.oldRect.width;
+            if ( heightDelta > 0 || widthDelta > 0 )
             {
-                GC gc = new GC ( composite );
+                final GC gc = new GC ( composite );
                 try
                 {
-                    gc.fillRectangle ( newRect.x, oldRect.height, newRect.width, heightDelta );
-                    gc.fillRectangle ( oldRect.width, newRect.y, widthDelta, newRect.height );
+                    gc.fillRectangle ( newRect.x, this.oldRect.height, newRect.width, heightDelta );
+                    gc.fillRectangle ( this.oldRect.width, newRect.y, widthDelta, newRect.height );
                 }
                 finally
                 {
@@ -49,6 +50,6 @@ public class CleanResizeListener extends ControlAdapter
                 }
             }
         }
-        oldRect = newRect;
+        this.oldRect = newRect;
     }
 }

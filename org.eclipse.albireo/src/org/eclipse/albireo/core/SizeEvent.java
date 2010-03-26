@@ -32,12 +32,12 @@ public class SizeEvent extends EventObject
     /** the maximum size for this control, as reported by AWT. */
     public final Point maximum;
 
-    public SizeEvent ( SwingControl source, Point min, Point pref, Point max )
+    public SizeEvent ( final SwingControl source, final Point min, final Point pref, final Point max )
     {
         super ( source );
-        minimum = min;
-        preferred = pref;
-        maximum = max;
+        this.minimum = min;
+        this.preferred = pref;
+        this.maximum = max;
     }
 
     /**
@@ -46,7 +46,7 @@ public class SizeEvent extends EventObject
      */
     public SwingControl getSwingControl ()
     {
-        return (SwingControl)source;
+        return (SwingControl)this.source;
     }
 
     /**
@@ -57,10 +57,12 @@ public class SizeEvent extends EventObject
      */
     protected String getName ()
     {
-        String string = getClass ().getName ();
-        int index = string.lastIndexOf ( '.' );
+        final String string = getClass ().getName ();
+        final int index = string.lastIndexOf ( '.' );
         if ( index == -1 )
+        {
             return string;
+        }
         return string.substring ( index + 1, string.length () );
     }
 
@@ -70,12 +72,13 @@ public class SizeEvent extends EventObject
      *
      * @return a string representation of the event
      */
+    @Override
     public String toString ()
     {
-        return getName () + "{" + source //$NON-NLS-1$
-                + " min=" + minimum //$NON-NLS-1$
-                + " pref=" + preferred //$NON-NLS-1$
-                + " max=" + maximum //$NON-NLS-1$
+        return getName () + "{" + this.source //$NON-NLS-1$
+                + " min=" + this.minimum //$NON-NLS-1$
+                + " pref=" + this.preferred //$NON-NLS-1$
+                + " max=" + this.maximum //$NON-NLS-1$
                 + "}"; //$NON-NLS-1$
     }
 }

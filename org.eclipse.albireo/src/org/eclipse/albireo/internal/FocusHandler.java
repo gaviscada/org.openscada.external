@@ -84,44 +84,46 @@ public class FocusHandler
     private boolean pendingDeactivate = false;
 
     // Listeners
-    private KeyEventDispatcher keyEventDispatcher = new AwtKeyDispatcher ();
+    private final KeyEventDispatcher keyEventDispatcher = new AwtKeyDispatcher ();
 
-    private WindowFocusListener awtWindowFocusListener = new AwtWindowFocusListener ();
+    private final WindowFocusListener awtWindowFocusListener = new AwtWindowFocusListener ();
 
-    private FocusListener swtFocusListener = new SwtFocusListener ();
+    private final FocusListener swtFocusListener = new SwtFocusListener ();
 
-    private Listener swtEventFilter = new SwtEventFilter ();
+    private final Listener swtEventFilter = new SwtEventFilter ();
 
-    public FocusHandler ( final SwingControl swingControl, GlobalFocusHandler globalHandler, final Composite borderless, final Frame frame )
+    public FocusHandler ( final SwingControl swingControl, final GlobalFocusHandler globalHandler, final Composite borderless, final Frame frame )
     {
         this.globalHandler = globalHandler;
         assert Display.getCurrent () != null; // On SWT event thread
 
         if ( verboseFocusEvents )
+        {
             FocusDebugging.addFocusDebugListeners ( swingControl, frame );
+        }
 
         this.swingControl = swingControl;
         this.borderless = borderless;
         this.frame = frame;
-        display = swingControl.getDisplay ();
+        this.display = swingControl.getDisplay ();
 
         getSynthesizeMethod ( frame.getClass () );
 
-        globalHandler.addEventFilter ( swtEventFilter );
+        globalHandler.addEventFilter ( this.swtEventFilter );
 
-        frame.addWindowFocusListener ( awtWindowFocusListener );
-        KeyboardFocusManager.getCurrentKeyboardFocusManager ().addKeyEventDispatcher ( keyEventDispatcher );
+        frame.addWindowFocusListener ( this.awtWindowFocusListener );
+        KeyboardFocusManager.getCurrentKeyboardFocusManager ().addKeyEventDispatcher ( this.keyEventDispatcher );
 
-        borderless.addFocusListener ( swtFocusListener );
+        borderless.addFocusListener ( this.swtFocusListener );
 
     }
 
     public void dispose ()
     {
-        globalHandler.removeEventFilter ( swtEventFilter );
-        frame.removeWindowFocusListener ( awtWindowFocusListener );
-        KeyboardFocusManager.getCurrentKeyboardFocusManager ().removeKeyEventDispatcher ( keyEventDispatcher );
-        borderless.removeFocusListener ( swtFocusListener );
+        this.globalHandler.removeEventFilter ( this.swtEventFilter );
+        this.frame.removeWindowFocusListener ( this.awtWindowFocusListener );
+        KeyboardFocusManager.getCurrentKeyboardFocusManager ().removeKeyEventDispatcher ( this.keyEventDispatcher );
+        this.borderless.removeFocusListener ( this.swtFocusListener );
     }
 
     // ================ 
@@ -133,10 +135,10 @@ public class FocusHandler
     {
         assert EventQueue.isDispatchThread ();
 
-        Component focusOwner = frame.getMostRecentFocusOwner ();
+        final Component focusOwner = this.frame.getMostRecentFocusOwner ();
         if ( focusOwner instanceof JTextComponent )
         {
-            Caret caret = ( (JTextComponent)focusOwner ).getCaret ();
+            final Caret caret = ( (JTextComponent)focusOwner ).getCaret ();
             if ( caret != null )
             {
                 caret.setSelectionVisible ( false );
@@ -148,28 +150,28 @@ public class FocusHandler
     // Embedded frames in win32 do not support traverse out. For seamless embedding, we
     // check for the need to traverse out here and generate the necessary SWT traversal(s). 
     // TODO: this should be optional
-    protected boolean checkForTraverseOut ( KeyEvent e )
+    protected boolean checkForTraverseOut ( final KeyEvent e )
     {
         assert EventQueue.isDispatchThread ();
 
         // Ignore events outside this frame
-        if ( frame.isFocused () )
+        if ( this.frame.isFocused () )
         {
-            Set traverseForwardKeys = frame.getFocusTraversalKeys ( KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS );
-            Set traverseBackwardKeys = frame.getFocusTraversalKeys ( KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS );
-            AWTKeyStroke key = AWTKeyStroke.getAWTKeyStrokeForEvent ( e );
+            final Set traverseForwardKeys = this.frame.getFocusTraversalKeys ( KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS );
+            final Set traverseBackwardKeys = this.frame.getFocusTraversalKeys ( KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS );
+            final AWTKeyStroke key = AWTKeyStroke.getAWTKeyStrokeForEvent ( e );
 
-            if ( !pendingTraverseOut )
+            if ( !this.pendingTraverseOut )
             {
                 // We haven't started to traverse out yet. Check to see if the traversal key has been 
                 // hit and that we are at the last/first compoent in the traversal group. 
 
-                Component limit = frame.getFocusTraversalPolicy ().getLastComponent ( frame );
+                Component limit = this.frame.getFocusTraversalPolicy ().getLastComponent ( this.frame );
                 if ( traverseForwardKeys.contains ( key ) && ( limit == e.getComponent () || limit == null ) )
                 {
                     // Tabbing forward from last component in frame (or empty frame)
-                    pendingTraverseOut = true;
-                    pendingTraverseOutSeqNum++;
+                    this.pendingTraverseOut = true;
+                    this.pendingTraverseOutSeqNum++;
                     swtTraverse ( SWT.TRAVERSE_TAB_NEXT, 1, false );
                     if ( verboseTraverseOut )
                     {
@@ -179,12 +181,12 @@ public class FocusHandler
                     return true;
                 }
 
-                limit = frame.getFocusTraversalPolicy ().getFirstComponent ( frame );
+                limit = this.frame.getFocusTraversalPolicy ().getFirstComponent ( this.frame );
                 if ( traverseBackwardKeys.contains ( key ) && ( limit == e.getComponent () || limit == null ) )
                 {
                     // Tabbing backward from first component in frame
-                    pendingTraverseOut = true;
-                    pendingTraverseOutSeqNum++;
+                    this.pendingTraverseOut = true;
+                    this.pendingTraverseOutSeqNum++;
                     swtTraverse ( SWT.TRAVERSE_TAB_PREVIOUS, 1, false );
                     if ( verboseTraverseOut )
                     {
@@ -206,7 +208,7 @@ public class FocusHandler
                     {
                         trace ( "forward traversal typeahead" );
                     }
-                    extraTabCount++;
+                    this.extraTabCount++;
                     e.consume ();
                     return true;
                 }
@@ -216,7 +218,7 @@ public class FocusHandler
                     {
                         trace ( "backward traversal typeahead" );
                     }
-                    extraTabCount--;
+                    this.extraTabCount--;
                     e.consume ();
                     return true;
                 }
@@ -225,57 +227,57 @@ public class FocusHandler
         return false;
     }
 
-    protected void processTypeAheadKeys ( int callerSeqNum )
+    protected void processTypeAheadKeys ( final int callerSeqNum )
     {
-        if ( pendingTraverseOut && extraTabCount != 0 )
+        if ( this.pendingTraverseOut && this.extraTabCount != 0 )
         {
-            if ( callerSeqNum != currentTraverseOutSeqNum + 1 )
+            if ( callerSeqNum != this.currentTraverseOutSeqNum + 1 )
             {
                 if ( verboseTraverseOut )
                 {
-                    trace ( "Discarding processTypeAhead request, sequence number out of sync " + callerSeqNum + "!=" + ( currentTraverseOutSeqNum + 1 ) + ", extraTabCount=" + extraTabCount );
+                    trace ( "Discarding processTypeAhead request, sequence number out of sync " + callerSeqNum + "!=" + ( this.currentTraverseOutSeqNum + 1 ) + ", extraTabCount=" + this.extraTabCount );
                 }
                 return;
             }
             if ( verboseTraverseOut )
             {
-                trace ( "Processing typeahead traversals, count=" + extraTabCount );
+                trace ( "Processing typeahead traversals, count=" + this.extraTabCount );
             }
-            int direction = ( extraTabCount > 0 ) ? SWT.TRAVERSE_TAB_NEXT : SWT.TRAVERSE_TAB_PREVIOUS;
-            swtTraverse ( direction, Math.abs ( extraTabCount ), true );
+            final int direction = this.extraTabCount > 0 ? SWT.TRAVERSE_TAB_NEXT : SWT.TRAVERSE_TAB_PREVIOUS;
+            swtTraverse ( direction, Math.abs ( this.extraTabCount ), true );
         }
-        pendingTraverseOut = false;
-        currentTraverseOutSeqNum++;
-        extraTabCount = 0;
+        this.pendingTraverseOut = false;
+        this.currentTraverseOutSeqNum++;
+        this.extraTabCount = 0;
     }
 
     protected void swtTraverse ( final int direction, final int count, final boolean flushingTypeAhead )
     {
         assert EventQueue.isDispatchThread ();
 
-        ThreadingHandler.getInstance ().asyncExec ( display, new Runnable () {
+        ThreadingHandler.getInstance ().asyncExec ( this.display, new Runnable () {
             public void run ()
             {
                 for ( int i = 0; i < count; i++ )
                 {
-                    doTraverse ( direction, flushingTypeAhead, pendingTraverseOutSeqNum );
+                    doTraverse ( direction, flushingTypeAhead, FocusHandler.this.pendingTraverseOutSeqNum );
                 }
             }
 
         } );
     }
 
-    protected void doTraverse ( final int direction, boolean flushingTypeAhead, final int seqNum )
+    protected void doTraverse ( final int direction, final boolean flushingTypeAhead, final int seqNum )
     {
         assert Display.getCurrent () != null;
 
-        Control focusControl = display.getFocusControl ();
+        Control focusControl = this.display.getFocusControl ();
         if ( verboseTraverseOut )
         {
             trace ( "SWT: traversing, control=" + focusControl );
         }
-        SwingControl activeBorderless = globalHandler.getActiveEmbedded ();
-        if ( ( focusControl == null ) && ( activeBorderless != null ) )
+        final SwingControl activeBorderless = this.globalHandler.getActiveEmbedded ();
+        if ( focusControl == null && activeBorderless != null )
         {
             focusControl = activeBorderless;
             if ( verboseTraverseOut )
@@ -285,10 +287,10 @@ public class FocusHandler
         }
         if ( focusControl != null )
         {
-            boolean traverse = focusControl.traverse ( direction );
+            final boolean traverse = focusControl.traverse ( direction );
 
-            Control newFocusControl = display.getFocusControl ();
-            if ( traverse && ( newFocusControl == focusControl ) && ( newFocusControl == activeBorderless ) )
+            final Control newFocusControl = this.display.getFocusControl ();
+            if ( traverse && newFocusControl == focusControl && newFocusControl == activeBorderless )
             {
                 // We were unable to traverse anywhere else.
                 if ( verboseTraverseOut )
@@ -332,7 +334,7 @@ public class FocusHandler
             // the SwingControl to be skipped while tabbing. Try to fix it here by resetting
             // the forceFocus result back to true when SWT events indicate we really do have 
             // focus. 
-            if ( !result && ( globalHandler.getActiveWidget () == borderless ) && isFocusedSwt )
+            if ( !result && this.globalHandler.getActiveWidget () == this.borderless && this.isFocusedSwt )
             {
                 // Force focus should have returned true
                 result = true;
@@ -380,14 +382,14 @@ public class FocusHandler
                             {
                                 trace ( "Calling synthesizeWindowActivation(" + activate + ")" );
                             }
-                            synthesizeMethod.invoke ( frame, new Object[] { new Boolean ( activate ) } );
+                            synthesizeMethod.invoke ( FocusHandler.this.frame, new Object[] { new Boolean ( activate ) } );
                         }
                     }
-                    catch ( IllegalAccessException e )
+                    catch ( final IllegalAccessException e )
                     {
                         handleSynthesizeException ( e );
                     }
-                    catch ( InvocationTargetException e )
+                    catch ( final InvocationTargetException e )
                     {
                         handleSynthesizeException ( e );
                     }
@@ -396,20 +398,20 @@ public class FocusHandler
                 {
                     if ( activate )
                     {
-                        frame.dispatchEvent ( new WindowEvent ( frame, WindowEvent.WINDOW_ACTIVATED ) );
-                        frame.dispatchEvent ( new WindowEvent ( frame, WindowEvent.WINDOW_GAINED_FOCUS ) );
+                        FocusHandler.this.frame.dispatchEvent ( new WindowEvent ( FocusHandler.this.frame, WindowEvent.WINDOW_ACTIVATED ) );
+                        FocusHandler.this.frame.dispatchEvent ( new WindowEvent ( FocusHandler.this.frame, WindowEvent.WINDOW_GAINED_FOCUS ) );
                     }
                     else
                     {
-                        frame.dispatchEvent ( new WindowEvent ( frame, WindowEvent.WINDOW_LOST_FOCUS ) );
-                        frame.dispatchEvent ( new WindowEvent ( frame, WindowEvent.WINDOW_DEACTIVATED ) );
+                        FocusHandler.this.frame.dispatchEvent ( new WindowEvent ( FocusHandler.this.frame, WindowEvent.WINDOW_LOST_FOCUS ) );
+                        FocusHandler.this.frame.dispatchEvent ( new WindowEvent ( FocusHandler.this.frame, WindowEvent.WINDOW_DEACTIVATED ) );
                     }
                 }
             }
         } );
     }
 
-    private void getSynthesizeMethod ( Class clazz )
+    private void getSynthesizeMethod ( final Class clazz )
     {
         if ( Platform.isWin32 () && !synthesizeMethodInitialized )
         {
@@ -418,14 +420,14 @@ public class FocusHandler
             {
                 synthesizeMethod = clazz.getMethod ( "synthesizeWindowActivation", new Class[] { boolean.class } );
             }
-            catch ( NoSuchMethodException e )
+            catch ( final NoSuchMethodException e )
             {
                 handleSynthesizeException ( e );
             }
         }
     }
 
-    private void handleSynthesizeException ( Exception e )
+    private void handleSynthesizeException ( final Exception e )
     {
         if ( verboseFocusEvents )
         {
@@ -439,11 +441,11 @@ public class FocusHandler
     // operation, it will make more sense to reset the focus to the first or last component.
     // This is an optional behavior, controlled through SwingControl.setSwtTabOrderExtended
 
-    protected void adjustFocusForSwtTraversal ( int currentSwtTraversal )
+    protected void adjustFocusForSwtTraversal ( final int currentSwtTraversal )
     {
         assert Display.getCurrent () != null;
 
-        if ( !swingControl.isSwtTabOrderExtended () )
+        if ( !this.swingControl.isSwtTabOrderExtended () )
         {
             return;
         }
@@ -474,11 +476,11 @@ public class FocusHandler
                 Component component;
                 if ( forward )
                 {
-                    component = frame.getFocusTraversalPolicy ().getFirstComponent ( frame );
+                    component = FocusHandler.this.frame.getFocusTraversalPolicy ().getFirstComponent ( FocusHandler.this.frame );
                 }
                 else
                 {
-                    component = frame.getFocusTraversalPolicy ().getLastComponent ( frame );
+                    component = FocusHandler.this.frame.getFocusTraversalPolicy ().getLastComponent ( FocusHandler.this.frame );
                 }
                 if ( verboseFocusEvents )
                 {
@@ -502,20 +504,14 @@ public class FocusHandler
     {
         assert Display.getCurrent () != null;
 
-        Shell activeShell = globalHandler.getActiveShell ();
-        SwingControl activeBorderless = globalHandler.getActiveEmbedded ();
+        final Shell activeShell = this.globalHandler.getActiveShell ();
+        final SwingControl activeBorderless = this.globalHandler.getActiveEmbedded ();
 
-        if ( !borderless.isDisposed () &&
+        if ( !this.borderless.isDisposed () &&
 
-        // Make sure that this control is in the active shell, so focus is not stolen from other windows.
-        // (Note: display.getActiveShell() is not always accurate here, so we use the static instead)
-        ( activeShell == borderless.getShell () ) &&
+        activeShell == this.borderless.getShell () &&
 
-        // Check that this control currently the focus control
-        // BUT... Display.getFocusControl is unreliable when another embedded AWT window has recently 
-        // become active, so to be safe, make sure that no other Swing control has been activated
-        // (otherwise we will steal focus from the other active SwingControl)
-        ( borderless == display.getFocusControl () && ( ( activeBorderless == null ) || ( activeBorderless == borderless ) ) ) )
+        this.borderless == this.display.getFocusControl () && ( activeBorderless == null || activeBorderless == this.borderless ) )
         {
 
             EventQueue.invokeLater ( new Runnable () {
@@ -526,12 +522,12 @@ public class FocusHandler
                     // is to request focus on the result of getMostRecentFocusOwner 
                     // which will preserve any existing focus, or otherwise use the initial
                     // component.
-                    Component component = frame.getMostRecentFocusOwner ();
+                    final Component component = FocusHandler.this.frame.getMostRecentFocusOwner ();
                     if ( component != null )
                     {
                         if ( verboseFocusEvents )
                         {
-                            trace ( "Manually activating: " + frame + ", focus component=" + component );
+                            trace ( "Manually activating: " + FocusHandler.this.frame + ", focus component=" + component );
                         }
                         component.requestFocus ();
                     }
@@ -540,7 +536,7 @@ public class FocusHandler
                         // Nothing can take focus, no point activating the frame. 
                         if ( verboseFocusEvents )
                         {
-                            trace ( "Ignoring manual activation; no focusable components in " + frame );
+                            trace ( "Ignoring manual activation; no focusable components in " + FocusHandler.this.frame );
                         }
                     }
                 }
@@ -548,13 +544,13 @@ public class FocusHandler
         }
     }
 
-    protected void doActivation ( int swtTraversal )
+    protected void doActivation ( final int swtTraversal )
     {
-        if ( swingControl.isDisposed () )
+        if ( this.swingControl.isDisposed () )
         {
             return;
         }
-        if ( !swingControl.isFocusControl () )
+        if ( !this.swingControl.isFocusControl () )
         {
             // We've lost focus, don't activate the underlying AWT window
             if ( verboseFocusEvents )
@@ -571,13 +567,13 @@ public class FocusHandler
         // the deactivation altogether, the subsequent Activate triggered by this event, does
         // nothing and the embedded frame never gets focus. So we do the deactivate right here, 
         // just before the activation. 
-        if ( Platform.isWin32 () && pendingDeactivate )
+        if ( Platform.isWin32 () && this.pendingDeactivate )
         {
             synthesizeWindowActivation ( false );
-            pendingDeactivate = false;
+            this.pendingDeactivate = false;
         }
 
-        if ( Platform.isWin32 () && ( synthesizeMethod != null ) )
+        if ( Platform.isWin32 () && synthesizeMethod != null )
         {
             // Activate the window now
             synthesizeWindowActivation ( true );
@@ -591,16 +587,16 @@ public class FocusHandler
     protected class SwtEventFilter implements Listener
     {
 
-        public void handleEvent ( Event event )
+        public void handleEvent ( final Event event )
         {
             // Handle activation of the SWT.EMBEDDED composite. Track the currently active one.
-            if ( event.widget == borderless )
+            if ( event.widget == FocusHandler.this.borderless )
             {
                 switch ( event.type )
                 {
                 case SWT.Activate:
                     // The lastSwtTraversal may change before it is used. Save its value for the asyncExecs
-                    final int swtTraversal = globalHandler.getCurrentSwtTraversal ();
+                    final int swtTraversal = FocusHandler.this.globalHandler.getCurrentSwtTraversal ();
 
                     // We use asyncExec to defer the activation and focus setting in the underlying AWT frame. 
                     // This allows proper handling of the case where focus is briefly 
@@ -611,7 +607,7 @@ public class FocusHandler
                     // left and right arrow keys. Focus is briefly given to the main view component and
                     // then it is returned to the view tab for further navigation. If we did not defer 
                     // the activation, then focus cannot be restored to the view tab.
-                    display.asyncExec ( new Runnable () {
+                    FocusHandler.this.display.asyncExec ( new Runnable () {
                         public void run ()
                         {
                             doActivation ( swtTraversal );
@@ -640,9 +636,9 @@ public class FocusHandler
                     // To work around this problem, we defer the deactivation
                     // of the embedded frame here. See the SWT.Activate case above for processing of the 
                     // deferred event. 
-                    if ( Platform.isWin32 () && ( synthesizeMethod != null ) )
+                    if ( Platform.isWin32 () && synthesizeMethod != null )
                     {
-                        pendingDeactivate = true;
+                        FocusHandler.this.pendingDeactivate = true;
                         // Prevent the SWT_AWT-installed listener from running (and deactivating the frame).
                         if ( verboseFocusEvents )
                         {
@@ -660,31 +656,31 @@ public class FocusHandler
 
     protected class SwtFocusListener implements FocusListener
     {
-        public void focusGained ( FocusEvent e )
+        public void focusGained ( final FocusEvent e )
         {
-            isFocusedSwt = true;
+            FocusHandler.this.isFocusedSwt = true;
         }
 
-        public void focusLost ( FocusEvent e )
+        public void focusLost ( final FocusEvent e )
         {
-            isFocusedSwt = false;
+            FocusHandler.this.isFocusedSwt = false;
         }
     }
 
     protected class AwtWindowFocusListener implements WindowFocusListener
     {
-        public void windowGainedFocus ( WindowEvent e )
+        public void windowGainedFocus ( final WindowEvent e )
         {
-            assert !pendingTraverseOut;
-            assert extraTabCount == 0;
+            assert !FocusHandler.this.pendingTraverseOut;
+            assert FocusHandler.this.extraTabCount == 0;
         }
 
-        public void windowLostFocus ( WindowEvent e )
+        public void windowLostFocus ( final WindowEvent e )
         {
             if ( Platform.isWin32 () )
             {
                 hideTextSelection ();
-                processTypeAheadKeys ( pendingTraverseOutSeqNum );
+                processTypeAheadKeys ( FocusHandler.this.pendingTraverseOutSeqNum );
             }
         }
 
@@ -693,7 +689,7 @@ public class FocusHandler
     protected class AwtKeyDispatcher implements KeyEventDispatcher
     {
 
-        public boolean dispatchKeyEvent ( KeyEvent e )
+        public boolean dispatchKeyEvent ( final KeyEvent e )
         {
             boolean result = false;
 
@@ -706,7 +702,7 @@ public class FocusHandler
 
     }
 
-    private void trace ( String msg )
+    private void trace ( final String msg )
     {
         System.err.println ( header () + ' ' + msg );
     }
