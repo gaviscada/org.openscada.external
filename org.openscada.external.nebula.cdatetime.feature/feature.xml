@@ -18,6 +18,11 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.core.runtime"/>
+   </requires>
+
    <plugin
          id="org.eclipse.nebula.cwt"
          download-size="0"
