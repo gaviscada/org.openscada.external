@@ -112,6 +112,7 @@
   	<openscada.builder.copyFeature id="org.openscada.external.spring.osgi" />
   	<openscada.builder.copyFeature id="org.openscada.external.hibernate" />
   	<openscada.builder.copyFeature id="org.openscada.external.apache.ldap.filter" />
+  	<openscada.builder.copyFeature id="org.openscada.external.nebula.cdatetime" />
   	
   	<openscada.builder.copyFeature id="org.openscada.external.jinterop" />
   	<openscada.builder.copyPlugin id="org.openscada.external.jcifs" />
