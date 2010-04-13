@@ -278,6 +278,13 @@
          unpack="false"/>
 
    <plugin
+         id="com.springsource.javax.jms"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
          id="com.springsource.javax.xml.soap"
          download-size="0"
          install-size="0"
@@ -335,13 +342,6 @@
 
    <plugin
          id="org.eclipse.albireo"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.openscada.external.javax.jms"
          download-size="0"
          install-size="0"
          version="0.0.0"
