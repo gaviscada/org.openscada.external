@@ -482,7 +482,7 @@ public class CollectionUtils extends org.apache.commons.collections.CollectionUt
         else if (b == null)
             return a;
         else if (a.size() > b.size()) {
-            return inter<T>(b, a);
+            return (Set<T>)inter(b, a);
         }
 
         final Set<T> res = new HashSet<T>();
