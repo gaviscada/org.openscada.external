@@ -612,13 +612,13 @@ public final class FileUtils {
     }
 
     public static final FileFilter DIR_FILTER = new FileFilter() {
-        @Override
+        
         public boolean accept(File f) {
             return f.isDirectory();
         }
     };
     public static final FileFilter REGULAR_FILE_FILTER = new FileFilter() {
-        @Override
+        
         public boolean accept(File f) {
             return f.isFile();
         }
@@ -632,7 +632,7 @@ public final class FileUtils {
      */
     public static final FileFilter createEndFileFilter(final String ext) {
         return new FileFilter() {
-            @Override
+            
             public boolean accept(File f) {
                 return f.isFile() && f.getName().endsWith(ext);
             }

@@ -247,7 +247,6 @@ public class ODSingleXMLDocument extends ODXMLDocument implements Cloneable, ODD
         return this.numero;
     }
 
-    @Override
     public ODPackage getPackage() {
         return this.pkg;
     }
@@ -555,7 +554,6 @@ public class ODSingleXMLDocument extends ODXMLDocument implements Cloneable, ODD
             {
                 final List<String> dataStyles = Arrays.asList("number-style", "currency-style", "percentage-style", "date-style", "time-style", "boolean-style", "text-style");
                 final String xpDataStyles = org.jopendocument.util.CollectionUtils.join(dataStyles, " | ", new ITransformer<String, String>() {
-                    @Override
                     public String transformChecked(String input) {
                         return "./number:" + input;
                     }

@@ -52,7 +52,6 @@ public abstract class StyleDesc<S extends StyleStyle> {
     }
 
     static private final ITransformer<String, String> Q_NAME_TRANSF = new ITransformer<String, String>() {
-        @Override
         public String transformChecked(String input) {
             return "name() = '" + input + "'";
         }
@@ -60,7 +59,7 @@ public abstract class StyleDesc<S extends StyleStyle> {
 
     static private final String getXPath(Collection<Entry<String, Collection<String>>> entries) {
         return CollectionUtils.join(entries, " or ", new ITransformer<Entry<String, Collection<String>>, String>() {
-            @Override
+
             public String transformChecked(Entry<String, Collection<String>> e) {
                 final String nameTest = CollectionUtils.join(e.getValue(), " or ", Q_NAME_TRANSF);
                 return "( @" + e.getKey() + " = $name  and ( " + nameTest + " ))";

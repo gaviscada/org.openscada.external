@@ -131,7 +131,6 @@ public class SpreadSheet implements ODDocument {
         return this.getPackage().getContent().getDocument();
     }
 
-    @Override
     public final XMLVersion getVersion() {
         return this.getPackage().getVersion();
     }
@@ -323,7 +322,6 @@ public class SpreadSheet implements ODDocument {
         return this.getPackage().save();
     }
 
-    @Override
     public final ODPackage getPackage() {
         return this.originalFile;
     }
