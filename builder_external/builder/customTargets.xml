@@ -112,8 +112,9 @@
   	<openscada.builder.copyFeature id="org.openscada.external.spring.osgi" />
   	<openscada.builder.copyFeature id="org.openscada.external.hibernate" />
   	<openscada.builder.copyFeature id="org.openscada.external.nebula.cdatetime" />
-  	
+  	<openscada.builder.copyFeature id="org.openscada.external.com.google.gson"/>
   	<openscada.builder.copyFeature id="org.openscada.external.jinterop" />
+
   	<openscada.builder.copyPlugin id="org.openscada.external.jcifs" />
   	<openscada.builder.copyPlugin id="org.openscada.external.jinterop" />
   	
@@ -121,7 +122,6 @@
   	<openscada.builder.copyPlugin id="org.openscada.external.jOpenDocument" />
   	
   	<openscada.builder.copyPlugin id="org.openscada.external.com.google.collections"/>
-  	<openscada.builder.copyPlugin id="org.openscada.external.com.google.gson"/>
   	<openscada.builder.copyPlugin id="org.eclipse.albireo"/>
   </target>
 
