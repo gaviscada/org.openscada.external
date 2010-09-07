@@ -42,10 +42,6 @@
          version="0.0.0"/>
 
    <includes
-         id="org.openscada.external.apache.ldap.filter"
-         version="0.0.0"/>
-
-   <includes
          id="org.openscada.external.spring.osgi"
          version="0.0.0"/>
 
@@ -236,20 +232,6 @@
          unpack="false"/>
 
    <plugin
-         id="com.springsource.org.apache.directory.shared.asn1"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.springsource.org.apache.directory.shared.ldap"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.springsource.javax.management.j2ee"
          download-size="0"
          install-size="0"
@@ -283,7 +265,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="com.springsource.javax.xml.soap"
          download-size="0"
