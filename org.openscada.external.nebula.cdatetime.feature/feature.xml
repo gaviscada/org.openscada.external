@@ -3,7 +3,7 @@
       id="org.openscada.external.nebula.cdatetime"
       label="Nebula CDateTime Widget"
       version="0.14.0.qualifier"
-      provider-name="inavare GmbH"
+      provider-name="TH4 SYSTEMS GmbH"
       plugin="org.eclipse.nebula.widgets.cdatetime">
 
    <description url="http://www.eclipse.org/nebula/widgets/cdatetime">

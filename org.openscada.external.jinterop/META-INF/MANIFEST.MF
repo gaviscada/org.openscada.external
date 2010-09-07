@@ -4,7 +4,7 @@ Bundle-Name: J-Interop
 Bundle-SymbolicName: org.openscada.external.jinterop
 Bundle-Version: 2.0.6
 Bundle-ClassPath: .
-Bundle-Vendor: inavare GmbH
+Bundle-Vendor: TH4 SYSTEMS GmbH
 Export-Package: com.iwombat.foundation,
  com.iwombat.foundation.uuid,
  com.iwombat.util,

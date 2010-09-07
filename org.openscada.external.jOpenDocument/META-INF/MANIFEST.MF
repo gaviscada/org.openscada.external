@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: JOpenDocument
 Bundle-SymbolicName: org.openscada.external.jOpenDocument
 Bundle-Version: 1.1.0.qualifier
-Bundle-Vendor: inavare GmbH
+Bundle-Vendor: TH4 SYSTEMS GmbH
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: javax.script;resolution:=optional,
  ognl;version="2.7.3",
