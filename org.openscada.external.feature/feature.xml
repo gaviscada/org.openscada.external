@@ -292,13 +292,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.openscada.external.com.google.collections"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.springsource.org.hsqldb"
          download-size="0"
          install-size="0"
@@ -335,6 +328,20 @@
 
    <plugin
          id="jackson-mapper-lgpl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="jsr305"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.google.guava"
          download-size="0"
          install-size="0"
          version="0.0.0"
