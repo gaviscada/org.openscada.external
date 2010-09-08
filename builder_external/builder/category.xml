@@ -3,9 +3,6 @@
    <feature url="features/org.openscada.external_0.15.0.qualifier.jar" id="org.openscada.external" version="0.15.0.qualifier">
       <category name="org.openscada.external.category"/>
    </feature>
-   <feature url="features/org.openscada.external.apache.ldap.filter_0.9.5.5.jar" id="org.openscada.external.apache.ldap.filter" version="0.9.5.5">
-      <category name="org.openscada.external.category"/>
-   </feature>
    <feature url="features/org.openscada.external.hibernate.feature_3.3.2.GA.jar" id="org.openscada.external.hibernate.feature" version="3.3.2.GA">
       <category name="org.openscada.external.category"/>
    </feature>
