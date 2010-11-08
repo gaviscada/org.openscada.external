@@ -118,6 +118,8 @@
   	<openscada.builder.copyPlugin id="org.openscada.external.jcifs" />
   	<openscada.builder.copyPlugin id="org.openscada.external.jinterop" />
   	
+  	<openscada.builder.copyPlugin id="org.openscada.external.apache.poi" />
+  	
   	<openscada.builder.copyFeature id="org.openscada.external.jOpenDocument" />
   	<openscada.builder.copyPlugin id="org.openscada.external.jOpenDocument" />
   	
