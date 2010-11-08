@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.openscada.external_0.15.0.qualifier.jar" id="org.openscada.external" version="0.15.0.qualifier">
+   <feature url="features/org.openscada.external_0.16.0.qualifier.jar" id="org.openscada.external" version="0.16.0.qualifier">
       <category name="org.openscada.external.category"/>
    </feature>
    <feature url="features/org.openscada.external.hibernate.feature_3.3.2.GA.jar" id="org.openscada.external.hibernate.feature" version="3.3.2.GA">
