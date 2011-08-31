@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: missing enterprise interfaces in equinox
+Bundle-SymbolicName: org.openscada.osgi.enterprise
+Bundle-Version: 4.2.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.osgi.service.jdbc;version="1.0";uses:="javax.sql"
