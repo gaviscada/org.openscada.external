@@ -123,7 +123,7 @@
   	<openscada.builder.copyPlugin id="org.openscada.external.jOpenDocument" />
   	
   	<openscada.builder.copyPlugin id="org.eclipse.albireo"/>
-  	<openscada.builder.copyPlugin id="org.openscadaexternal.osgi.enterprise"/>
+  	<openscada.builder.copyPlugin id="org.openscada.external.osgi.enterprise"/>
   </target>
 
   <!-- ===================================================================== -->
