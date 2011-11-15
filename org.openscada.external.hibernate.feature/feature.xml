@@ -87,13 +87,6 @@
          unpack="false"/>
 
    <plugin
-         id="com.springsource.org.apache.commons.logging"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.springsource.org.apache.commons.dbcp"
          download-size="0"
          install-size="0"
@@ -102,6 +95,13 @@
 
    <plugin
          id="com.springsource.org.apache.commons.pool"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="jcl.over.slf4j"
          download-size="0"
          install-size="0"
          version="0.0.0"
