@@ -36,22 +36,14 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          id="slf4j.api"
          download-size="0"
          install-size="0"
-         version="1.6.2"
-         unpack="false"/>
-
-   <plugin
-         id="slf4j.log4j12"
-         download-size="0"
-         install-size="0"
-         version="1.6.2"
-         fragment="true"
+         version="1.6.4"
          unpack="false"/>
 
    <plugin
          id="slf4j.ext"
          download-size="0"
          install-size="0"
-         version="1.6.2"
+         version="1.6.4"
          unpack="false"/>
 
    <plugin
@@ -59,6 +51,20 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          download-size="0"
          install-size="0"
          version="0.7.4"
+         unpack="false"/>
+
+   <plugin
+         id="ch.qos.logback.classic"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ch.qos.logback.core"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
          unpack="false"/>
 
 </feature>
