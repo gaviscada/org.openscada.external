@@ -6,7 +6,7 @@
    <feature url="features/org.openscada.external.jinterop_2.0.6.qualifier.jar" id="org.openscada.external.jinterop" version="2.0.6.qualifier">
       <category name="org.openscada.external.category"/>
    </feature>
-   <feature url="features/org.openscada.external.slf4j_1.5.8.qualifier.jar" id="org.openscada.external.slf4j" version="1.5.8.qualifier">
+   <feature url="features/org.openscada.external.slf4j_1.6.4.qualifier.jar" id="org.openscada.external.slf4j" version="1.6.4.qualifier">
       <category name="org.openscada.external.category"/>
    </feature>
    <feature url="features/org.openscada.external.spring_2.5.6.SEC01.jar" id="org.openscada.external.spring" version="2.5.6.SEC01">
@@ -27,5 +27,13 @@
    <feature url="features/org.openscada.external_0.17.0.qualifier.jar" id="org.openscada.external" version="0.17.0.qualifier">
       <category name="org.openscada.external.category"/>
    </feature>
+   <feature url="features/org.openscada.external.optional_0.17.0.qualifier.jar" id="org.openscada.external.optional" version="0.17.0.qualifier">
+      <category name="org.openscada.external.optional"/>
+   </feature>
    <category-def name="org.openscada.external.category" label="External Libraries"/>
+   <category-def name="org.openscada.external.optional" label="Optional external libraries">
+      <description>
+         These are optional external libraries which should only be installed when you know what you are doing.
+      </description>
+   </category-def>
 </site>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.openscada.external.optional"
+      label="openSCADA optional externals"
+      version="0.17.0.qualifier"
+      provider-name="TH4 SYSTEMS GmbH">
+
+   <description>
+      This is a wrapper feature for all external bundles which are needed by OpenSCADA.
+   </description>
+
+   <copyright>
+      See the specific bundle for its copyright information.
+   </copyright>
+
+   <license>
+      See the specific bundle for its license information.
+   </license>
+
+   <requires>
+      <import plugin="slf4j.api"/>
+   </requires>
+
+   <plugin
+         id="jul.to.slf4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="log4j.over.slf4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="slf4j.log4j12"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="jcl.over.slf4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

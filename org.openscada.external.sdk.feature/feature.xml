@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.openscada.external.sdk"
+      label="openSCADA External SDK Feature"
+      version="0.17.0.qualifier"
+      provider-name="TH4 SYSTEMS GmbH">
+
+   <description>
+      This is a wrapper feature for all external bundles which are needed by openSCADA.
+   </description>
+
+   <copyright>
+      See the specific bundle for its copyright information.
+   </copyright>
+
+   <license>
+      See the specific bundle for its license information.
+   </license>
+
+   <includes
+         id="org.openscada.external"
+         version="0.0.0"/>
+
+   <includes
+         id="org.openscada.external.optional"
+         version="0.0.0"/>
+
+</feature>
