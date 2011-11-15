@@ -48,7 +48,7 @@
           target: publish              
          ================================= -->
     <target name="publish" depends="" description="Publish artifacts" unless="skipPublish">
-    	<openscada.publish.repository id="org.openscada.external" project="external"/>
+    	<openscada.publish.repository id="org.openscada.external.sdk" project="external"/>
     </target>
 	
 </project>

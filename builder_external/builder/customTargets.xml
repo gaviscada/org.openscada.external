@@ -196,7 +196,7 @@
   <!-- ===================================================================== -->
   <target name="postBuild">
     <antcall target="gatherLogs" />
-	<openscada.deploy.repository name="org.openscada.external"/>
+	<openscada.deploy.repository name="org.openscada.external.sdk"/>
   </target>
 
   <!-- ===================================================================== -->
