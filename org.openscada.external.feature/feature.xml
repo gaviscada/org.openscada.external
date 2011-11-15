@@ -122,13 +122,6 @@
          unpack="false"/>
 
    <plugin
-         id="com.springsource.org.apache.commons.logging"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.springsource.org.apache.xalan"
          download-size="0"
          install-size="0"
@@ -173,13 +166,6 @@
 
    <plugin
          id="com.springsource.org.apache.commons.collections"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.springsource.org.apache.log4j"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -362,6 +348,27 @@
 
    <plugin
          id="org.openscada.external.osgi.enterprise"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="jcl.over.slf4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="log4j.over.slf4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="jul.to.slf4j"
          download-size="0"
          install-size="0"
          version="0.0.0"

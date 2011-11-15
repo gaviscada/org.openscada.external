@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.openscada.external.hibernate.feature"
-      label="OpenSCADA Hibernate Feature"
+      label="openSCADA Hibernate Feature"
       version="3.3.2.GA">
 
    <description url="http://www.example.com/description">
@@ -77,14 +77,6 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="slf4j.log4j12"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
          unpack="false"/>
 
    <plugin
