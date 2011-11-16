@@ -1,41 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- ====================================================================== 
-     Sep 9, 2009 2:53:07 PM                                                        
-
-     OpenSCADA Builder
-     The main OpenSCADA Builder file
-
-     Jens Reimann
+     openSCADA external
      ====================================================================== -->
-<project name="OpenSCADA Builder" default="default" basedir=".">
+
+<project name="org.openscada.external" default="default" basedir=".">
     <description>
-            The main OpenSCADA Builder file
+            openSCADA external
     </description>
 
 	<property name="build.root" location="${basedir}"/>
 	<property name="source.root" location="${basedir}/.."/>
-	
-	<property environment="env" />
-	<property file="local.properties"/>
-	<property file="global.properties"/>
-	<property file="global/local.properties"/>
-	<property file="global/global.properties"/>
-		
-	<property name="buildId" value="${external.version}"/>
 	
 	<import file="${build.root}/global/lib.xml"/>
 	
     <!-- ================================= 
           target: default              
          ================================= -->
-    <target name="default" depends="build" description="The main OpenSCADA Builder file">
-    </target>
-	
-	<!-- ================================= 
-          target: build              
-         ================================= -->
-    <target name="build" description="OpenSCADA External">
+    <target name="default">
     	<openscada.bundleBuild builder="builder"/>
     </target>
-
+	
 </project>
