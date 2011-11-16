@@ -4,9 +4,9 @@
 	<import file="${build.root}/global/lib.xml"/>
 	
 	<property file="${build.root}/local.properties"/>
-	<property file="${build.root}/build.properties"/>
+	<property file="${build.root}/global.properties"/>
 	<property file="${build.root}/global/local.properties"/>
-	<property file="${build.root}/global/build.properties"/>
+	<property file="${build.root}/global/global.properties"/>
 	
 	<!-- ===================================================================== -->
 	<!-- Run a given ${target} on all elements being built -->
