@@ -16,14 +16,14 @@
 	<property name="source.root" location="${basedir}/.."/>
 	
 	<property environment="env" />
-	<property file="config/local.properties"/>
-	<property file="config/build.properties"/>
-	<property file="common/config/local.properties"/>
-	<property file="common/config/build.properties"/>
+	<property file="local.properties"/>
+	<property file="global.properties"/>
+	<property file="common/local.properties"/>
+	<property file="common/global.properties"/>
 		
 	<property name="buildId" value="${external.version}"/>
 	
-	<import file="${build.root}/common/lib/lib.xml"/>
+	<import file="${build.root}/global/lib.xml"/>
 	
     <!-- ================================= 
           target: default              

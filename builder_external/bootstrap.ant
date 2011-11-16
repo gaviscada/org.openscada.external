@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="project" default="default" basedir=".">
+    <description>
+            Build Bootstrapper - 0.1.0
+    </description>
+	
+	<property file="local.properties"/>
+	<property file="global.properties"/>
+
+    <!-- ================================= 
+          target: default
+         ================================= -->
+    <target name="default">
+    	<!-- cleanup gloal -->
+    	<delete dir="global" failonerror="false"/>
+		<mkdir dir="global" />
+    	
+    	<!-- unzip -->
+    	<unzip dest="global" src="${bootstrap.uri}"/>
+    </target>
+
+</project>
