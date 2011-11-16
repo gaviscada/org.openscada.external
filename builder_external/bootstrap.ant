@@ -3,20 +3,25 @@
     <description>
             Build Bootstrapper - 0.1.0
     </description>
-	
+
 	<property file="local.properties"/>
 	<property file="global.properties"/>
-
+	
     <!-- ================================= 
           target: default
          ================================= -->
     <target name="default">
+    	
     	<!-- cleanup gloal -->
+
     	<delete dir="global" failonerror="false"/>
 		<mkdir dir="global" />
-    	
+
     	<!-- unzip -->
-    	<unzip dest="global" src="${bootstrap.uri}"/>
+
+    	<get src="${bootstrap.uri}" dest="builder.zip"/>
+    	<unzip dest="global" src="builder.zip"/>
+    	<delete file="builder.zip"/>
     </target>
 
 </project>
