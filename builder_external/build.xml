@@ -18,8 +18,8 @@
 	<property environment="env" />
 	<property file="local.properties"/>
 	<property file="global.properties"/>
-	<property file="common/local.properties"/>
-	<property file="common/global.properties"/>
+	<property file="global/local.properties"/>
+	<property file="global/global.properties"/>
 		
 	<property name="buildId" value="${external.version}"/>
 	

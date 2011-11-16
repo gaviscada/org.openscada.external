@@ -1,12 +1,13 @@
 <project name="Build specific targets and properties" default="noDefault" xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<property name="build.root" location=".."/>
-	<import file="${build.root}/global/lib.xml"/>
-	
+			
 	<property file="${build.root}/local.properties"/>
 	<property file="${build.root}/global.properties"/>
 	<property file="${build.root}/global/local.properties"/>
 	<property file="${build.root}/global/global.properties"/>
+	
+	<import file="${build.root}/global/lib.xml"/>
 	
 	<!-- ===================================================================== -->
 	<!-- Run a given ${target} on all elements being built -->
@@ -92,6 +93,7 @@
   	<echo message="Building in: ${buildDirectory}"/>
   	<echo message="SkipMaps: ${skipMaps}"/>
   	<echo message="SkipFetch: ${skipFetch}"/>
+  	<echo message="Version: ${buildType}/${buildId}" />
   </target>
 
   <!-- ===================================================================== -->
