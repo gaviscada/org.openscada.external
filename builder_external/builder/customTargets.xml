@@ -90,6 +90,7 @@
   <!-- Steps to do before setup -->
   <!-- ===================================================================== -->
   <target name="preSetup">
+  	<echo message="Build Root: ${build.root}" />
   	<echo message="Building in: ${buildDirectory}"/>
   	<echo message="SkipMaps: ${skipMaps}"/>
   	<echo message="SkipFetch: ${skipFetch}"/>
