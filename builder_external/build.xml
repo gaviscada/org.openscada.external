@@ -28,27 +28,14 @@
     <!-- ================================= 
           target: default              
          ================================= -->
-    <target name="default" depends="clean,build,publish" description="The main OpenSCADA Builder file">
+    <target name="default" depends="build" description="The main OpenSCADA Builder file">
     </target>
 	
 	<!-- ================================= 
           target: build              
          ================================= -->
-    <target name="build" depends="" description="OpenSCADA External">
+    <target name="build" description="OpenSCADA External">
     	<openscada.bundleBuild builder="builder"/>
     </target>
 
-	<!-- ================================= 
-          target: clean              
-         ================================= -->
-    <target name="clean" depends="" description="Clean up">
-    </target>
-
-	<!-- ================================= 
-          target: publish              
-         ================================= -->
-    <target name="publish" depends="" description="Publish artifacts" unless="skipPublish">
-    	<openscada.publish.repository id="org.openscada.external.sdk" project="external"/>
-    </target>
-	
 </project>
