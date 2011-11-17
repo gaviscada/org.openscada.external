@@ -4,8 +4,7 @@
             Build Bootstrapper - 0.1.0
     </description>
 
-	<property file="local.properties"/>
-	<property file="global.properties"/>
+	<property file="bootstrap.properties"/>
 	
     <!-- ================================= 
           target: default
