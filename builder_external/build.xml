@@ -20,8 +20,15 @@
     <!-- ================================= 
           target: default              
          ================================= -->
-    <target name="default">
+    <target name="default" depends="clean">
     	<openscada.bundleBuild builder="builder"/>
+    </target>
+	
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+    <target name="clean">
+        <delete dir="${output.dir}" failonerror="false"/>
     </target>
 	
 </project>
