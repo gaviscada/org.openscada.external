@@ -2,11 +2,6 @@
 
 	<property name="build.root" location=".."/>
 			
-	<property file="${build.root}/local.properties"/>
-	<property file="${build.root}/global.properties"/>
-	<property file="${build.root}/global/local.properties"/>
-	<property file="${build.root}/global/global.properties"/>
-	
 	<import file="${build.root}/global/lib.xml"/>
 	
 	<!-- ===================================================================== -->
