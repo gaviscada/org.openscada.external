@@ -41,7 +41,7 @@
           target: publish              
          ================================= -->
     <target name="publish" unless="skip.publish">
-        <openscada.upload.repository basename="external" repository="org.openscada.external.sdk" version="${external.version}"/>
+        <openscada.upload.repository base="external" repository="org.openscada.external.sdk" version="${external.version}"/>
     </target>
 	
 </project>
