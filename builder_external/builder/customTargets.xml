@@ -75,8 +75,8 @@
 		</unzip>
 	</target>
 
-	
-	<target name="preProcessRepos">
+	<target name="preProcessRepos">	
+		<openscada.importAllRepositories/>
   	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
