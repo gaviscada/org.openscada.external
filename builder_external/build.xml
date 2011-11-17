@@ -20,13 +20,7 @@
     <!-- ================================= 
           target: default              
          ================================= -->
-    <target name="default" depends="clean,openscada.build.profile.setup,build,publish">
-    </target>
-	
-	<!-- ================================= 
-          target: build              
-         ================================= -->
-    <target name="build">
+    <target name="default" depends="clean,openscada.build.profile.setup">
     	<openscada.bundleBuild builder="builder"/>
     </target>
 	
@@ -35,13 +29,6 @@
          ================================= -->
     <target name="clean">
         <delete dir="${output.dir}" failonerror="false"/>
-    </target>
-	
-	<!-- ================================= 
-          target: publish              
-         ================================= -->
-    <target name="publish" unless="skip.publish">
-        <openscada.upload.repository basename="external" repository="org.openscada.external.sdk" version="${external.version}"/>
     </target>
 	
 </project>
