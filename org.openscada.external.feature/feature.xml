@@ -2,7 +2,7 @@
 <feature
       id="org.openscada.external"
       label="openSCADA Externals Feature"
-      version="0.17.0.qualifier"
+      version="0.18.0.qualifier"
       provider-name="TH4 SYSTEMS GmbH">
 
    <description>
@@ -34,15 +34,7 @@
          version="0.0.0"/>
 
    <includes
-         id="org.openscada.external.hibernate.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.openscada.external.spring.extended.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.openscada.external.spring.osgi"
          version="0.0.0"/>
 
    <requires>
