@@ -373,4 +373,10 @@
          version="0.0.0"
          fragment="true"/>
 
+   <plugin
+         id="org.openscada.external.postgresql"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
 </feature>
