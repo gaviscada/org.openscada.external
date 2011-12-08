@@ -50,10 +50,10 @@ public class Activator implements BundleActivator
 
         final Dictionary<String, Object> properties = new Hashtable<String, Object> ();
         properties.put ( Constants.SERVICE_VENDOR, "TH4 SYSTEMS GmbH" );
-        properties.put ( Constants.SERVICE_DESCRIPTION, "DataSourceFactory which provides Oracle access" );
+        properties.put ( Constants.SERVICE_DESCRIPTION, "DataSourceFactory which provides Postgres access" );
         properties.put ( DataSourceFactory.OSGI_JDBC_DRIVER_CLASS, Driver.class.getName () );
-        properties.put ( DataSourceFactory.OSGI_JDBC_DRIVER_NAME, "Oracle JDBC Driver" );
-        properties.put ( DataSourceFactory.OSGI_JDBC_DRIVER_VERSION, "11.1.0.7" );
+        properties.put ( DataSourceFactory.OSGI_JDBC_DRIVER_NAME, "Postgres JDBC Driver" );
+        properties.put ( DataSourceFactory.OSGI_JDBC_DRIVER_VERSION, "9.1-901.jdbc3" );
         this.serviceHandle = context.registerService ( DataSourceFactory.class, this.dataSourceFactory, properties );
 
         logger.info ( "{} started", PLUGIN_ID );
