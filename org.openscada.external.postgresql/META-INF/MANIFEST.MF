@@ -43,13 +43,19 @@ Export-Package: org.postgresql;version="9.1.0";uses:="org.postgresql.largeobject
    org.postgresql.core",
  org.postgresql.xa.jdbc3;version="9.1.0";uses:="javax.naming,javax.sql,org.postgresql.ds.common"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: javax.net.ssl,
- javax.security.auth.callback,
- javax.sql,
+Import-Package: javax.naming,
  javax.naming.spi,
- org.ietf.jgss,
  javax.net,
- javax.security.auth.login,
+ javax.net.ssl,
  javax.security.auth,
- javax.transaction.xa; version="1.1.0",
- javax.naming
+ javax.security.auth.callback,
+ javax.security.auth.login,
+ javax.sql,
+ javax.transaction.xa;version="1.1.0",
+ org.ietf.jgss,
+ org.osgi.framework;version="1.6.0",
+ org.osgi.service.jdbc;version="1.0.0",
+ org.slf4j;version="1.6.0"
+Bundle-ClassPath: lib/postgresql-9.1-901.jdbc3.jar,
+ .
+Bundle-Activator: org.openscada.external.postgresql.Activator
