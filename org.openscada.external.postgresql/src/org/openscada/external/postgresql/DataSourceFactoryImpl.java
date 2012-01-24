@@ -1,6 +1,6 @@
 /*
  * This file is part of the openSCADA project
- * Copyright (C) 2010-2011 TH4 SYSTEMS GmbH (http://th4-systems.com)
+ * Copyright (C) 2010-2012 TH4 SYSTEMS GmbH (http://th4-systems.com)
  *
  * openSCADA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License version 3
@@ -273,7 +273,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory
         } );
 
         // pool properties
-        this.poolProperties.put ( "", new BooleanProperty<AbstractJdbc23ConnectionPoolDataSource> () {
+        this.poolProperties.put ( "defaultAutoCommit", new BooleanProperty<AbstractJdbc23ConnectionPoolDataSource> () {
 
             @Override
             protected void applyBoolean ( final AbstractJdbc23ConnectionPoolDataSource dataSource, final Boolean value ) throws SQLException
