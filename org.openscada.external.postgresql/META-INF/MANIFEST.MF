@@ -6,17 +6,18 @@ Bundle-Version: 9.1.901.qualifier
 Bundle-Vendor: TH4 SYSTEMS GmbH
 Export-Package: org.postgresql;version="9.1.0";uses:="org.postgresql.largeobject,org.postgresql.fastpath,org.postgresql.copy",
  org.postgresql.copy;version="9.1.0";uses:="org.postgresql,org.postgresql.core",
- org.postgresql.core;version="9.1.0";uses:="org.postgresql.copy,org.postgresql,org.postgresql.jdbc2",
+ org.postgresql.core;version="9.1.0";uses:="org.postgresql,org.postgresql.copy,org.postgresql.jdbc2",
  org.postgresql.core.types;version="9.1.0",
- org.postgresql.core.v2;version="9.1.0";uses:="org.postgresql,org.postgresql.copy,org.postgresql.core",
- org.postgresql.core.v3;version="9.1.0";uses:="org.postgresql,org.postgresql.copy,org.postgresql.core",
- org.postgresql.ds;version="9.1.0";uses:="org.postgresql.ds.jdbc23,javax.sql",
+ org.postgresql.core.v2;version="9.1.0";uses:="org.postgresql.copy,org.postgresql,org.postgresql.core",
+ org.postgresql.core.v3;version="9.1.0";uses:="org.postgresql.copy,org.postgresql,org.postgresql.core",
+ org.postgresql.ds;version="9.1.0";uses:="javax.sql,org.postgresql.ds.jdbc4",
  org.postgresql.ds.common;version="9.1.0";uses:="javax.naming,javax.naming.spi",
  org.postgresql.ds.jdbc23;version="9.1.0";
   uses:="javax.naming,
    org.postgresql.ds,
    javax.sql,
    org.postgresql.ds.common",
+ org.postgresql.ds.jdbc4;uses:="org.postgresql.ds.jdbc23,javax.sql",
  org.postgresql.fastpath;version="9.1.0";uses:="org.postgresql.core",
  org.postgresql.geometric;version="9.1.0";uses:="org.postgresql.util",
  org.postgresql.gss;version="9.1.0";uses:="javax.security.auth.callback,org.postgresql.core",
@@ -28,20 +29,29 @@ Export-Package: org.postgresql;version="9.1.0";uses:="org.postgresql.largeobject
    org.postgresql.copy,
    org.postgresql.core",
  org.postgresql.jdbc2.optional;version="9.1.0";uses:="org.postgresql.ds",
- org.postgresql.jdbc3;version="9.1.0";uses:="org.postgresql.ds,org.postgresql.jdbc2,org.postgresql.core",
+ org.postgresql.jdbc3;version="9.1.0";uses:="org.postgresql.jdbc2,org.postgresql.core",
+ org.postgresql.jdbc3g;uses:="org.postgresql.jdbc3,org.postgresql.core",
+ org.postgresql.jdbc4;
+  uses:="org.xml.sax,
+   org.postgresql.jdbc3,
+   org.postgresql.jdbc3g,
+   javax.xml.transform,
+   org.postgresql.jdbc2,
+   org.postgresql.core",
  org.postgresql.largeobject;version="9.1.0";uses:="org.postgresql.fastpath,org.postgresql.core",
  org.postgresql.ssl;version="9.1.0";uses:="javax.net.ssl,org.postgresql.core",
  org.postgresql.translation;version="9.1.0",
  org.postgresql.util;version="9.1.0",
  org.postgresql.xa;version="9.1.0";
-  uses:="org.postgresql.xa.jdbc3,
-   javax.naming,
+  uses:="javax.naming,
    org.postgresql.ds,
    javax.sql,
+   org.postgresql.xa.jdbc4,
    javax.transaction.xa,
    org.postgresql.ds.common,
    org.postgresql.core",
- org.postgresql.xa.jdbc3;version="9.1.0";uses:="javax.naming,javax.sql,org.postgresql.ds.common"
+ org.postgresql.xa.jdbc3;version="9.1.0";uses:="javax.naming,javax.sql,org.postgresql.ds.common",
+ org.postgresql.xa.jdbc4;uses:="org.postgresql.xa.jdbc3"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: javax.naming,
  javax.naming.spi,
@@ -56,6 +66,6 @@ Import-Package: javax.naming,
  org.osgi.framework;version="1.6.0",
  org.osgi.service.jdbc;version="1.0.0",
  org.slf4j;version="1.6.0"
-Bundle-ClassPath: .,
- lib/postgresql-9.1-901.jdbc4.jar
+Bundle-ClassPath: lib/postgresql-9.1-901.jdbc4.jar,
+ .
 Bundle-Activator: org.openscada.external.postgresql.Activator
