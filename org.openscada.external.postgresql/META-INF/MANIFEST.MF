@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Postgresql 9.1 JDBC Driver
+Bundle-Name: Postgresql 9.1 JDBC4 Driver
 Bundle-SymbolicName: org.openscada.external.postgresql
-Bundle-Version: 9.1.901
+Bundle-Version: 9.1.901.qualifier
 Bundle-Vendor: TH4 SYSTEMS GmbH
 Export-Package: org.postgresql;version="9.1.0";uses:="org.postgresql.largeobject,org.postgresql.fastpath,org.postgresql.copy",
  org.postgresql.copy;version="9.1.0";uses:="org.postgresql,org.postgresql.core",
@@ -56,6 +56,6 @@ Import-Package: javax.naming,
  org.osgi.framework;version="1.6.0",
  org.osgi.service.jdbc;version="1.0.0",
  org.slf4j;version="1.6.0"
-Bundle-ClassPath: lib/postgresql-9.1-901.jdbc3.jar,
- .
+Bundle-ClassPath: .,
+ lib/postgresql-9.1-901.jdbc4.jar
 Bundle-Activator: org.openscada.external.postgresql.Activator

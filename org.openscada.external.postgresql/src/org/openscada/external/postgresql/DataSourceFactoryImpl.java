@@ -30,16 +30,16 @@ import javax.sql.DataSource;
 import javax.sql.XADataSource;
 
 import org.osgi.service.jdbc.DataSourceFactory;
+import org.postgresql.ds.PGConnectionPoolDataSource;
+import org.postgresql.ds.PGSimpleDataSource;
 import org.postgresql.ds.common.BaseDataSource;
 import org.postgresql.ds.jdbc23.AbstractJdbc23ConnectionPoolDataSource;
-import org.postgresql.jdbc3.Jdbc3ConnectionPool;
-import org.postgresql.jdbc3.Jdbc3SimpleDataSource;
 import org.postgresql.xa.PGXADataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * A {@link DataSourceFactory} implemenation for Postgres
+ * A {@link DataSourceFactory} implemenation for PostgreSQL
  * @author Jens Reimann
  *
  */
@@ -289,7 +289,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory
     @Override
     public DataSource createDataSource ( final Properties paramProperties ) throws SQLException
     {
-        final Jdbc3SimpleDataSource dataSource = new Jdbc3SimpleDataSource ();
+        final PGSimpleDataSource dataSource = new PGSimpleDataSource ();
 
         setProperties ( dataSource, paramProperties, this.properties );
 
@@ -299,7 +299,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory
     @Override
     public ConnectionPoolDataSource createConnectionPoolDataSource ( final Properties paramProperties ) throws SQLException
     {
-        final Jdbc3ConnectionPool dataSource = new Jdbc3ConnectionPool ();
+        final PGConnectionPoolDataSource dataSource = new PGConnectionPoolDataSource ();
 
         setProperties ( dataSource, paramProperties, this.properties );
         setProperties ( dataSource, paramProperties, this.poolProperties );
