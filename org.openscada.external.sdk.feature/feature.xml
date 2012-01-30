@@ -2,7 +2,7 @@
 <feature
       id="org.openscada.external.sdk"
       label="openSCADA External SDK Feature"
-      version="0.17.0.qualifier"
+      version="0.18.0.qualifier"
       provider-name="TH4 SYSTEMS GmbH">
 
    <description>
