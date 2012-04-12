@@ -39,9 +39,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * A {@link DataSourceFactory} implemenation for PostgreSQL
+ * A {@link DataSourceFactory} implementation for PostgreSQL
+ * 
  * @author Jens Reimann
- *
  */
 public class DataSourceFactoryImpl implements DataSourceFactory
 {
