@@ -8,6 +8,11 @@
     </encoder>
   </appender>
 
+<!-- 
+  <logger name="org.openscada.hd" level="DEBUG"/>
+  <logger name="org.openscada.hds" level="DEBUG"/>
+  -->
+  
   <root level="warn">
     <appender-ref ref="STDOUT" />
   </root>
