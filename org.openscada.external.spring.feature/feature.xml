@@ -5,16 +5,16 @@
       version="2.5.6.SEC01"
       provider-name="TH4 SYSTEMS GmbH">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="http://www.springsource.org/">
+      Spring application framework.
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright>
+      See the specific bundle for its copyright information.
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license>
+      See the specific bundle for its license information.
    </license>
 
    <plugin
