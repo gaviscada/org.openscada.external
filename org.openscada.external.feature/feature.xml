@@ -33,10 +33,6 @@
          id="org.openscada.external.jOpenDocument"
          version="0.0.0"/>
 
-   <includes
-         id="org.openscada.external.spring.extended.feature"
-         version="0.0.0"/>
-
    <requires>
       <import plugin="org.eclipse.osgi"/>
       <import plugin="javax.servlet"/>
