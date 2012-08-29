@@ -123,8 +123,7 @@
   	
   	<openscada.builder.copyPlugin id="org.openscada.external.logback.default" />
   	
-  	<openscada.builder.copyFeature id="org.openscada.external.jOpenDocument" />
-  	<openscada.builder.copyPlugin id="org.openscada.external.jOpenDocument" />
+  	<openscada.builder.copyPlugin id="org.openscada.external.odfdom" />
   	
   	<openscada.builder.copyPlugin id="org.eclipse.albireo"/>
   	<openscada.builder.copyPlugin id="org.openscada.external.osgi.enterprise"/>
