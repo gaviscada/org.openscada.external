@@ -22,27 +22,54 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.table;
 
-import java.util.AbstractList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-class DomNodeList extends AbstractList<Node> {
+class DomNodeList implements Iterable<Node> {
     
-    private NodeList m_nodeList;
+    private final NodeList m_nodeList;
+    
+    private final int m_size;
+    
+    private int m_currentPosition;
     
     /** Creates a new instance of NodeList */
     public DomNodeList(NodeList list) {
         m_nodeList = list;
+        m_size = list.getLength ();
     }
 
     @Override
-	public int size() {
-        return m_nodeList.getLength();
-    }
+    public Iterator<Node> iterator ()
+    {
+        return new Iterator<Node>() {
 
-    @Override
-	public Node get(int index) {
-        return m_nodeList.item(index);
+            @Override
+            public boolean hasNext ()
+            {
+                return m_currentPosition < m_size;
+            }
+
+            @Override
+            public Node next ()
+            {
+                if ( !hasNext () )
+                    throw new NoSuchElementException ();
+                
+                final Node next = m_nodeList.item ( m_currentPosition );
+                m_currentPosition++;
+                return next;
+            }
+
+            @Override
+            public void remove ()
+            {
+                throw new UnsupportedOperationException ();
+            }
+            
+        };
     }    
 }

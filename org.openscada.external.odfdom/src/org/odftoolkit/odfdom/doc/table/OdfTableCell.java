@@ -108,8 +108,9 @@ public class OdfTableCell {
 	 */
 	private static final int DEFAULT_COLUMNS_REPEATED_NUMBER = 1;
 	TableTableCellElementBase mCellElement;
-	OdfDocument mDocument;
-
+	private OdfDocument mDocument;
+	private OdfTable mTable;
+    
 	OdfTableCell(TableTableCellElementBase odfElement, int repeatedColIndex, int repeatedRowIndex) {
 		mCellElement = odfElement;
 		mnRepeatedColIndex = repeatedColIndex;
@@ -378,9 +379,12 @@ public class OdfTableCell {
 	 * @return the table containing this cell
 	 */
 	public OdfTable getTable() {
+	    if ( mTable != null )
+	        return mTable;
 		TableTableElement tableElement = getTableElement();
 		if (tableElement != null) {
-			return OdfTable.getInstance(tableElement);
+		    mTable = OdfTable.getInstance(tableElement);
+			return mTable;
 		}
 		return null;
 	}

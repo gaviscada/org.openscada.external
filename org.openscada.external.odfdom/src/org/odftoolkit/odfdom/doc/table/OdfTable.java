@@ -30,13 +30,9 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
+import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
@@ -59,8 +55,12 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfTableProperties;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.type.PositiveLength;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.type.Length.Unit;
+import org.odftoolkit.odfdom.type.PositiveLength;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -755,14 +755,19 @@ public class OdfTable {
 		return null;
 	}
 
+	private Integer mRowCount;
+	
 	/**
 	 * Get the row count of this table.
 	 * 
 	 * @return total count of rows
 	 */
 	public int getRowCount() {
+	    if ( mRowCount != null )
+	        return mRowCount;
+	    
 		int result = 0;
-
+		
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
 			if (n instanceof TableTableHeaderRowsElement) {
 				result += getHeaderRowCount((TableTableHeaderRowsElement) n);
@@ -771,16 +776,24 @@ public class OdfTable {
 				result += ((TableTableRowElement) n).getTableNumberRowsRepeatedAttribute();
 			}
 		}
+		
+		mRowCount = result;
+		
 		return result;
 	}
 
+	private Integer columnCount;
+	
 	/**
 	 * Get the column count of this table.
 	 * 
 	 * @return total count of columns
 	 */
 	public int getColumnCount() {
-		int result = 0;
+	    if ( columnCount != null )
+	        return columnCount;
+
+	    int result = 0;
 
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
 			if (n instanceof TableTableHeaderColumnsElement) {
@@ -790,6 +803,9 @@ public class OdfTable {
 				result += getColumnInstance((TableTableColumnElement) n, 0).getColumnsRepeatedNumber();
 			}
 		}
+		
+		columnCount = result;
+		
 		return result;
 	}
 
@@ -829,7 +845,7 @@ public class OdfTable {
 			}
 			aRow.appendChild(aCell);
 		}
-
+		
 		return aRow;
 	}
 
@@ -851,12 +867,12 @@ public class OdfTable {
 	public OdfTableRow appendRow() {
 		int columnCount = getColumnCount();
 		List<OdfTableRow> rowList = getRowList();
-
+		
 		if (rowList.size() == 0) //no row, create a default row
 		{
 			TableTableRowElement newRow = createDefaultRow(columnCount);
 			mTableElement.appendChild(newRow);
-
+	        mRowCount = null;
 			return getRowInstance(newRow, 0);
 		} else {
 			OdfTableRow refRow = rowList.get(rowList.size() - 1);
@@ -966,6 +982,9 @@ public class OdfTable {
 			mTableElement.insertBefore(newColumn, positonElement);
 		}
 
+	      // clear cached value
+        this.columnCount = null;
+		
 		return getColumnInstance(newColumn, 0);
 	}
 
@@ -1096,6 +1115,7 @@ public class OdfTable {
 				i = i + refCell.getColumnsRepeatedNumber();
 			}
 		}
+		mRowCount = null;
 		if (positionRow == null) {
 			mTableElement.appendChild(aRow);
 		} else {
@@ -1153,6 +1173,9 @@ public class OdfTable {
 			throw new IndexOutOfBoundsException();
 		}
 
+	      // clear cached value
+        this.columnCount = null;
+		
 		if (index == 0) {
 			int iRowCount = getRowCount();
 			for (int i = 0; i < iRowCount; i++) {
@@ -1235,6 +1258,8 @@ public class OdfTable {
 		if (startIndex + deleteColCount >= colCount) {
 			deleteColCount = colCount - startIndex;
 		}
+		
+		columnCount = null;
 
 		//1. remove cell
 		for (int i = 0; i < getRowCount(); i++) {
@@ -1579,6 +1604,7 @@ public class OdfTable {
 					updateRowRepository(firstRow.getOdfElement(), i - startRow.getRowIndex(), null, 0);
 				}
 			}
+			mRowCount=null;
 		}
 		//2. if mediumRow becomes as top row, revise style
 		if (deleted && startIndex == 0) {
