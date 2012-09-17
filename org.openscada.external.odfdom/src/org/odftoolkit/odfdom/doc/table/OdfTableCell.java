@@ -57,6 +57,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.style.props.OdfTextProperties;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberCurrencyStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberPercentageStyle;
@@ -1020,6 +1021,35 @@ public class OdfTableCell {
 		}
 	}
 
+    public void clearCellBackgroundColor ()
+    {
+        splitRepeatedCells ();
+        OdfStyleBase styleElement = getCellStyleElementForWrite();
+        if (styleElement != null) {
+            OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
+                    OdfName.newName(OdfDocumentNamespace.FO, "background-color"));
+            styleElement.removeProperty ( bkColorProperty );
+        }
+    }
+    
+    public void setFontWeight ( String fontWeight )
+    {
+        splitRepeatedCells();
+        OdfStyleBase styleElement = getCellStyleElementForWrite();
+        if (styleElement != null) {
+            styleElement.setProperty ( OdfTextProperties.FontWeight, fontWeight );
+        }
+    }
+    
+    public void clearFontWeight ()
+    {
+        splitRepeatedCells();
+        OdfStyleBase styleElement = getCellStyleElementForWrite();
+        if (styleElement != null) {
+            styleElement.removeProperty ( OdfTextProperties.FontWeight );
+        }
+    }
+    
 	/**
 	 * Get the column spanned number of this cell.
 	 * 
@@ -1733,4 +1763,5 @@ public class OdfTableCell {
 		}
 		return null;
 	}
+
 }
