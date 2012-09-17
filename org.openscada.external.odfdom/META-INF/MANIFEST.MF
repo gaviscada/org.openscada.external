@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: ODFDOM
+Bundle-Name: ODFDOM (Patched)
 Bundle-SymbolicName: org.openscada.external.odfdom
 Bundle-Version: 0.8.7.qualifier
 Bundle-Vendor: TH4 SYSTEMS GmbH
