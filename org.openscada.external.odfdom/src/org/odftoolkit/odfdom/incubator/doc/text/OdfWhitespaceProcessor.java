@@ -33,6 +33,7 @@ import org.w3c.dom.Node;
 /**
  *
  * @author J David Eisenberg
+ * @author Jens Reimann
  */
 public class OdfWhitespaceProcessor {
 	private int nSpaces;
@@ -116,24 +117,30 @@ public class OdfWhitespaceProcessor {
 		partial = "";
 	}
 
+	public String getText(Node element)
+	{
+	    return getText(element,false);
+	}
+	
     /**
      * Retrieve the text content of an element.
      * Recursively retrieves all the text nodes, expanding whitespace where
      * necessary. Ignores any elements except <code>&lt;text:s&gt;</code>,
      * <code>&lt;text:line-break&gt;</code> and <code>&lt;text:tab&gt</code>.
      * @param element an element whose text you want to retrieve
+     * @param splitParagraphs split paragraphs into different lines like LibreOffice does.
      * @return the element's text content, with whitespace expanded
      */
-	public String getText(Node element)
+	public String getText(Node element,boolean splitParagraphs)
 	{
-		String result = "";
+		StringBuilder result = new StringBuilder();
 		int spaceCount;
 		Node node = element.getFirstChild();
 		while (node != null)
 		{
 			if (node.getNodeType() == Node.TEXT_NODE)
 			{
-				result += node.getNodeValue();
+				result.append ( node.getNodeValue() );
 			}
 			else if (node.getNodeType() == Node.ELEMENT_NODE)
 			{
@@ -151,25 +158,32 @@ public class OdfWhitespaceProcessor {
 					}
 					for (int i = 0; i < spaceCount; i++)
 					{
-						result += " ";
+					    result.append (' ');
 					}
+				}
+				else if (node.getLocalName().equals("p"))
+				{
+				    if (result.length() > 0) {
+				        result.append('\n'); // if we already have data, we split the line here
+				    }
+				    result.append ( getText(node) );
 				}
 				else if (node.getLocalName().equals("line-break"))
 				{
-					result += "\n";
+                    result.append ('\n');
 				}
 				else if (node.getLocalName().equals("tab"))
 				{
-					result += "\t";
+                    result.append ('\t');
 				}
 				else
 				{
-					result = result + getText(node);
+					result.append ( getText(node) );
 				}
 			}
 			node = node.getNextSibling();
 		}
-		return result;
+		return result.toString ();
 	}
 
     /**
