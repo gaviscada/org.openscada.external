@@ -125,7 +125,6 @@
   	
   	<openscada.builder.copyPlugin id="org.openscada.external.odfdom" />
   	
-  	<openscada.builder.copyPlugin id="org.eclipse.albireo"/>
   	<openscada.builder.copyPlugin id="org.openscada.external.osgi.enterprise"/>
   	<openscada.builder.copyPlugin id="org.openscada.external.postgresql"/>
   	
