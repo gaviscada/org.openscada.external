@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.openscada.external.spring.extended.feature"
-      label="OpenSCADA Spring (extended) Feature"
-      version="2.5.6.SEC01">
+      label="openSCADA Spring (extended) Feature"
+      version="3.1.2"
+      provider-name="TH4 SYSTEMS GmbH">
 
    <description url="http://www.springsource.org/">
       Spring application framework.
