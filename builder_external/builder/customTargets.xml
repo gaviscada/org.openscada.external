@@ -101,8 +101,9 @@
   	<!-- copy all builder/lib jars -->
   	<copy todir="${builder}/build/plugins">
   		<fileset dir="${builder}/lib">
-  			<include name="*.jar"/>
+  			<include name="**/*.jar"/>
   		</fileset>
+  		<mapper type="flatten"/>
 	</copy>
   	
   	<openscada.builder.copyFeature id="org.openscada.external.sdk" />
