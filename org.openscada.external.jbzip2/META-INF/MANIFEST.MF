@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Jbzip2
+Bundle-SymbolicName: org.openscada.external.jbzip2
+Bundle-Version: 0.9.1.qualifier
+Bundle-Vendor: TH4 SYSTEMS GmbH
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.itadaki.bzip2;version="0.9.1"
