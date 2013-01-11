@@ -114,12 +114,8 @@
   	<openscada.builder.copyFeature id="org.openscada.external.slf4j" />
   	<openscada.builder.copyFeature id="org.openscada.external.spring" />
   	<openscada.builder.copyFeature id="org.openscada.external.com.google.gson"/>
-  	<openscada.builder.copyFeature id="org.openscada.external.jinterop" />
   	
-  	
-
   	<openscada.builder.copyPlugin id="org.openscada.external.jcifs" />
-  	<openscada.builder.copyPlugin id="org.openscada.external.jinterop" />
   	
   	<openscada.builder.copyPlugin id="org.openscada.external.jbzip2" />
   	
