@@ -25,10 +25,6 @@
          id="org.openscada.external.spring"
          version="0.0.0"/>
 
-   <includes
-         id="org.openscada.external.jinterop"
-         version="0.0.0"/>
-
    <requires>
       <import plugin="org.eclipse.osgi"/>
       <import plugin="javax.servlet"/>
