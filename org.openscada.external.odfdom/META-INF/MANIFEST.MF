@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: ODFDOM (Patched)
 Bundle-SymbolicName: org.openscada.external.odfdom
 Bundle-Version: 0.8.7.qualifier
-Bundle-Vendor: TH4 SYSTEMS GmbH
+Bundle-Vendor: openSCADA.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.odftoolkit.odfdom;version="0.8.7.1",
  org.odftoolkit.odfdom.doc;version="0.8.7.1",

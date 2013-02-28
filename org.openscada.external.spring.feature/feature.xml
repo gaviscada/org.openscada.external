@@ -3,7 +3,7 @@
       id="org.openscada.external.spring"
       label="openSCADA Spring Feature"
       version="3.1.2"
-      provider-name="TH4 SYSTEMS GmbH">
+      provider-name="openSCADA.org">
 
    <description url="http://www.springsource.org/">
       Spring application framework.

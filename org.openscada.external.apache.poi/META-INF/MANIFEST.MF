@@ -4,7 +4,7 @@ Bundle-Name: Apache POI
 Bundle-SymbolicName: org.openscada.external.apache.poi
 Bundle-Version: 3.7.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: TH4 SYSTEMS GmbH
+Bundle-Vendor: openSCADA.org
 Export-Package: org.apache.poi;version="3.7.0",
  org.apache.poi.common.usermodel;version="3.7.0",
  org.apache.poi.ddf;version="3.7.0",

@@ -3,13 +3,7 @@
    <feature url="features/org.openscada.external.slf4j_1.6.4.qualifier.jar" id="org.openscada.external.slf4j" version="1.6.4.qualifier">
       <category name="org.openscada.external.category"/>
    </feature>
-   <feature url="features/org.openscada.external.spring_2.5.6.SEC01.jar" id="org.openscada.external.spring" version="2.5.6.SEC01">
-      <category name="org.openscada.external.category"/>
-   </feature>
-   <feature url="features/org.openscada.external.spring.extended.feature_2.5.6.SEC01.jar" id="org.openscada.external.spring.extended.feature" version="2.5.6.SEC01">
-      <category name="org.openscada.external.category"/>
-   </feature>
-   <feature url="features/org.openscada.external.jOpenDocument_1.1.0.qualifier.jar" id="org.openscada.external.jOpenDocument" version="1.1.0.qualifier">
+   <feature url="features/org.openscada.external.spring_3.1.2.jar" id="org.openscada.external.spring" version="3.1.2">
       <category name="org.openscada.external.category"/>
    </feature>
    <feature url="features/org.openscada.external_1.0.0.qualifier.jar" id="org.openscada.external" version="1.0.0.qualifier">

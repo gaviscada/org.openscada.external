@@ -12,10 +12,7 @@
   <logger name="org.openscada.hd" level="DEBUG"/>
   <logger name="org.openscada.hds" level="DEBUG"/>
   -->
-  
-  <logger name="org.openscada.ae" level="DEBUG"/>
-  <logger name="org.openscada.ae.server.monitor.proxy" level="DEBUG"/>
-  <logger name="org.openscada.core.connection.provider" level="DEBUG"/>
+
   
   <root level="warn">
     <appender-ref ref="STDOUT" />

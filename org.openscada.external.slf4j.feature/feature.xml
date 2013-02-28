@@ -3,7 +3,7 @@
       id="org.openscada.external.slf4j"
       label="SLF4J"
       version="1.6.4.qualifier"
-      provider-name="TH4 SYSTEMS GmbH">
+      provider-name="openSCADA.org">
 
    <description>
       An SLF4J wrapper feature

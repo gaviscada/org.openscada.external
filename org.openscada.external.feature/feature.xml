@@ -3,10 +3,11 @@
       id="org.openscada.external"
       label="openSCADA Externals Feature"
       version="1.0.0.qualifier"
-      provider-name="TH4 SYSTEMS GmbH">
+      provider-name="openSCADA.org">
 
    <description>
-      This is a wrapper feature for all external bundles which are needed by OpenSCADA.
+      This is a wrapper feature for all external bundles which are
+needed by openSCADA.
    </description>
 
    <copyright>
