@@ -120,13 +120,6 @@ needed by openSCADA.
          unpack="false"/>
 
    <plugin
-         id="org.openscada.external.osgi.enterprise"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="jcl.over.slf4j"
          download-size="0"
          install-size="0"
