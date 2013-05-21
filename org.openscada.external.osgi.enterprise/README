@@ -1,6 +1,0 @@
-this package just provides some interfaces which are
-in the osgi.enterprise specification, but not included
-in a standard Eclipse Equinox distribution.
-
-This is also the reason that this package has a different
-license than the rest of the openSCADA project.
