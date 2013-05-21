@@ -3,13 +3,13 @@
    <feature url="features/org.openscada.external.slf4j_1.6.4.qualifier.jar" id="org.openscada.external.slf4j" version="1.6.4.qualifier">
       <category name="org.openscada.external.category"/>
    </feature>
-   <feature url="features/org.openscada.external_1.1.0.qualifier.jar" id="org.openscada.external" version="1.1.0.qualifier">
+   <feature url="features/org.openscada.external_1.2.0.qualifier.jar" id="org.openscada.external" version="1.2.0.qualifier">
       <category name="org.openscada.external.category"/>
    </feature>
    <feature url="features/org.openscada.external.com.google.gson.feature_2.0.0.jar" id="org.openscada.external.com.google.gson.feature" version="2.0">
       <category name="org.openscada.external.category"/>
    </feature>
-   <feature url="features/org.openscada.external.optional_1.1.0.qualifier.jar" id="org.openscada.external.optional" version="1.1.0.qualifier">
+   <feature url="features/org.openscada.external.optional_1.2.0.qualifier.jar" id="org.openscada.external.optional" version="1.2.0.qualifier">
       <category name="org.openscada.external.optional"/>
    </feature>
    <category-def name="org.openscada.external.category" label="External Libraries"/>

@@ -125,9 +125,6 @@
   	
   	<openscada.builder.copyPlugin id="org.openscada.external.odfdom" />
   	
-  	<!-- import using gemini
-  	<openscada.builder.copyPlugin id="org.openscada.external.osgi.enterprise"/>
-  	-->
   	<openscada.builder.copyPlugin id="org.openscada.external.postgresql"/>
   	
   </target>
