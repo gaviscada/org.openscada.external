@@ -70,7 +70,8 @@
 		</unzip>
 	</target>
 
-	<target name="preProcessRepos">	
+
+	<target name="preProcessRepos">
 		<openscada.importAllRepositories/>
   	</target>
 
@@ -112,7 +113,6 @@
   	<openscada.builder.copyFeature id="org.openscada.external.optional" />
 		
   	<openscada.builder.copyFeature id="org.openscada.external.slf4j" />
-  	<openscada.builder.copyFeature id="org.openscada.external.spring" />
   	<openscada.builder.copyFeature id="org.openscada.external.com.google.gson"/>
   	
   	<openscada.builder.copyPlugin id="org.openscada.external.jcifs" />
@@ -125,7 +125,9 @@
   	
   	<openscada.builder.copyPlugin id="org.openscada.external.odfdom" />
   	
+  	<!-- import using gemini
   	<openscada.builder.copyPlugin id="org.openscada.external.osgi.enterprise"/>
+  	-->
   	<openscada.builder.copyPlugin id="org.openscada.external.postgresql"/>
   	
   </target>
