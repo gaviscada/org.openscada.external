@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.openscada.external.slf4j_1.6.4.qualifier.jar" id="org.openscada.external.slf4j" version="1.6.4.qualifier">
+   <feature url="features/org.openscada.external.slf4j_1.7.2.qualifier.jar" id="org.openscada.external.slf4j" version="1.7.2.qualifier">
       <category name="org.openscada.external.category"/>
    </feature>
    <feature url="features/org.openscada.external_1.2.0.qualifier.jar" id="org.openscada.external" version="1.2.0.qualifier">

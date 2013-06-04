@@ -2,7 +2,7 @@
 <feature
       id="org.openscada.external.slf4j"
       label="SLF4J"
-      version="1.7.3.qualifier"
+      version="1.7.2.qualifier"
       provider-name="openSCADA.org">
 
    <description>
