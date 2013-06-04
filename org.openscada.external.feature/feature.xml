@@ -99,27 +99,6 @@ needed by openSCADA.
          unpack="false"/>
 
    <plugin
-         id="jcl.over.slf4j"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="log4j.over.slf4j"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="jul.to.slf4j"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.openscada.external.logback.default"
          download-size="0"
          install-size="0"
@@ -238,6 +217,27 @@ needed by openSCADA.
 
    <plugin
          id="org.eclipse.gemini.dbaccess.h2"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.slf4j.jcl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.slf4j.jul"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.slf4j.log4j"
          download-size="0"
          install-size="0"
          version="0.0.0"

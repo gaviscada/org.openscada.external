@@ -2,7 +2,7 @@
 <feature
       id="org.openscada.external.slf4j"
       label="SLF4J"
-      version="1.6.4.qualifier"
+      version="1.7.3.qualifier"
       provider-name="openSCADA.org">
 
    <description>
@@ -33,38 +33,31 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    </license>
 
    <plugin
-         id="slf4j.api"
+         id="org.slf4j.api"
          download-size="0"
          install-size="0"
-         version="1.6.4"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="slf4j.ext"
+         id="org.slf4j.ext"
          download-size="0"
          install-size="0"
-         version="1.6.4"
-         unpack="false"/>
-
-   <plugin
-         id="cal10n.api"
-         download-size="0"
-         install-size="0"
-         version="0.7.4"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="ch.qos.logback.classic"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="ch.qos.logback.core"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
