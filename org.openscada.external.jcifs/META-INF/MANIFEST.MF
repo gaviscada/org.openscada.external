@@ -6,7 +6,8 @@ Bundle-Version: 1.2.25.qualifier
 Bundle-Vendor: openSCADA
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: javax.servlet;version="2.5.0",
- javax.servlet.http;version="2.5.0"
+ javax.servlet.http;version="2.5.0",
+ org.bouncycastle.crypto.digests
 Export-Package: jcifs;version="1.2.25";uses:="jcifs.netbios",
  jcifs.dcerpc;version="1.2.25";uses:="jcifs.smb,jcifs.dcerpc.ndr",
  jcifs.dcerpc.msrpc;version="1.2.25";uses:="jcifs.smb,jcifs.dcerpc.ndr,jcifs.dcerpc",
