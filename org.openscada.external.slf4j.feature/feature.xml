@@ -32,6 +32,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    </license>
 
+   <requires>
+      <import plugin="org.apache.commons.lang"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="javax.servlet"/>
+   </requires>
+
    <plugin
          id="org.slf4j.api"
          download-size="0"
