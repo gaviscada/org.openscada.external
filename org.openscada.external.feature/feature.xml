@@ -112,6 +112,18 @@ needed by openSCADA.
          version="0.0.0"/>
 
    <plugin
+         id="org.openscada.external.juli.over.slf4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.openscada.external.jdbc.pool"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
          id="org.apache.commons.dbcp"
          download-size="0"
          install-size="0"
