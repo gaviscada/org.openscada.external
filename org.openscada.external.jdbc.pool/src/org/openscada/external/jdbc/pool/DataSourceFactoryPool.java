@@ -80,7 +80,6 @@ public class DataSourceFactoryPool implements DataSourceFactory
 
     private org.apache.tomcat.jdbc.pool.DataSource createPooledDataSource ( final Properties props ) throws SQLException
     {
-        logger.trace ( "props in map = {}", this.dataSources.keySet () );
         org.apache.tomcat.jdbc.pool.DataSource ds;
         synchronized ( this.lock )
         {
