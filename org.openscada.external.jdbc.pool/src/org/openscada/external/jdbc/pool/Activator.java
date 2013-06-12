@@ -132,7 +132,8 @@ public class Activator implements BundleActivator
         properties.put ( DataSourceFactory.OSGI_JDBC_DRIVER_CLASS, reference.getProperty ( DataSourceFactory.OSGI_JDBC_DRIVER_CLASS ) );
         properties.put ( DataSourceFactory.OSGI_JDBC_DRIVER_NAME, reference.getProperty ( DataSourceFactory.OSGI_JDBC_DRIVER_NAME ) + " via org.apache.tomcat.jdbc.pool" );
         properties.put ( DataSourceFactory.OSGI_JDBC_DRIVER_VERSION, reference.getProperty ( DataSourceFactory.OSGI_JDBC_DRIVER_VERSION ) );
-        properties.put ( "isConnectionPool", "true" );
+        properties.put ( Constants.SERVICE_RANKING, Integer.getInteger ( "org.openscada.external.jdbc.pool.serviceRanking", 10 ) );
+        properties.put ( "isConnectionPool", true );
         return context.registerService ( DataSourceFactory.class, new DataSourceFactoryPool ( context, reference ), properties );
     }
 }
