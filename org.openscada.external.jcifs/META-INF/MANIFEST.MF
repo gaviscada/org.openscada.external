@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: JCIFS
 Bundle-SymbolicName: org.openscada.external.jcifs
 Bundle-Version: 1.2.25.qualifier
-Bundle-Vendor: openSCADA
+Bundle-Vendor: openSCADA.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: javax.servlet;version="2.5.0",
  javax.servlet.http;version="2.5.0",
