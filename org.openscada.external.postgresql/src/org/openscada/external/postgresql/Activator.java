@@ -49,7 +49,7 @@ public class Activator implements BundleActivator
         this.dataSourceFactory = new DataSourceFactoryImpl ();
 
         final Dictionary<String, Object> properties = new Hashtable<String, Object> ();
-        properties.put ( Constants.SERVICE_VENDOR, "TH4 SYSTEMS GmbH" );
+        properties.put ( Constants.SERVICE_VENDOR, "openSCADA.org" );
         properties.put ( Constants.SERVICE_DESCRIPTION, "DataSourceFactory which provides Postgres access" );
         properties.put ( DataSourceFactory.OSGI_JDBC_DRIVER_CLASS, Driver.class.getName () );
         properties.put ( DataSourceFactory.OSGI_JDBC_DRIVER_NAME, "Postgres JDBC Driver" );
