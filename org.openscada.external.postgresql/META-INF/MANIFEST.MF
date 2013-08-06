@@ -68,4 +68,5 @@ Import-Package: javax.naming,
  org.slf4j;version="1.6.0"
 Bundle-ClassPath: lib/postgresql-9.1-901.jdbc4.jar,
  .
-Bundle-Activator: org.openscada.external.postgresql.Activator
+Service-Component: OSGI-INF/dataSource.xml
+Bundle-ActivationPolicy: lazy
