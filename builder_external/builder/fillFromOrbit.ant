@@ -17,6 +17,10 @@
         <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.slf4j.api_1.7.2.v20121108-1250.jar" dest="lib" usetimestamp="true"/>
         <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.slf4j.api.source_1.7.2.v20121108-1250.jar" dest="lib" usetimestamp="true"/>
         <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/ch.qos.logback.classic_1.0.7.v20121108-1250.jar" dest="lib" usetimestamp="true"/>
+        <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.apache.xerces_2.9.0.v201101211617.jar" dest="lib" usetimestamp="true"/>
+        <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.apache.xml.resolver_1.2.0.v201005080400.jar" dest="lib" usetimestamp="true"/>
+        <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.apache.xml.serializer_2.7.1.v201005080400.jar" dest="lib" usetimestamp="true"/>
+        <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/javax.xml_1.3.4.v201005080400.jar" dest="lib" usetimestamp="true"/>
     </target>
 
 </project>
