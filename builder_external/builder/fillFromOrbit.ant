@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ======================================================================
+	 Download from Eclipse Orbit 
+     ====================================================================== -->
+<project name="project" default="default">
+    <description>
+            Download from Eclipse Orbit 
+    </description>
+
+    <!-- ================================= 
+          target: default
+         ================================= -->
+    <target name="default">
+        <mkdir dir="lib"/>
+        <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/javax.transaction_1.1.1.v201105210645.jar" dest="lib" usetimestamp="true"/>
+        <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/javax.transaction.source_1.1.1.v201105210645.jar" dest="lib" usetimestamp="true"/>
+        <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.slf4j.api_1.7.2.v20121108-1250.jar" dest="lib" usetimestamp="true"/>
+        <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.slf4j.api.source_1.7.2.v20121108-1250.jar" dest="lib" usetimestamp="true"/>
+        <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/ch.qos.logback.classic_1.0.7.v20121108-1250.jar" dest="lib" usetimestamp="true"/>
+    </target>
+
+</project>
