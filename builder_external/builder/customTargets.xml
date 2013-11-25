@@ -111,7 +111,6 @@
   	<openscada.builder.copyFeature id="org.openscada.external" />
   	
   	<openscada.builder.copyPlugin id="org.openscada.external.jcifs" />
- 	<openscada.builder.copyPlugin id="org.openscada.external.jbzip2" />
   	<openscada.builder.copyPlugin id="org.openscada.external.logback.default" />
   	<openscada.builder.copyPlugin id="org.openscada.external.odfdom" />
     <openscada.builder.copyPlugin id="org.openscada.external.postgresql"/>
