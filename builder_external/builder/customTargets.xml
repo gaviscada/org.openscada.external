@@ -108,24 +108,14 @@
 	</copy>
   	
   	<openscada.builder.copyFeature id="org.openscada.external.sdk" />
-  	
-	<openscada.builder.copyFeature id="org.openscada.external" />
-  	<openscada.builder.copyFeature id="org.openscada.external.optional" />
-		
-  	<openscada.builder.copyFeature id="org.openscada.external.slf4j" />
+  	<openscada.builder.copyFeature id="org.openscada.external" />
   	
   	<openscada.builder.copyPlugin id="org.openscada.external.jcifs" />
-  	
-  	<openscada.builder.copyPlugin id="org.openscada.external.jbzip2" />
-  	
+ 	<openscada.builder.copyPlugin id="org.openscada.external.jbzip2" />
   	<openscada.builder.copyPlugin id="org.openscada.external.logback.default" />
-  	
   	<openscada.builder.copyPlugin id="org.openscada.external.odfdom" />
-  	
     <openscada.builder.copyPlugin id="org.openscada.external.postgresql"/>
-    
     <openscada.builder.copyPlugin id="org.openscada.external.juli.over.slf4j"/>
-    
     <openscada.builder.copyPlugin id="org.openscada.external.jdbc.pool"/>
     
   </target>
