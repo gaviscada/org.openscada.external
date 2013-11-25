@@ -18,19 +18,13 @@ needed by openSCADA.
       See the specific bundle for its license information.
    </license>
 
-   <includes
-         id="org.openscada.external.slf4j"
-         version="0.0.0"/>
-
    <requires>
-      <import plugin="org.eclipse.osgi"/>
-      <import plugin="javax.servlet"/>
       <import plugin="ch.qos.logback.classic" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi"/>
       <import plugin="osgi.enterprise"/>
       <import plugin="org.slf4j.api"/>
       <import plugin="org.apache.xerces" version="2.9.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.commons.codec"/>
-      <import plugin="org.apache.commons.logging"/>
+      <import plugin="javax.servlet"/>
    </requires>
 
    <plugin
@@ -62,13 +56,6 @@ needed by openSCADA.
 
    <plugin
          id="bcprov"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.apache.commons.httpclient"
          download-size="0"
          install-size="0"
          version="0.0.0"
