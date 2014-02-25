@@ -110,6 +110,7 @@
   	<openscada.builder.copyFeature id="org.openscada.external.sdk" />
   	<openscada.builder.copyFeature id="org.openscada.external" />
   	
+    <openscada.builder.copyPlugin id="org.openscada.external.snmp4j" />
   	<openscada.builder.copyPlugin id="org.openscada.external.jcifs" />
   	<openscada.builder.copyPlugin id="org.openscada.external.logback.default" />
   	<openscada.builder.copyPlugin id="org.openscada.external.odfdom" />

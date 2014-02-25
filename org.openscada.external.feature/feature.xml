@@ -76,4 +76,11 @@ needed by openSCADA.
          fragment="true"
          unpack="false"/>
 
+   <plugin
+         id="org.openscada.external.snmp4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
