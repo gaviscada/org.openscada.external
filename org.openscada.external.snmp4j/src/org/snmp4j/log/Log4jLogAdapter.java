@@ -133,39 +133,6 @@ public class Log4jLogAdapter implements LogAdapter, Comparable {
     logger.log(FQCN, Level.FATAL, message, throwable);
   }
 
-  public void setLogLevel(LogLevel level) {
-    Level l;
-    switch (level.getLevel()) {
-      case LogLevel.LEVEL_OFF:
-        l = Level.OFF;
-        break;
-      case LogLevel.LEVEL_ALL:
-        l = Level.ALL;
-        break;
-      case LogLevel.LEVEL_TRACE:
-        l = Level.DEBUG;
-        break;
-      case LogLevel.LEVEL_DEBUG:
-        l = Level.DEBUG;
-        break;
-      case LogLevel.LEVEL_INFO:
-        l = Level.INFO;
-        break;
-      case LogLevel.LEVEL_WARN:
-        l = Level.WARN;
-        break;
-      case LogLevel.LEVEL_ERROR:
-        l = Level.ERROR;
-        break;
-      case LogLevel.LEVEL_FATAL:
-        l = Level.FATAL;
-        break;
-      default:
-        l = null;
-    }
-    logger.setLevel(l);
-  }
-
   public Logger getLogger() {
     return logger;
   }

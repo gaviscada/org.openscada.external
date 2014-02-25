@@ -120,12 +120,6 @@ public class LogProxy implements LogAdapter {
     return (logger != null) && logger.isWarnEnabled();
   }
 
-  public void setLogLevel(LogLevel level) {
-    if (logger != null) {
-      logger.setLogLevel(level);
-    }
-  }
-
   public void warn(Serializable message) {
     if (logger != null) {
       logger.warn(message);

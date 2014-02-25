@@ -50,16 +50,4 @@ public class Log4jLogFactory extends LogFactory {
   public LogAdapter getRootLogger() {
     return new Log4jLogAdapter(Logger.getRootLogger());
   }
-
-  public Iterator loggers() {
-    ArrayList<Logger> l = Collections.<Logger>list(Logger.getRootLogger().
-                                                   getLoggerRepository().
-                                                   getCurrentLoggers());
-    ArrayList<Log4jLogAdapter> la = new ArrayList<Log4jLogAdapter>(l.size());
-    for (Logger logger : l) {
-      la.add(new Log4jLogAdapter(logger));
-    }
-    Collections.sort(la);
-    return la.iterator();
-  }
 }

@@ -111,14 +111,6 @@ public interface LogAdapter {
   void fatal(CharSequence message, Throwable throwable);
 
   /**
-   * Sets the log level for this log adapter (if applicable).
-   * @param level
-   *    a LogLevel instance.
-   * @since 1.6.1
-   */
-  void setLogLevel(LogLevel level);
-
-  /**
    * Returns the log level defined for this log adapter.
    * @return
    *    a LogLevel instance.
