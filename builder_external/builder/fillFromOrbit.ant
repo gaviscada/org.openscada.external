@@ -26,6 +26,7 @@
         <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.slf4j.ext_1.7.2.v20121108-1250.jar" dest="lib" usetimestamp="true"/>
         <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.slf4j.ext.source_1.7.2.v20121108-1250.jar" dest="lib" usetimestamp="true"/>
         <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20140114142710/repository/plugins/org.slf4j.log4j_1.7.2.v20130115-1340.jar" dest="lib" usetimestamp="true"/>
+        <get src="http://download.eclipse.org/tools/orbit/downloads/drops/R20140114142710/repository/plugins/org.slf4j.log4j.source_1.7.2.v20130115-1340.jar" dest="lib" usetimestamp="true"/>
     </target>
 
 </project>
