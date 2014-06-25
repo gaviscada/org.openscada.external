@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Postgresql 9.1 JDBC4 Driver
+Bundle-Name: Postgresql 9.3 JDBC4 Driver
 Bundle-SymbolicName: org.openscada.external.postgresql
-Bundle-Version: 9.1.901.qualifier
+Bundle-Version: 9.3.1101.qualifier
 Bundle-Vendor: openSCADA.org
 Export-Package: org.postgresql;version="9.1.0";uses:="org.postgresql.largeobject,org.postgresql.fastpath,org.postgresql.copy",
  org.postgresql.copy;version="9.1.0";uses:="org.postgresql,org.postgresql.core",
@@ -52,7 +52,7 @@ Export-Package: org.postgresql;version="9.1.0";uses:="org.postgresql.largeobject
    org.postgresql.core",
  org.postgresql.xa.jdbc3;version="9.1.0";uses:="javax.naming,javax.sql,org.postgresql.ds.common",
  org.postgresql.xa.jdbc4;uses:="org.postgresql.xa.jdbc3"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.naming,
  javax.naming.spi,
  javax.net,
@@ -66,7 +66,7 @@ Import-Package: javax.naming,
  org.osgi.framework;version="1.6.0",
  org.osgi.service.jdbc;version="1.0.0",
  org.slf4j;version="1.6.0"
-Bundle-ClassPath: lib/postgresql-9.1-901.jdbc4.jar,
+Bundle-ClassPath: lib/postgresql-9.3-1101.jdbc41.jar,
  .
 Service-Component: OSGI-INF/dataSource.xml
 Bundle-ActivationPolicy: lazy
