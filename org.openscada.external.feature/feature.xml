@@ -18,8 +18,6 @@ needed by openSCADA.
       See the specific bundle for its license information.
    </license>
 
-<!--
-
    <plugin
          id="org.openscada.external.postgresql"
          download-size="0"
@@ -39,7 +37,7 @@ needed by openSCADA.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
--->
+         
    <plugin
          id="bcprov"
          download-size="0"

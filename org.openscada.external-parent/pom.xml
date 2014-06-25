@@ -18,14 +18,6 @@
 		<tycho.scmUrl>scm:git:git://git.openscada.org/org.openscada.external.git</tycho.scmUrl>
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>openscada.external.wrapper</id>
-			<layout>p2</layout>
-			<url>http://neutronium.openscada.org/p2.wrapper/1.2</url>
-		</repository>
-	</repositories>
-
 	<modules>
 		<module>../org.openscada.external-p2</module>
 
@@ -33,6 +25,9 @@
 		<module>../org.openscada.external.sdk.feature</module>
 
 		<module>../org.openscada.external.snmp4j</module>
+		<module>../org.openscada.external.jcifs</module>
+		<module>../org.openscada.external.odfdom</module>
+		<module>../org.openscada.external.postgresql</module>
 	</modules>
 
 </project>
