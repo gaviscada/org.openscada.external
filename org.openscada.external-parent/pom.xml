@@ -22,7 +22,7 @@
 		<repository>
 			<id>openscada.external.wrapper</id>
 			<layout>p2</layout>
-			<url>http://neutronium.openscada.org/p2.external/</url>
+			<url>http://neutronium.openscada.org/p2.wrapper/1.2</url>
 		</repository>
 	</repositories>
 
