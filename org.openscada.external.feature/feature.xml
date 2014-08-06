@@ -37,7 +37,7 @@ needed by openSCADA.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="bcprov"
          download-size="0"
@@ -55,6 +55,20 @@ needed by openSCADA.
 
    <plugin
          id="org.openscada.external.snmp4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.eclipsesource.jaxrs.provider.gson"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.eclipsesource.jaxrs.publisher"
          download-size="0"
          install-size="0"
          version="0.0.0"
