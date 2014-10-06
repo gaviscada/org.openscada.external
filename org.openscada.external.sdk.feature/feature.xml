@@ -2,7 +2,7 @@
 <feature
       id="org.openscada.external.sdk"
       label="openSCADA External SDK Feature"
-      version="1.2.0.qualifier"
+      version="1.3.0.qualifier"
       provider-name="openSCADA.org">
 
    <description>
