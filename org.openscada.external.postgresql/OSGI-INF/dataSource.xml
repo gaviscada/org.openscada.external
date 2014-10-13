@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="false" name="org.openscada.external.postgresql">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="org.openscada.external.postgresql">
    <implementation class="org.openscada.external.postgresql.DataSourceFactoryImpl"/>
    <properties entry="OSGI-INF/dataSource.properties"/>
    <service>
