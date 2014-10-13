@@ -84,7 +84,7 @@ Import-Package: javax.naming,
  org.ietf.jgss,
  org.osgi.framework;version="1.6.0",
  org.osgi.service.jdbc;version="1.0.0",
- org.slf4j;version="1.6.0"
+ org.slf4j;version="1.7.0"
 Bundle-ClassPath: lib/postgresql-9.3-1101.jdbc41.jar,
  .
 Service-Component: OSGI-INF/dataSource.xml
