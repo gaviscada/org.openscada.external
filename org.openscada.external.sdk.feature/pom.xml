@@ -11,5 +11,5 @@
 	<groupId>org.openscada.external.features</groupId>
 	<artifactId>org.openscada.external.sdk</artifactId>
 	<packaging>eclipse-feature</packaging>
-	<version>1.3.0-SNAPSHOT</version>
+	<version>1.4.0-SNAPSHOT</version>
 </project>
